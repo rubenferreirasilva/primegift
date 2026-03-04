@@ -1,5 +1,8 @@
 'use client';
-import React, { useState, useMemo, CSSProperties } from 'react';
+import React, { useState, useEffect, useMemo, CSSProperties } from 'react';
+import dynamic from 'next/dynamic';
+
+const CupViewer3D = dynamic(() => import('./CupViewer3D'), { ssr: false });
 
 // ==================== DATA ====================
 
@@ -13,6 +16,13 @@ type Product = {
   cupTopW: number;
   cupBotW: number;
   prices: Record<number, number>;
+};
+
+type CartItem = {
+  itemId: string;
+  productId: string;
+  quantity: number;
+  colors: number;
 };
 
 const PRODUCTS: Product[] = [
@@ -117,6 +127,140 @@ function fmt(n: number): string {
   return n.toFixed(2).replace('.', ',') + '€';
 }
 
+function getCartSubtotal(cart: CartItem[]): number {
+  return cart.reduce((sum, item) => {
+    const product = PRODUCTS.find(p => p.id === item.productId);
+    if (!product) return sum;
+    return sum + (getUnitPrice(product, item.quantity) + getColorSurcharge(item.colors)) * item.quantity;
+  }, 0);
+}
+
+function getCartWeight(cart: CartItem[]): number {
+  return cart.reduce((sum, item) => {
+    const product = PRODUCTS.find(p => p.id === item.productId);
+    if (!product) return sum;
+    return sum + calculateWeightKg(product, item.quantity);
+  }, 0);
+}
+
+// ==================== BACKGROUND REMOVAL ====================
+
+function removeBackground(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      // Cap processing size for performance
+      const MAX = 600;
+      let w = img.width, h = img.height;
+      if (w > MAX || h > MAX) {
+        const scale = MAX / Math.max(w, h);
+        w = Math.round(w * scale);
+        h = Math.round(h * scale);
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) { reject('No canvas context'); return; }
+
+      ctx.drawImage(img, 0, 0, w, h);
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const data = imageData.data;
+      const total = w * h;
+      const visited = new Uint8Array(total);
+
+      // Sample edge pixels to detect background color
+      const step = Math.max(1, Math.floor(Math.max(w, h) / 30));
+      let rSum = 0, gSum = 0, bSum = 0, sCount = 0;
+      for (let x = 0; x < w; x += step) {
+        for (const row of [0, h - 1]) {
+          const i = (row * w + x) * 4;
+          rSum += data[i]; gSum += data[i + 1]; bSum += data[i + 2]; sCount++;
+        }
+      }
+      for (let y = 0; y < h; y += step) {
+        for (const col of [0, w - 1]) {
+          const i = (y * w + col) * 4;
+          rSum += data[i]; gSum += data[i + 1]; bSum += data[i + 2]; sCount++;
+        }
+      }
+      const bgR = Math.round(rSum / sCount);
+      const bgG = Math.round(gSum / sCount);
+      const bgB = Math.round(bSum / sCount);
+
+      const tolerance = 55;
+      const feather = 15;
+      const maxDist = tolerance + feather;
+      const maxDistSq = maxDist * maxDist;
+      const tolSq = tolerance * tolerance;
+
+      // Ring buffer queue for BFS (much faster than array push/pop)
+      const queue = new Int32Array(total);
+      let qHead = 0, qTail = 0;
+
+      // Seed all edge pixels
+      for (let x = 0; x < w; x++) {
+        queue[qTail++] = x;
+        queue[qTail++] = (h - 1) * w + x;
+      }
+      for (let y = 1; y < h - 1; y++) {
+        queue[qTail++] = y * w;
+        queue[qTail++] = y * w + (w - 1);
+      }
+
+      while (qHead < qTail) {
+        const pos = queue[qHead++];
+        if (visited[pos]) continue;
+        visited[pos] = 1;
+        const idx = pos * 4;
+        const dr = data[idx] - bgR;
+        const dg = data[idx + 1] - bgG;
+        const db = data[idx + 2] - bgB;
+        const distSq = dr * dr + dg * dg + db * db;
+        if (distSq > maxDistSq) continue;
+
+        if (distSq <= tolSq) {
+          data[idx + 3] = 0;
+        } else {
+          const dist = Math.sqrt(distSq);
+          const alpha = Math.round(((dist - tolerance) / feather) * data[idx + 3]);
+          data[idx + 3] = Math.min(data[idx + 3], alpha);
+        }
+
+        const x = pos % w, y = (pos - x) / w;
+        if (x > 0 && !visited[pos - 1]) queue[qTail++] = pos - 1;
+        if (x < w - 1 && !visited[pos + 1]) queue[qTail++] = pos + 1;
+        if (y > 0 && !visited[pos - w]) queue[qTail++] = pos - w;
+        if (y < h - 1 && !visited[pos + w]) queue[qTail++] = pos + w;
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    img.onerror = () => reject('Image load failed');
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+// ==================== EXPORT MOCKUP ====================
+
+function exportMockupPNG(productName: string) {
+  const container = document.getElementById('cup-viewer-3d');
+  if (!container) return;
+  const canvas = container.querySelector('canvas');
+  if (!canvas) return;
+  canvas.toBlob(blob => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mockup-${productName}.png`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+
 // ==================== COLORS & STYLES ====================
 
 const C = {
@@ -145,10 +289,10 @@ function Logo({ variant = 'dark', height = 40 }: { variant?: 'dark' | 'white'; h
 }
 
 const CUP_IMAGES: Record<string, string> = {
-  pg200: '/cup-200.png',
-  pg300: '/cup-300.png',
-  pg330: '/cup-330.png',
-  pg500: '/cup-500.png',
+  pg200: '/cup-200-real.png',
+  pg300: '/cup-300-real.png',
+  pg330: '/cup-330-real.png',
+  pg500: '/cup-500-real.png',
 };
 
 function CupImage({ product, size = 120 }: { product: Product; size?: number }) {
@@ -160,6 +304,8 @@ function CupImage({ product, size = 120 }: { product: Product; size?: number }) 
     />
   );
 }
+
+
 
 function PaymentIcon({ method }: { method: string }) {
   const s = 20;
@@ -211,27 +357,86 @@ function Header({ page, setPage }: { page: string; setPage: (p: string) => void 
 
 // ==================== HOME PAGE ====================
 
-function HomePage({ setPage }: { setPage: (p: string) => void }) {
+function HomePage({ setPage, onSelectProduct }: { setPage: (p: string) => void; onSelectProduct: (id: string) => void }) {
   return (
     <div>
-      {/* Hero */}
-      <section style={{ background: `linear-gradient(135deg, ${C.primary} 0%, ${C.accent} 100%)`, padding: '80px 24px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 800, margin: '0 auto' }}>
-          <h1 style={{ color: C.white, fontSize: 48, fontWeight: 800, margin: 0, lineHeight: 1.1 }}>
-            A Sua Marca<br />em Cada Copo
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 20, marginTop: 20, lineHeight: 1.6 }}>
-            Copos de plástico reutilizáveis personalizados com a sua marca. Tampografia e serigrafia de alta qualidade, produção própria.
-          </p>
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 36, flexWrap: 'wrap' }}>
-            <button onClick={() => { setPage('products'); window.scrollTo(0, 0); }}
-              style={{ background: C.white, color: C.primary, border: 'none', padding: '14px 36px', borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-              Ver Produtos
-            </button>
-            <button onClick={() => { setPage('contact'); window.scrollTo(0, 0); }}
-              style={{ background: 'transparent', color: C.white, border: '2px solid rgba(255,255,255,0.6)', padding: '14px 36px', borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s' }}>
-              Pedir Orçamento
-            </button>
+      {/* Hero Banner — Split diagonal: Festival + Copo personalizado */}
+      <section style={{ position: 'relative', width: '100%', minHeight: 540, overflow: 'hidden', display: 'flex' }}>
+        {/* Lado esquerdo — Festival */}
+        <div style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          clipPath: 'polygon(0 0, 62% 0, 48% 100%, 0 100%)',
+        }}>
+          <img
+            src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1200&h=800&fit=crop"
+            alt="Festival de verão com pessoas e copos"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(27,79,114,0.80) 0%, rgba(27,79,114,0.55) 100%)' }} />
+        </div>
+
+        {/* Lado direito — Copo personalizado */}
+        <div style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          clipPath: 'polygon(62% 0, 100% 0, 100% 100%, 48% 100%)',
+          background: `linear-gradient(160deg, ${C.lightBg} 0%, #F0F7FC 100%)`,
+        }}>
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '52%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ position: 'relative', textAlign: 'center', display: 'inline-block' }}>
+              <img
+                src="/cup-330-real.png"
+                alt="Copo PG-330 personalizado"
+                style={{ height: 360, width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.15))', display: 'block' }}
+              />
+              {/* Logo simulado na área de impressão real do copo */}
+              <div style={{
+                position: 'absolute',
+                top: '28%', left: '28%', width: '44%', height: '30%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                pointerEvents: 'none',
+                overflow: 'hidden',
+                borderRadius: '45% / 5%',
+              }}>
+                <div style={{
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4,
+                  opacity: 0.7,
+                }}>
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect x="4" y="4" width="32" height="32" rx="6" stroke={C.accent} strokeWidth="2.5" strokeDasharray="4 3" />
+                    <circle cx="20" cy="16" r="6" stroke={C.accent} strokeWidth="2" />
+                    <path d="M10 28 Q15 22 20 24 Q25 26 30 20" stroke={C.accent} strokeWidth="2" fill="none" />
+                  </svg>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: C.accent, letterSpacing: 1.2, textTransform: 'uppercase' }}>O Seu Logo</span>
+                </div>
+              </div>
+              <p style={{ margin: '12px 0 0', fontSize: 14, fontWeight: 700, color: C.primary }}>PG-330 · 330ml</p>
+              <p style={{ margin: '2px 0 0', fontSize: 12, color: C.textMuted }}>Personalizado com a marca do seu evento</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Conteúdo texto — lado esquerdo */}
+        <div style={{ position: 'relative', zIndex: 2, width: '50%', minHeight: 540, display: 'flex', alignItems: 'center', padding: '60px 48px 60px 5%' }}>
+          <div>
+            <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: '6px 16px', marginBottom: 16, backdropFilter: 'blur(8px)' }}>
+              <span style={{ fontSize: 13, fontWeight: 600, color: C.white, letterSpacing: 0.5 }}>Festivais · Festas · Restaurantes</span>
+            </div>
+            <h1 style={{ color: C.white, fontSize: 44, fontWeight: 800, margin: 0, lineHeight: 1.1, textShadow: '0 2px 16px rgba(0,0,0,0.25)' }}>
+              A Sua Marca<br />em Cada Copo
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.92)', fontSize: 18, marginTop: 16, lineHeight: 1.6, maxWidth: 420, textShadow: '0 1px 6px rgba(0,0,0,0.15)' }}>
+              Copos reutilizáveis personalizados com tampografia de alta qualidade. Produção própria, desde 25 unidades.
+            </p>
+            <div style={{ display: 'flex', gap: 14, marginTop: 32, flexWrap: 'wrap' }}>
+              <button onClick={() => { setPage('products'); window.scrollTo(0, 0); }}
+                style={{ background: C.white, color: C.primary, border: 'none', padding: '14px 32px', borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.2)', transition: 'all 0.2s' }}>
+                Ver Produtos
+              </button>
+              <button onClick={() => { setPage('contact'); window.scrollTo(0, 0); }}
+                style={{ background: 'rgba(255,255,255,0.15)', color: C.white, border: '2px solid rgba(255,255,255,0.7)', padding: '14px 32px', borderRadius: 8, fontSize: 15, fontWeight: 600, cursor: 'pointer', backdropFilter: 'blur(4px)', transition: 'all 0.2s' }}>
+                Pedir Orçamento
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -255,14 +460,14 @@ function HomePage({ setPage }: { setPage: (p: string) => void }) {
       </section>
 
       {/* Products Grid */}
-      <section style={{ padding: '64px 24px', background: C.lightBg }}>
+      <section style={{ padding: '96px 24px', background: C.lightBg }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>Os Nossos Produtos</h2>
           <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>Copos reutilizáveis de alta qualidade, prontos para a sua marca</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
             {PRODUCTS.map(product => (
-              <div key={product.id} onClick={() => { setPage('products'); window.scrollTo(0, 0); }}
-                style={{ background: C.white, borderRadius: 12, padding: 28, flex: '1 1 240px', maxWidth: 280, cursor: 'pointer', boxShadow: C.cardShadow, transition: 'all 0.3s', textAlign: 'center', border: `1px solid transparent` }}
+              <div key={product.id} onClick={() => { onSelectProduct(product.id); window.scrollTo(0, 0); }}
+                style={{ background: C.white, borderRadius: 12, padding: 28, cursor: 'pointer', boxShadow: C.cardShadow, transition: 'all 0.3s', textAlign: 'center', border: `1px solid transparent` }}
                 onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = C.cardShadowHover; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = C.cardShadow; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'; }}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
@@ -278,8 +483,96 @@ function HomePage({ setPage }: { setPage: (p: string) => void }) {
         </div>
       </section>
 
+      {/* Gallery: Copos em Acção */}
+      <section style={{ padding: '96px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>Os Nossos Copos em Acção</h2>
+          <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>Festivais, festas, restaurantes — a sua marca presente em todos os momentos</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
+            {[
+              { img: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop', label: 'Festivais de Verão', desc: 'Milhares de copos personalizados em festivais por todo o país' },
+              { img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop', label: 'Festas & Eventos', desc: 'Aniversários, casamentos e celebrações com a sua marca' },
+              { img: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&h=400&fit=crop', label: 'Bares & Restaurantes', desc: 'Copos reutilizáveis que elevam a experiência do cliente' },
+              { img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop', label: 'Eventos Corporativos', desc: 'Conferências e eventos de empresa com branding profissional' },
+              { img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop', label: 'Eventos ao Ar Livre', desc: 'Feiras, mercados e eventos outdoor sustentáveis' },
+              { img: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&h=400&fit=crop', label: 'Cocktails & Bebidas', desc: 'Apresentação premium para cocktails e bebidas especiais' },
+            ].map((item, i) => (
+              <div key={i} style={{ position: 'relative', borderRadius: 12, overflow: 'hidden', aspectRatio: '3/2', boxShadow: C.cardShadow }}>
+                <img src={item.img} alt={item.label} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(transparent, rgba(0,0,0,0.75))', padding: '40px 20px 20px' }}>
+                  <h4 style={{ margin: '0 0 4px', fontSize: 18, fontWeight: 700, color: C.white }}>{item.label}</h4>
+                  <p style={{ margin: 0, fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.4 }}>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* USPs: Porquê a PrimeGift? */}
+      <section style={{ padding: '96px 24px', background: C.lightBg }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>Porquê a PrimeGift?</h2>
+          <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>Razões para confiar em nós para a personalização dos seus copos</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 24 }}>
+            {[
+              { icon: '🏭', title: 'Produção Própria', desc: 'Controlo total da qualidade em todas as fases do processo' },
+              { icon: '♻️', title: 'Reutilizáveis', desc: 'Copos ecológicos e sustentáveis, prontos para centenas de utilizações' },
+              { icon: '🎨', title: 'Personalização Total', desc: 'Tampografia e serigrafia de alta definição até 4 cores Pantone' },
+              { icon: '🚀', title: 'Envio Rápido', desc: 'Produção e entrega em 5-10 dias úteis para todo o território' },
+              { icon: '📦', title: 'Sem Mínimos Elevados', desc: 'Encomendas a partir de apenas 25 unidades, ideal para pequenos negócios' },
+              { icon: '🤝', title: 'Suporte Dedicado', desc: 'Acompanhamento personalizado do início ao fim, com maquete gratuita' },
+            ].map((item, i) => (
+              <div key={i} style={{ background: C.white, borderRadius: 12, padding: 28, textAlign: 'center', boxShadow: C.cardShadow, border: `1px solid ${C.border}` }}>
+                <div style={{ fontSize: 36, marginBottom: 12 }}>{item.icon}</div>
+                <h3 style={{ margin: '0 0 8px', fontSize: 18, fontWeight: 700, color: C.text }}>{item.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, color: C.textSec, lineHeight: 1.6 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section style={{ padding: '96px 24px' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>O Que Dizem os Nossos Clientes</h2>
+          <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>Eventos reais, resultados reais</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            {[
+              { name: 'Ana Rodrigues', role: 'Festival Vilar de Mouros', quote: 'Os copos ficaram incríveis e resistiram a todo o festival. A qualidade de impressão superou as expectativas e os participantes adoraram levar como recordação.' },
+              { name: 'Miguel Santos', role: 'Restaurante O Marinheiro', quote: 'Substituímos os copos descartáveis pelos reutilizáveis da PrimeGift. Os clientes elogiam constantemente e poupamos no descartável. Excelente investimento.' },
+              { name: 'Carla Ferreira', role: 'Eventos Corporativos LDA', quote: 'Encomendámos para um evento de 500 pessoas e o resultado foi impecável. A maquete prévia ajudou-nos a acertar no design à primeira. Recomendo vivamente.' },
+            ].map((item, i) => (
+              <div key={i} style={{ background: C.white, borderRadius: 12, padding: 28, boxShadow: C.cardShadow, border: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontSize: 32, color: C.accent, marginBottom: 12, lineHeight: 1 }}>&ldquo;</div>
+                <p style={{ margin: '0 0 20px', fontSize: 14, color: C.textSec, lineHeight: 1.7, flex: 1 }}>{item.quote}</p>
+                <div>
+                  <p style={{ margin: 0, fontWeight: 700, fontSize: 15, color: C.text }}>{item.name}</p>
+                  <p style={{ margin: '2px 0 0', fontSize: 13, color: C.textMuted }}>{item.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section style={{ background: `linear-gradient(135deg, ${C.primary} 0%, ${C.accent} 100%)`, padding: '96px 24px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 600, margin: '0 auto' }}>
+          <h2 style={{ color: C.white, fontSize: 32, fontWeight: 700, margin: '0 0 16px' }}>Pronto para personalizar os seus copos?</h2>
+          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 16, margin: '0 0 32px', lineHeight: 1.6 }}>
+            Comece agora e receba uma maquete digital gratuita. Sem compromisso.
+          </p>
+          <button onClick={() => { setPage('products'); window.scrollTo(0, 0); }}
+            style={{ background: C.white, color: C.primary, border: 'none', padding: '16px 40px', borderRadius: 8, fontSize: 17, fontWeight: 700, cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.2)', transition: 'all 0.2s' }}>
+            Começar Agora
+          </button>
+        </div>
+      </section>
+
       {/* How It Works Preview */}
-      <section style={{ padding: '64px 24px' }}>
+      <section style={{ padding: '96px 24px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 48px' }}>Como Funciona</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'center' }}>
@@ -306,27 +599,83 @@ function HomePage({ setPage }: { setPage: (p: string) => void }) {
 
 // ==================== PRODUCTS PAGE ====================
 
-function ProductsPage({ goToContact }: { goToContact: () => void }) {
-  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
+function ProductsPage({ goToContact, initialProduct }: { goToContact: () => void; initialProduct: string | null }) {
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(initialProduct);
   const [quantity, setQuantity] = useState(100);
   const [colors, setColors] = useState(1);
-  const [fileUploaded, setFileUploaded] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [logoPreviewUrl, setLogoPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [shippingRegion, setShippingRegion] = useState('pt-continental');
   const [shippingMethod, setShippingMethod] = useState('2-days');
   const [showModal, setShowModal] = useState(false);
+  const [removingBg, setRemovingBg] = useState(false);
+  const [autoRemoveBg, setAutoRemoveBg] = useState(true);
+  const [logoYOffset, setLogoYOffset] = useState(0);
+  const [logoScale, setLogoScale] = useState(100);
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  // Generate preview URL when file or autoRemoveBg changes
+  useEffect(() => {
+    if (!uploadedFile) {
+      setLogoPreviewUrl(null);
+      return;
+    }
+    const isImage = uploadedFile.type.startsWith('image/') || uploadedFile.name.endsWith('.svg');
+    if (!isImage) {
+      setLogoPreviewUrl(null);
+      return;
+    }
+    // SVGs don't need background removal
+    if (uploadedFile.name.endsWith('.svg')) {
+      const url = URL.createObjectURL(uploadedFile);
+      setLogoPreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    }
+    // If autoRemoveBg is off, show original image
+    if (!autoRemoveBg) {
+      const url = URL.createObjectURL(uploadedFile);
+      setLogoPreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    }
+    // For raster images, auto-remove background
+    let cancelled = false;
+    setRemovingBg(true);
+    removeBackground(uploadedFile)
+      .then(dataUrl => {
+        if (!cancelled) {
+          setLogoPreviewUrl(dataUrl);
+          setRemovingBg(false);
+        }
+      })
+      .catch(() => {
+        // Fallback: show original image
+        if (!cancelled) {
+          const url = URL.createObjectURL(uploadedFile);
+          setLogoPreviewUrl(url);
+          setRemovingBg(false);
+        }
+      });
+    return () => { cancelled = true; };
+  }, [uploadedFile, autoRemoveBg]);
 
   const product = PRODUCTS.find(p => p.id === selectedProduct) || null;
-  const unitPrice = product ? getUnitPrice(product, quantity) + getColorSurcharge(colors) : 0;
-  const subtotal = unitPrice * quantity;
-  const weightKg = product ? calculateWeightKg(product, quantity) : 0;
-  const overweight = weightKg > 30;
+
+  // Cart calculations
+  const cartSubtotal = getCartSubtotal(cart);
+  const cartWeightKg = getCartWeight(cart);
+  const overweight = cartWeightKg > 30;
   const isInternational = shippingRegion === 'international';
   const availableMethods = getAvailableMethods(shippingRegion);
-  const freeShipping = subtotal > 150;
-  const shippingCost = (!isInternational && !overweight && product) ? (freeShipping ? 0 : (getShippingCost(weightKg, shippingRegion, shippingMethod) ?? 0)) : 0;
-  const totalBeforeVAT = subtotal + shippingCost;
+  const freeShipping = cartSubtotal > 150;
+  const shippingCost = (!isInternational && !overweight && cart.length > 0) ? (freeShipping ? 0 : (getShippingCost(cartWeightKg, shippingRegion, shippingMethod) ?? 0)) : 0;
+  const totalBeforeVAT = cartSubtotal + shippingCost;
   const vat = totalBeforeVAT * 0.23;
   const total = totalBeforeVAT + vat;
+
+  // Staging item price (for preview in configurator)
+  const stagingUnitPrice = product ? getUnitPrice(product, quantity) + getColorSurcharge(colors) : 0;
+  const stagingSubtotal = stagingUnitPrice * quantity;
 
   // Reset shipping method when region changes
   const handleRegionChange = (r: string) => {
@@ -335,6 +684,20 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
     if (methods.length > 0 && !methods.includes(shippingMethod)) {
       setShippingMethod(methods[0]);
     }
+  };
+
+  const addToCart = () => {
+    if (!selectedProduct) return;
+    setCart(prev => [...prev, {
+      itemId: crypto.randomUUID(),
+      productId: selectedProduct,
+      quantity,
+      colors,
+    }]);
+  };
+
+  const removeFromCart = (itemId: string) => {
+    setCart(prev => prev.filter(i => i.itemId !== itemId));
   };
 
   const sectionStyle: CSSProperties = { marginBottom: 32 };
@@ -397,28 +760,130 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
                   </div>
                 </div>
               </div>
+              {/* Staging preview */}
+              {product && (
+                <div style={{ marginTop: 16, padding: 16, background: C.lightBg, borderRadius: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+                  <div style={{ fontSize: 14, color: C.text }}>
+                    <strong>{product.name}</strong> — {quantity.toLocaleString('pt-PT')} un. — {fmt(stagingUnitPrice)}/un. = <strong>{fmt(stagingSubtotal)}</strong>
+                  </div>
+                  <button onClick={addToCart}
+                    style={{ padding: '10px 24px', borderRadius: 8, background: C.success, color: C.white, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap' }}>
+                    + Adicionar ao Carrinho
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Step 3: File Upload */}
             <div style={sectionStyle}>
               <h3 style={stepTitleStyle}><span style={stepNumStyle}>3</span> Envie o seu ficheiro</h3>
-              <div onClick={() => setFileUploaded(!fileUploaded)}
-                style={{ border: `2px dashed ${fileUploaded ? C.success : C.border}`, borderRadius: 12, padding: 40, textAlign: 'center', cursor: 'pointer', background: fileUploaded ? '#EAFAF1' : '#FAFAFA', transition: 'all 0.2s' }}>
-                {fileUploaded ? (
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.ai,.eps,.png,.svg,.jpg,.jpeg"
+                style={{ display: 'none' }}
+                onChange={e => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    if (file.size > 10 * 1024 * 1024) {
+                      alert('Ficheiro demasiado grande. Máximo 10MB.');
+                      return;
+                    }
+                    setUploadedFile(file);
+                  }
+                }}
+              />
+              <div
+                onClick={() => {
+                  if (uploadedFile) {
+                    setUploadedFile(null);
+                    if (fileInputRef.current) fileInputRef.current.value = '';
+                  } else {
+                    fileInputRef.current?.click();
+                  }
+                }}
+                onDragOver={e => { e.preventDefault(); e.stopPropagation(); }}
+                onDrop={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  const file = e.dataTransfer.files?.[0];
+                  if (file) {
+                    if (file.size > 10 * 1024 * 1024) {
+                      alert('Ficheiro demasiado grande. Máximo 10MB.');
+                      return;
+                    }
+                    setUploadedFile(file);
+                  }
+                }}
+                style={{ border: `2px dashed ${uploadedFile ? C.success : C.border}`, borderRadius: 12, padding: 40, textAlign: 'center', cursor: 'pointer', background: uploadedFile ? '#EAFAF1' : '#FAFAFA', transition: 'all 0.2s' }}>
+                {uploadedFile ? (
                   <>
-                    <div style={{ fontSize: 36, marginBottom: 8 }}>✅</div>
+                    <div style={{ fontSize: 36, marginBottom: 8 }}>&#x2705;</div>
                     <p style={{ margin: 0, fontWeight: 600, color: C.success }}>Ficheiro carregado com sucesso</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>logo-empresa.pdf — Clique para remover</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{uploadedFile.name} ({(uploadedFile.size / 1024).toFixed(0)}KB) — Clique para remover</p>
                   </>
                 ) : (
                   <>
-                    <div style={{ fontSize: 36, marginBottom: 8 }}>📁</div>
+                    <div style={{ fontSize: 36, marginBottom: 8 }}>&#x1F4C1;</div>
                     <p style={{ margin: 0, fontWeight: 600, color: C.text }}>Arraste o ficheiro ou clique para enviar</p>
                     <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>PDF, AI, EPS, PNG ou SVG (máx. 10MB)</p>
                   </>
                 )}
               </div>
+              <p style={{ margin: '8px 0 0', fontSize: 12, color: C.textMuted }}>
+                Para melhor resultado, envie PNG com fundo transparente ou SVG
+              </p>
+              {/* Auto-remove background toggle */}
+              {uploadedFile && !uploadedFile.name.endsWith('.svg') && (
+                <label style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12, cursor: 'pointer', fontSize: 14, color: C.text }}>
+                  <input
+                    type="checkbox"
+                    checked={autoRemoveBg}
+                    onChange={e => setAutoRemoveBg(e.target.checked)}
+                    style={{ width: 18, height: 18, cursor: 'pointer', accentColor: C.accent }}
+                  />
+                  <span style={{ fontWeight: 600 }}>Remover fundo automaticamente</span>
+                  <span style={{ fontSize: 12, color: C.textMuted, marginLeft: 4 }}>
+                    ({autoRemoveBg ? 'Fundo removido' : 'Imagem original'})
+                  </span>
+                </label>
+              )}
             </div>
+
+            {/* Cart Items */}
+            {cart.length > 0 && (
+              <div style={sectionStyle}>
+                <h3 style={stepTitleStyle}>
+                  <span style={{ ...stepNumStyle, background: C.success }}>&#x1F6D2;</span>
+                  Carrinho ({cart.length} {cart.length === 1 ? 'item' : 'itens'})
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {cart.map(item => {
+                    const p = PRODUCTS.find(pr => pr.id === item.productId);
+                    if (!p) return null;
+                    const up = getUnitPrice(p, item.quantity) + getColorSurcharge(item.colors);
+                    const itemTotal = up * item.quantity;
+                    return (
+                      <div key={item.itemId} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: 12, background: C.white, borderRadius: 8, border: `1px solid ${C.border}` }}>
+                        <CupImage product={p} size={36} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontWeight: 600, fontSize: 14, color: C.text }}>{p.name} — {p.capacity}</div>
+                          <div style={{ fontSize: 12, color: C.textSec }}>
+                            {item.quantity.toLocaleString('pt-PT')} un. · {COLOR_OPTIONS.find(c => c.value === item.colors)?.label} · {fmt(up)}/un.
+                          </div>
+                        </div>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, whiteSpace: 'nowrap' }}>{fmt(itemTotal)}</div>
+                        <button onClick={() => removeFromCart(item.itemId)}
+                          style={{ background: 'none', border: 'none', color: '#E74C3C', fontSize: 18, cursor: 'pointer', padding: '4px 8px', lineHeight: 1 }}
+                          title="Remover">
+                          ✕
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Shipping */}
             <div style={sectionStyle}>
@@ -460,51 +925,149 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
                   <p style={{ margin: 0, fontSize: 14, color: '#1E8449', fontWeight: 600 }}>🎉 Transporte OFERTA! Encomendas acima de 150€.</p>
                 </div>
               )}
-              {product && !isInternational && !overweight && (
+              {cart.length > 0 && !isInternational && !overweight && (
                 <p style={{ margin: '8px 0 0', fontSize: 13, color: C.textMuted }}>
-                  Peso estimado: {weightKg.toFixed(1)}kg — Prazo: {SHIPPING_METHOD_LABELS[shippingMethod]?.days}
+                  Peso estimado: {cartWeightKg.toFixed(1)}kg — Prazo: {SHIPPING_METHOD_LABELS[shippingMethod]?.days}
                 </p>
               )}
             </div>
           </div>
 
-          {/* RIGHT: Order Summary */}
-          <div style={{ flex: '0 0 360px', position: 'sticky', top: 80, maxWidth: '100%' }}>
+          {/* RIGHT: Mockup + Order Summary */}
+          <div style={{ flex: '0 0 480px', position: 'sticky', top: 80, maxWidth: '100%', display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {/* Cup Mockup Preview */}
+            {product && (
+              <div style={{ background: C.white, borderRadius: 12, boxShadow: C.cardShadow, border: `1px solid ${C.border}`, overflow: 'hidden' }}>
+                <div style={{ background: `linear-gradient(135deg, ${C.lightBg}, #F8F9FA)`, padding: '12px 24px', borderBottom: `1px solid ${C.border}` }}>
+                  <h3 style={{ color: C.primary, margin: 0, fontSize: 16, fontWeight: 700 }}>
+                    {logoPreviewUrl ? 'Pré-visualização' : 'Mockup do Copo'}
+                  </h3>
+                  {!logoPreviewUrl && <p style={{ margin: '4px 0 0', fontSize: 12, color: C.textMuted }}>Envie um logo para ver a simulação</p>}
+                </div>
+                <div style={{ padding: 24, display: 'flex', justifyContent: 'center', background: '#FAFBFC' }}>
+                  <CupViewer3D
+                    radiusTop={product.cupTopW / 2}
+                    radiusBottom={product.cupBotW / 2}
+                    height={product.cupHeight}
+                    logoUrl={logoPreviewUrl}
+                    logoScale={logoScale}
+                    logoYOffset={logoYOffset}
+                  />
+                </div>
+                {removingBg && (
+                  <div style={{ padding: '8px 24px 16px', textAlign: 'center' }}>
+                    <p style={{ margin: 0, fontSize: 12, color: C.accent, fontWeight: 600 }}>
+                      &#x23F3; A remover fundo do logótipo...
+                    </p>
+                  </div>
+                )}
+                {logoPreviewUrl && !removingBg && (
+                  <div style={{ padding: '8px 24px 16px', textAlign: 'center' }}>
+                    <p style={{ margin: 0, fontSize: 12, color: C.success, fontWeight: 600 }}>
+                      &#x2705; Simulação com o seu logo — {product.name} ({product.capacity})
+                    </p>
+                    <p style={{ margin: '4px 0 0', fontSize: 11, color: C.textMuted }}>
+                      {autoRemoveBg ? 'Fundo removido automaticamente.' : 'Imagem original.'} A maquete final será enviada para aprovação.
+                    </p>
+                  </div>
+                )}
+                {/* Logo position & size sliders */}
+                {logoPreviewUrl && !removingBg && (
+                  <div style={{ padding: '0 24px 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {/* Position slider */}
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                        <label style={{ fontSize: 12, fontWeight: 600, color: C.textSec }}>Posição vertical</label>
+                        {logoYOffset !== 0 && (
+                          <button onClick={() => setLogoYOffset(0)}
+                            style={{ background: 'none', border: 'none', color: C.accent, fontSize: 11, cursor: 'pointer', padding: 0, textDecoration: 'underline' }}>
+                            Reset
+                          </button>
+                        )}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ fontSize: 11, color: C.textMuted }}>&#x2191;</span>
+                        <input
+                          type="range"
+                          min={-25}
+                          max={25}
+                          value={logoYOffset}
+                          onChange={e => setLogoYOffset(Number(e.target.value))}
+                          style={{ flex: 1, cursor: 'pointer', accentColor: C.accent }}
+                        />
+                        <span style={{ fontSize: 11, color: C.textMuted }}>&#x2193;</span>
+                      </div>
+                    </div>
+                    {/* Size slider */}
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                        <label style={{ fontSize: 12, fontWeight: 600, color: C.textSec }}>Tamanho do logo ({logoScale}%)</label>
+                        {logoScale !== 100 && (
+                          <button onClick={() => setLogoScale(100)}
+                            style={{ background: 'none', border: 'none', color: C.accent, fontSize: 11, cursor: 'pointer', padding: 0, textDecoration: 'underline' }}>
+                            Reset
+                          </button>
+                        )}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ fontSize: 11, color: C.textMuted }}>&#x2212;</span>
+                        <input
+                          type="range"
+                          min={30}
+                          max={300}
+                          value={logoScale}
+                          onChange={e => setLogoScale(Number(e.target.value))}
+                          style={{ flex: 1, cursor: 'pointer', accentColor: C.accent }}
+                        />
+                        <span style={{ fontSize: 11, color: C.textMuted }}>+</span>
+                      </div>
+                    </div>
+                    {/* Download mockup button */}
+                    <button
+                      onClick={() => product && exportMockupPNG(product.name)}
+                      style={{ width: '100%', marginTop: 4, padding: '10px 16px', borderRadius: 8, background: 'transparent', color: C.accent, border: `2px solid ${C.accent}`, fontSize: 13, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}>
+                      Descarregar Mockup
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Order Summary */}
             <div style={{ background: C.white, borderRadius: 12, boxShadow: C.cardShadow, border: `1px solid ${C.border}`, overflow: 'hidden' }}>
               <div style={{ background: C.primary, padding: '16px 24px' }}>
                 <h3 style={{ color: C.white, margin: 0, fontSize: 18, fontWeight: 700 }}>Resumo do Orçamento</h3>
               </div>
               <div style={{ padding: 24 }}>
-                {product ? (
+                {cart.length > 0 ? (
                   <>
-                    <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 20, paddingBottom: 20, borderBottom: `1px solid ${C.border}` }}>
-                      <CupImage product={product} size={50} />
-                      <div>
-                        <div style={{ fontWeight: 700, color: C.text }}>{product.name} — {product.capacity}</div>
-                        <div style={{ fontSize: 13, color: C.textSec }}>{product.description}</div>
-                      </div>
+                    {/* Cart items summary */}
+                    <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: `1px solid ${C.border}` }}>
+                      {cart.map(item => {
+                        const p = PRODUCTS.find(pr => pr.id === item.productId);
+                        if (!p) return null;
+                        const up = getUnitPrice(p, item.quantity) + getColorSurcharge(item.colors);
+                        const itemTotal = up * item.quantity;
+                        return (
+                          <div key={item.itemId} style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 8 }}>
+                            <CupImage product={p} size={32} />
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div style={{ fontWeight: 600, fontSize: 13, color: C.text }}>{p.name}</div>
+                              <div style={{ fontSize: 11, color: C.textSec }}>{item.quantity.toLocaleString('pt-PT')} un. × {fmt(up)}</div>
+                            </div>
+                            <div style={{ fontWeight: 600, fontSize: 13, color: C.text, whiteSpace: 'nowrap' }}>{fmt(itemTotal)}</div>
+                          </div>
+                        );
+                      })}
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: C.textSec }}>Quantidade</span>
-                        <span style={{ fontWeight: 600 }}>{quantity.toLocaleString('pt-PT')} un.</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: C.textSec }}>Cores</span>
-                        <span style={{ fontWeight: 600 }}>{COLOR_OPTIONS.find(c => c.value === colors)?.label}</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: C.textSec }}>Preço unitário</span>
-                        <span style={{ fontWeight: 600 }}>{fmt(unitPrice)}</span>
-                      </div>
-                      <div style={{ height: 1, background: C.border, margin: '4px 0' }} />
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: C.textSec }}>Subtotal (produtos)</span>
-                        <span style={{ fontWeight: 600 }}>{fmt(subtotal)}</span>
+                        <span style={{ color: C.textSec }}>Subtotal ({cart.length} {cart.length === 1 ? 'item' : 'itens'})</span>
+                        <span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span>
                       </div>
                       {!isInternational && !overweight && (
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: C.textSec }}>Envio{freeShipping ? '' : ''}</span>
+                          <span style={{ color: C.textSec }}>Envio</span>
                           <span style={{ fontWeight: 700, color: freeShipping ? C.success : undefined }}>{freeShipping ? 'OFERTA' : fmt(shippingCost)}</span>
                         </div>
                       )}
@@ -538,7 +1101,7 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
                 ) : (
                   <div style={{ textAlign: 'center', padding: '32px 0', color: C.textMuted }}>
                     <div style={{ fontSize: 40, marginBottom: 12 }}>🛒</div>
-                    <p style={{ margin: 0, fontSize: 14 }}>Selecione um produto para ver o orçamento</p>
+                    <p style={{ margin: 0, fontSize: 14 }}>Adicione produtos ao carrinho para ver o orçamento</p>
                   </div>
                 )}
               </div>
@@ -586,8 +1149,8 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
       </section>
 
       {/* Confirmation Modal */}
-      {showModal && product && (
-        <ConfirmationModal product={product} quantity={quantity} colors={colors} unitPrice={unitPrice} subtotal={subtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} />
+      {showModal && cart.length > 0 && (
+        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} />
       )}
     </div>
   );
@@ -595,8 +1158,8 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
 
 // ==================== CONFIRMATION MODAL ====================
 
-function ConfirmationModal({ product, quantity, colors, unitPrice, subtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose }: {
-  product: Product; quantity: number; colors: number; unitPrice: number; subtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void;
+function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose }: {
+  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void;
 }) {
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
 
@@ -619,15 +1182,28 @@ function ConfirmationModal({ product, quantity, colors, unitPrice, subtotal, shi
         <h2 style={{ color: C.primary, margin: '0 0 24px', fontSize: 24 }}>Confirmar Encomenda</h2>
 
         <div style={{ background: C.lightBg, borderRadius: 8, padding: 20, marginBottom: 24 }}>
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 16 }}>
-            <CupImage product={product} size={44} />
-            <div>
-              <div style={{ fontWeight: 700 }}>{product.name} — {product.capacity}</div>
-              <div style={{ fontSize: 13, color: C.textSec }}>{quantity.toLocaleString('pt-PT')} un. · {COLOR_OPTIONS.find(c => c.value === colors)?.label}</div>
-            </div>
-          </div>
+          {/* Cart items */}
+          {cart.map(item => {
+            const p = PRODUCTS.find(pr => pr.id === item.productId);
+            if (!p) return null;
+            const up = getUnitPrice(p, item.quantity) + getColorSurcharge(item.colors);
+            const itemTotal = up * item.quantity;
+            return (
+              <div key={item.itemId} style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 12 }}>
+                <CupImage product={p} size={40} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{p.name} — {p.capacity}</div>
+                  <div style={{ fontSize: 12, color: C.textSec }}>
+                    {item.quantity.toLocaleString('pt-PT')} un. · {COLOR_OPTIONS.find(c => c.value === item.colors)?.label} · {fmt(up)}/un.
+                  </div>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 14, color: C.primary }}>{fmt(itemTotal)}</div>
+              </div>
+            );
+          })}
+          <div style={{ height: 1, background: C.border, margin: '12px 0' }} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 14 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>Subtotal</span><span style={{ fontWeight: 600 }}>{fmt(subtotal)}</span></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>Subtotal</span><span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span></div>
             {!isInternational && !overweight && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>Envio ({SHIPPING_METHOD_LABELS[shippingMethod]?.label})</span><span style={{ fontWeight: 700, color: freeShipping ? C.success : undefined }}>{freeShipping ? 'OFERTA' : fmt(shippingCost)}</span></div>
             )}
@@ -864,13 +1440,20 @@ function Footer({ setPage }: { setPage: (p: string) => void }) {
 
 export default function PrimeGiftApp() {
   const [page, setPage] = useState('home');
+  const [initialProduct, setInitialProduct] = useState<string | null>(null);
+
+  const handleSelectProduct = (productId: string) => {
+    setInitialProduct(productId);
+    setPage('products');
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header page={page} setPage={setPage} />
       <main style={{ flex: 1 }}>
-        {page === 'home' && <HomePage setPage={setPage} />}
-        {page === 'products' && <ProductsPage goToContact={() => { setPage('contact'); window.scrollTo(0, 0); }} />}
+        {page === 'home' && <HomePage setPage={setPage} onSelectProduct={handleSelectProduct} />}
+        {page === 'products' && <ProductsPage key={initialProduct ?? 'default'} goToContact={() => { setPage('contact'); window.scrollTo(0, 0); }} initialProduct={initialProduct} />}
         {page === 'how-it-works' && <HowItWorksPage />}
         {page === 'contact' && <ContactPage />}
       </main>
