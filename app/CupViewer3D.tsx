@@ -86,11 +86,12 @@ function Cup({ rTop, rBot, h, logoUrl, logoScale, logoYOffset }: {
   // Hollow cup via LatheGeometry (profile: outer wall → rim → inner wall → bottom)
   const cupGeometry = useMemo(() => {
     const pts: THREE.Vector2[] = [
-      new THREE.Vector2(rBot, -h / 2),        // outer bottom
-      new THREE.Vector2(rTop, h / 2),          // outer top
+      new THREE.Vector2(0, -h / 2),            // center bottom (outside face)
+      new THREE.Vector2(rBot, -h / 2),         // outer bottom edge
+      new THREE.Vector2(rTop, h / 2),          // outer top edge
       new THREE.Vector2(rTop - wall, h / 2),   // inner top (rim)
-      new THREE.Vector2(rBot - wall, -h / 2),  // inner bottom
-      new THREE.Vector2(rBot, -h / 2),         // close bottom disc
+      new THREE.Vector2(rBot - wall, -h / 2),  // inner bottom edge
+      new THREE.Vector2(0, -h / 2),            // center bottom (inside face)
     ];
     return new THREE.LatheGeometry(pts, 64);
   }, [rTop, rBot, h, wall]);
