@@ -2366,7 +2366,7 @@ function ContactPage({ t }: { t: TFunc }) {
       });
       if (!res.ok) throw new Error();
       setSent(true);
-    } catch {
+    } catch (err) {
       setError(t('contact.form.error'));
     } finally {
       setSending(false);
