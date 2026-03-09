@@ -395,11 +395,14 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
                 {PRODUCTS.map(p => (
                   <div key={p.id} onClick={() => setSelectedProduct(p.id)}
-                    style={{ flex: '1 1 130px', maxWidth: 160, padding: 16, borderRadius: 10, border: `2px solid ${selectedProduct === p.id ? C.accent : C.border}`, background: selectedProduct === p.id ? C.lightBg : C.white, cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s' }}>
+                    style={{ flex: '1 1 130px', maxWidth: 160, padding: 16, borderRadius: 10, border: `2px solid ${selectedProduct === p.id ? C.accent : C.border}`, background: selectedProduct === p.id ? C.lightBg : C.white, cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s', position: 'relative' }}>
+                    <div style={{ position: 'absolute', top: 8, right: 8, background: C.accent, color: C.white, padding: '3px 8px', borderRadius: 12, fontSize: 12, fontWeight: 700 }}>
+                      {p.capacity}
+                    </div>
                     <CupImage product={p} size={60} />
                     <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, marginTop: 8 }}>{p.name}</div>
-                    <div style={{ fontSize: 13, color: C.textSec }}>{p.capacity}</div>
-                    <div style={{ fontSize: 12, color: C.textMuted, marginTop: 2 }}>{p.description}</div>
+                    <div style={{ fontSize: 11, color: C.textMuted }}>⌀{p.cupTopW}mm × {p.cupHeight}mm</div>
+                    <div style={{ fontSize: 12, color: C.textSec, marginTop: 4 }}>{p.description}</div>
                   </div>
                 ))}
               </div>
@@ -554,10 +557,16 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
                 {product ? (
                   <>
                     <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 20, paddingBottom: 20, borderBottom: `1px solid ${C.border}` }}>
-                      <CupImage product={product} size={50} />
+                      <div style={{ position: 'relative' }}>
+                        <CupImage product={product} size={60} />
+                        <div style={{ position: 'absolute', bottom: -4, left: '50%', transform: 'translateX(-50%)', background: C.accent, color: C.white, padding: '2px 8px', borderRadius: 10, fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap' }}>
+                          {product.capacity}
+                        </div>
+                      </div>
                       <div>
-                        <div style={{ fontWeight: 700, color: C.text }}>{product.name} — {product.capacity}</div>
+                        <div style={{ fontWeight: 700, color: C.text, fontSize: 16 }}>{product.name}</div>
                         <div style={{ fontSize: 13, color: C.textSec }}>{product.description}</div>
+                        <div style={{ fontSize: 11, color: C.textMuted, marginTop: 2 }}>⌀{product.cupTopW}mm × {product.cupHeight}mm</div>
                       </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14 }}>
