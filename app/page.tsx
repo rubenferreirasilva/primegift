@@ -27,6 +27,12 @@ const COLOR_OPTIONS = [
   { value: 2, label: '2 cores', surcharge: 0.06 },
 ];
 
+const PRINT_TECHNIQUES = [
+  { id: 'tampografia', label: 'Tampografia', description: 'Ideal para logos simples', surcharge: 0 },
+  { id: 'serigrafia', label: 'Serigrafia', description: 'Cores vivas e duráveis', surcharge: 0.02 },
+  { id: 'serigrafia360', label: 'Serigrafia 360°', description: 'Impressão em toda a volta', surcharge: 0.08 },
+];
+
 const QUANTITIES = [25, 50, 100, 250, 500, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000];
 
 const SHIPPING_REGIONS = [
@@ -270,7 +276,8 @@ function HomePage({ setPage }: { setPage: (p: string) => void }) {
                 </div>
                 <h3 style={{ margin: '0 0 4px', fontSize: 20, fontWeight: 700, color: C.primary }}>{product.name}</h3>
                 <p style={{ margin: '0 0 4px', fontSize: 15, color: C.text, fontWeight: 500 }}>{product.capacity}</p>
-                <p style={{ margin: '0 0 12px', fontSize: 14, color: C.textSec }}>{product.description}</p>
+                <p style={{ margin: '0 0 4px', fontSize: 14, color: C.textSec }}>{product.description}</p>
+                <p style={{ margin: '0 0 12px', fontSize: 12, color: C.textMuted }}>⌀{product.cupTopW}mm × {product.cupHeight}mm altura</p>
                 <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: C.success }}>desde {fmt(product.prices[5000])}/un.</p>
               </div>
             ))}
@@ -300,6 +307,33 @@ function HomePage({ setPage }: { setPage: (p: string) => void }) {
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <section style={{ padding: '64px 24px', background: C.lightBg }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>O Que Dizem os Nossos Clientes</h2>
+          <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>Eventos reais, resultados reais</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center' }}>
+            {[
+              { quote: 'Os copos ficaram incríveis e resistiram a todo o festival. A qualidade de impressão superou as expectativas e os participantes adoraram levar como recordação.', name: 'Ana Rodrigues', role: 'Festival Vilar de Mouros' },
+              { quote: 'Substituímos os copos descartáveis pelos reutilizáveis da PrimeGift. Os clientes elogiam constantemente e poupamos no descartável. Excelente investimento.', name: 'Miguel Santos', role: 'Restaurante O Marinheiro' },
+              { quote: 'Encomendámos para um evento de 500 pessoas e o resultado foi impecável. A maquete prévia ajudou-nos a acertar no design à primeira. Recomendo vivamente.', name: 'Carla Ferreira', role: 'Eventos Corporativos LDA' },
+              { quote: 'A serigrafia 360° ficou espetacular nos nossos copos de cerveja artesanal. Os clientes perguntam sempre onde podem comprar!', name: 'Pedro Almeida', role: 'Cervejaria Artesanal Minho' },
+              { quote: 'Trabalho com a PrimeGift há 2 anos. Qualidade consistente, prazos cumpridos e preços competitivos. São o nosso fornecedor de referência.', name: 'Sofia Costa', role: 'Agência EventosPro' },
+              { quote: 'Os copos personalizados deram um toque premium ao nosso casamento. Todos os convidados levaram como lembrança. Simplesmente perfeito!', name: 'Ricardo & Joana', role: 'Casamento em Sintra' },
+            ].map((review, idx) => (
+              <div key={idx} style={{ flex: '1 1 300px', maxWidth: 340, background: C.white, borderRadius: 12, padding: 24, boxShadow: C.cardShadow }}>
+                <div style={{ fontSize: 32, color: C.accent, marginBottom: 12 }}>"</div>
+                <p style={{ margin: '0 0 16px', fontSize: 14, color: C.textSec, lineHeight: 1.6, fontStyle: 'italic' }}>{review.quote}</p>
+                <div>
+                  <p style={{ margin: 0, fontWeight: 700, color: C.text, fontSize: 15 }}>{review.name}</p>
+                  <p style={{ margin: '2px 0 0', fontSize: 13, color: C.textMuted }}>{review.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
@@ -310,13 +344,16 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(100);
   const [colors, setColors] = useState(1);
-  const [fileUploaded, setFileUploaded] = useState(false);
+  const [printTechnique, setPrintTechnique] = useState('tampografia');
+  const [uploadedFile, setUploadedFile] = useState<{ name: string; preview: string | null } | null>(null);
   const [shippingRegion, setShippingRegion] = useState('pt-continental');
   const [shippingMethod, setShippingMethod] = useState('2-days');
   const [showModal, setShowModal] = useState(false);
 
   const product = PRODUCTS.find(p => p.id === selectedProduct) || null;
-  const unitPrice = product ? getUnitPrice(product, quantity) + getColorSurcharge(colors) : 0;
+  const technique = PRINT_TECHNIQUES.find(t => t.id === printTechnique);
+  const techniqueSurcharge = technique?.surcharge ?? 0;
+  const unitPrice = product ? getUnitPrice(product, quantity) + getColorSurcharge(colors) + techniqueSurcharge : 0;
   const subtotal = unitPrice * quantity;
   const weightKg = product ? calculateWeightKg(product, quantity) : 0;
   const overweight = weightKg > 30;
@@ -399,16 +436,55 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
               </div>
             </div>
 
+            {/* Step 2.5: Print Technique */}
+            <div style={sectionStyle}>
+              <h3 style={stepTitleStyle}><span style={stepNumStyle}>2.5</span> Técnica de impressão</h3>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                {PRINT_TECHNIQUES.map(t => (
+                  <div key={t.id} onClick={() => setPrintTechnique(t.id)}
+                    style={{ flex: '1 1 140px', padding: '14px 16px', borderRadius: 10, border: `2px solid ${printTechnique === t.id ? C.accent : C.border}`, background: printTechnique === t.id ? C.lightBg : C.white, cursor: 'pointer', transition: 'all 0.2s' }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, color: printTechnique === t.id ? C.accent : C.text, marginBottom: 4 }}>{t.label}</div>
+                    <div style={{ fontSize: 12, color: C.textMuted }}>{t.description}</div>
+                    {t.surcharge > 0 && <div style={{ fontSize: 11, color: C.success, marginTop: 4 }}>+{fmt(t.surcharge)}/un.</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Step 3: File Upload */}
             <div style={sectionStyle}>
               <h3 style={stepTitleStyle}><span style={stepNumStyle}>3</span> Envie o seu ficheiro</h3>
-              <div onClick={() => setFileUploaded(!fileUploaded)}
-                style={{ border: `2px dashed ${fileUploaded ? C.success : C.border}`, borderRadius: 12, padding: 40, textAlign: 'center', cursor: 'pointer', background: fileUploaded ? '#EAFAF1' : '#FAFAFA', transition: 'all 0.2s' }}>
-                {fileUploaded ? (
+              <input
+                type="file"
+                id="file-upload"
+                accept=".pdf,.ai,.eps,.png,.svg,.jpg,.jpeg"
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const isImage = file.type.startsWith('image/');
+                    setUploadedFile({
+                      name: file.name,
+                      preview: isImage ? URL.createObjectURL(file) : null
+                    });
+                  }
+                }}
+              />
+              <label htmlFor="file-upload"
+                style={{ display: 'block', border: `2px dashed ${uploadedFile ? C.success : C.border}`, borderRadius: 12, padding: 40, textAlign: 'center', cursor: 'pointer', background: uploadedFile ? '#EAFAF1' : '#FAFAFA', transition: 'all 0.2s' }}>
+                {uploadedFile ? (
                   <>
-                    <div style={{ fontSize: 36, marginBottom: 8 }}>✅</div>
+                    {uploadedFile.preview ? (
+                      <img src={uploadedFile.preview} alt="Preview" style={{ maxWidth: 150, maxHeight: 100, marginBottom: 12, borderRadius: 8 }} />
+                    ) : (
+                      <div style={{ fontSize: 36, marginBottom: 8 }}>✅</div>
+                    )}
                     <p style={{ margin: 0, fontWeight: 600, color: C.success }}>Ficheiro carregado com sucesso</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>logo-empresa.pdf — Clique para remover</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{uploadedFile.name}</p>
+                    <button onClick={(e) => { e.preventDefault(); setUploadedFile(null); }}
+                      style={{ marginTop: 8, background: 'none', border: 'none', color: C.accent, fontSize: 13, cursor: 'pointer', textDecoration: 'underline' }}>
+                      Remover ficheiro
+                    </button>
                   </>
                 ) : (
                   <>
@@ -417,7 +493,7 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
                     <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>PDF, AI, EPS, PNG ou SVG (máx. 10MB)</p>
                   </>
                 )}
-              </div>
+              </label>
             </div>
 
             {/* Shipping */}
@@ -851,12 +927,152 @@ function Footer({ setPage }: { setPage: (p: string) => void }) {
             ))}
           </div>
         </div>
+
+        {/* Legal */}
+        <div style={{ flex: '0 0 180px' }}>
+          <h4 style={{ color: C.white, fontSize: 14, fontWeight: 700, margin: '0 0 16px', textTransform: 'uppercase', letterSpacing: 1 }}>Legal</h4>
+          {[
+            { id: 'privacy', label: 'Política de Privacidade' },
+            { id: 'terms', label: 'Termos e Condições' },
+            { id: 'returns', label: 'Devoluções e Reembolsos' },
+            { id: 'shipping', label: 'Política de Envio' },
+            { id: 'cookies', label: 'Política de Cookies' },
+          ].map(item => (
+            <div key={item.id} style={{ marginBottom: 6 }}>
+              <a onClick={() => { setPage(item.id); window.scrollTo(0, 0); }}
+                style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, cursor: 'pointer', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = C.white)}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}>
+                {item.label}
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: 20, textAlign: 'center' }}>
         <p style={{ margin: 0, fontSize: 13, opacity: 0.6 }}>© 2026 PrimeGift. Todos os direitos reservados.</p>
       </div>
     </footer>
+  );
+}
+
+// ==================== LEGAL PAGES ====================
+
+function LegalPage({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <section style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, padding: '40px 24px', textAlign: 'center' }}>
+        <h1 style={{ color: C.white, fontSize: 32, fontWeight: 700, margin: 0 }}>{title}</h1>
+      </section>
+      <section style={{ ...container, padding: '48px 24px' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto', fontSize: 15, color: C.text, lineHeight: 1.8 }}>
+          {children}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function PrivacyPage() {
+  return (
+    <LegalPage title="Política de Privacidade">
+      <p><strong>Última atualização:</strong> Março 2026</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>1. Responsável pelo Tratamento</h2>
+      <p>A PrimeGift é responsável pelo tratamento dos dados pessoais recolhidos através deste website. Estamos empenhados em proteger a sua privacidade e em cumprir o Regulamento Geral de Proteção de Dados (RGPD).</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>2. Dados Recolhidos</h2>
+      <p>Recolhemos os seguintes dados pessoais:</p>
+      <ul>
+        <li>Nome e email (para comunicação e processamento de encomendas)</li>
+        <li>Morada de entrega (para envio de encomendas)</li>
+        <li>Número de telefone (para contacto relacionado com encomendas)</li>
+        <li>Dados de pagamento (processados por terceiros seguros)</li>
+      </ul>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>3. Finalidade do Tratamento</h2>
+      <p>Os seus dados são utilizados para:</p>
+      <ul>
+        <li>Processar e entregar as suas encomendas</li>
+        <li>Comunicar sobre o estado das encomendas</li>
+        <li>Enviar maquetes digitais para aprovação</li>
+        <li>Responder a pedidos de informação</li>
+      </ul>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>4. Direitos do Titular</h2>
+      <p>Tem direito a aceder, retificar, apagar ou limitar o tratamento dos seus dados. Para exercer estes direitos, contacte-nos através do email: privacidade@primegift.pt</p>
+    </LegalPage>
+  );
+}
+
+function TermsPage() {
+  return (
+    <LegalPage title="Termos e Condições">
+      <p><strong>Última atualização:</strong> Março 2026</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>1. Objeto</h2>
+      <p>Os presentes Termos e Condições regulam a utilização do website PrimeGift e a aquisição de produtos através do mesmo.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>2. Encomendas</h2>
+      <p>Todas as encomendas estão sujeitas a confirmação. Após aprovação da maquete digital, a encomenda será processada e o prazo de produção inicia-se.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>3. Preços e Pagamento</h2>
+      <p>Os preços indicados não incluem IVA (23%). O pagamento deve ser efetuado na totalidade antes do início da produção.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>4. Propriedade Intelectual</h2>
+      <p>O cliente garante que possui os direitos sobre os logótipos e designs fornecidos para personalização. A PrimeGift não se responsabiliza por violações de direitos de autor.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>5. Limitação de Responsabilidade</h2>
+      <p>A PrimeGift não se responsabiliza por atrasos causados por transportadoras ou por força maior.</p>
+    </LegalPage>
+  );
+}
+
+function ReturnsPage() {
+  return (
+    <LegalPage title="Política de Devoluções e Reembolsos">
+      <p><strong>Última atualização:</strong> Março 2026</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>1. Produtos Personalizados</h2>
+      <p>Por serem produtos personalizados e fabricados sob encomenda, <strong>não aceitamos devoluções</strong> exceto em caso de defeito de fabrico ou erro da nossa parte.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>2. Defeitos de Fabrico</h2>
+      <p>Se receber produtos com defeito, contacte-nos no prazo de 48 horas após a receção, enviando fotografias do problema. Após análise, procederemos à substituição ou reembolso.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>3. Erros na Impressão</h2>
+      <p>Caso a impressão não corresponda à maquete aprovada, procederemos à reposição sem custos adicionais.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>4. Cancelamentos</h2>
+      <p>Pode cancelar a encomenda gratuitamente antes da aprovação da maquete. Após aprovação, será cobrado 50% do valor. Após início da produção, não são aceites cancelamentos.</p>
+    </LegalPage>
+  );
+}
+
+function ShippingPage() {
+  return (
+    <LegalPage title="Política de Envio">
+      <p><strong>Última atualização:</strong> Março 2026</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>1. Prazos de Entrega</h2>
+      <p>O prazo total inclui produção (5-10 dias úteis) mais tempo de envio:</p>
+      <ul>
+        <li><strong>Portugal Continental:</strong> 1-2 dias úteis</li>
+        <li><strong>Ilhas (Açores/Madeira):</strong> 3-5 dias úteis</li>
+        <li><strong>Espanha:</strong> 2-3 dias úteis</li>
+        <li><strong>Europa:</strong> 4-7 dias úteis</li>
+      </ul>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>2. Custos de Envio</h2>
+      <p><strong>Portes grátis</strong> para encomendas acima de 150€ (Portugal Continental). Para outros destinos, consulte a tabela de preços no configurador.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>3. Transportadora</h2>
+      <p>Utilizamos a CTT Expresso para Portugal e Espanha, e transportadoras parceiras para outros destinos europeus.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>4. Tracking</h2>
+      <p>Receberá um código de tracking por email assim que a encomenda for expedida.</p>
+    </LegalPage>
+  );
+}
+
+function CookiesPage() {
+  return (
+    <LegalPage title="Política de Cookies">
+      <p><strong>Última atualização:</strong> Março 2026</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>1. O que são Cookies?</h2>
+      <p>Cookies são pequenos ficheiros de texto armazenados no seu dispositivo quando visita um website. Permitem melhorar a experiência de navegação.</p>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>2. Cookies Utilizados</h2>
+      <ul>
+        <li><strong>Essenciais:</strong> Necessários para o funcionamento do site (carrinho, sessão)</li>
+        <li><strong>Analíticos:</strong> Google Analytics para compreender como utiliza o site</li>
+        <li><strong>Funcionais:</strong> Guardar preferências (idioma, região)</li>
+      </ul>
+      <h2 style={{ color: C.primary, fontSize: 20, marginTop: 32 }}>3. Gestão de Cookies</h2>
+      <p>Pode desativar os cookies nas definições do seu browser. Note que isso pode afetar a funcionalidade do site.</p>
+    </LegalPage>
   );
 }
 
@@ -873,6 +1089,11 @@ export default function PrimeGiftApp() {
         {page === 'products' && <ProductsPage goToContact={() => { setPage('contact'); window.scrollTo(0, 0); }} />}
         {page === 'how-it-works' && <HowItWorksPage />}
         {page === 'contact' && <ContactPage />}
+        {page === 'privacy' && <PrivacyPage />}
+        {page === 'terms' && <TermsPage />}
+        {page === 'returns' && <ReturnsPage />}
+        {page === 'shipping' && <ShippingPage />}
+        {page === 'cookies' && <CookiesPage />}
       </main>
       <Footer setPage={setPage} />
     </div>
