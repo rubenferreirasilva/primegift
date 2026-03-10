@@ -252,6 +252,26 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navegação',
     'footer.payment': 'Pagamento',
     'footer.copyright': '© 2026 PrimeGift. Todos os direitos reservados.',
+    'products.step3.vectorNotice': 'Ficheiros PDF, AI e EPS não podem ser pré-visualizados no mockup. O seu ficheiro será usado na maquete final enviada para aprovação.',
+    'testimonial.3.quote': 'Usámos os copos da PrimeGift no nosso casamento e foi um sucesso. Os convidados ficaram encantados com a personalização e muitos levaram como lembrança.',
+    'testimonial.3.role': 'Casamento — Quinta do Lago',
+    'testimonial.4.quote': 'Há 3 anos que encomendamos para os nossos festivais de verão. A consistência da qualidade e o cumprimento dos prazos fazem toda a diferença quando organizamos eventos de grande escala.',
+    'testimonial.4.role': 'MEO Sudoeste',
+    'testimonial.5.quote': 'Implementámos os copos reutilizáveis em toda a cadeia de lojas. Reduziu o nosso consumo de plástico em 80% e os clientes adoram o conceito eco-friendly.',
+    'testimonial.5.role': 'Padaria Portuguesa',
+    'legal.privacy.title': 'Política de Privacidade',
+    'legal.terms.title': 'Termos e Condições',
+    'legal.cookies.title': 'Política de Cookies',
+    'legal.returns.title': 'Política de Devoluções',
+    'legal.shipping.title': 'Política de Envio',
+    'legal.lastUpdated': 'Última atualização',
+    'legal.date': 'Março 2026',
+    'footer.legal': 'Legal',
+    'footer.privacy': 'Política de Privacidade',
+    'footer.terms': 'Termos e Condições',
+    'footer.cookies': 'Política de Cookies',
+    'footer.returns': 'Devoluções',
+    'footer.shipping': 'Política de Envio',
   },
   es: {
     'nav.home': 'Inicio',
@@ -464,6 +484,26 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navegación',
     'footer.payment': 'Pago',
     'footer.copyright': '© 2026 PrimeGift. Todos los derechos reservados.',
+    'products.step3.vectorNotice': 'Los archivos PDF, AI y EPS no pueden previsualizarse en la maqueta. Tu archivo será utilizado en la maqueta final enviada para aprobación.',
+    'testimonial.3.quote': 'Usamos los vasos de PrimeGift en nuestra boda y fue un éxito. Los invitados quedaron encantados con la personalización y muchos se los llevaron de recuerdo.',
+    'testimonial.3.role': 'Boda — Quinta do Lago',
+    'testimonial.4.quote': 'Hace 3 años que pedimos para nuestros festivales de verano. La consistencia de la calidad y el cumplimiento de los plazos marcan la diferencia en eventos de gran escala.',
+    'testimonial.4.role': 'MEO Sudoeste',
+    'testimonial.5.quote': 'Implementamos los vasos reutilizables en toda la cadena de tiendas. Redujimos nuestro consumo de plástico en un 80% y los clientes adoran el concepto eco-friendly.',
+    'testimonial.5.role': 'Padaria Portuguesa',
+    'legal.privacy.title': 'Política de Privacidad',
+    'legal.terms.title': 'Términos y Condiciones',
+    'legal.cookies.title': 'Política de Cookies',
+    'legal.returns.title': 'Política de Devoluciones',
+    'legal.shipping.title': 'Política de Envío',
+    'legal.lastUpdated': 'Última actualización',
+    'legal.date': 'Marzo 2026',
+    'footer.legal': 'Legal',
+    'footer.privacy': 'Política de Privacidad',
+    'footer.terms': 'Términos y Condiciones',
+    'footer.cookies': 'Política de Cookies',
+    'footer.returns': 'Devoluciones',
+    'footer.shipping': 'Política de Envío',
   },
   en: {
     'nav.home': 'Home',
@@ -676,6 +716,26 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navigation',
     'footer.payment': 'Payment',
     'footer.copyright': '© 2026 PrimeGift. All rights reserved.',
+    'products.step3.vectorNotice': 'PDF, AI and EPS files cannot be previewed on the mockup. Your file will be used in the final mockup sent for approval.',
+    'testimonial.3.quote': 'We used PrimeGift cups at our wedding and it was a huge success. Guests loved the personalisation and many took them home as souvenirs.',
+    'testimonial.3.role': 'Wedding — Quinta do Lago',
+    'testimonial.4.quote': 'We\'ve been ordering for our summer festivals for 3 years now. The consistency in quality and meeting deadlines makes all the difference for large-scale events.',
+    'testimonial.4.role': 'MEO Sudoeste',
+    'testimonial.5.quote': 'We implemented reusable cups across our entire chain of shops. It reduced our plastic consumption by 80% and customers love the eco-friendly concept.',
+    'testimonial.5.role': 'Padaria Portuguesa',
+    'legal.privacy.title': 'Privacy Policy',
+    'legal.terms.title': 'Terms & Conditions',
+    'legal.cookies.title': 'Cookie Policy',
+    'legal.returns.title': 'Returns Policy',
+    'legal.shipping.title': 'Shipping Policy',
+    'legal.lastUpdated': 'Last updated',
+    'legal.date': 'March 2026',
+    'footer.legal': 'Legal',
+    'footer.privacy': 'Privacy Policy',
+    'footer.terms': 'Terms & Conditions',
+    'footer.cookies': 'Cookie Policy',
+    'footer.returns': 'Returns',
+    'footer.shipping': 'Shipping Policy',
   },
   fr: {
     'nav.home': 'Accueil',
@@ -888,6 +948,26 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navigation',
     'footer.payment': 'Paiement',
     'footer.copyright': '© 2026 PrimeGift. Tous droits réservés.',
+    'products.step3.vectorNotice': 'Les fichiers PDF, AI et EPS ne peuvent pas être prévisualisés sur la maquette. Votre fichier sera utilisé dans la maquette finale envoyée pour approbation.',
+    'testimonial.3.quote': 'Nous avons utilisé les gobelets PrimeGift pour notre mariage et ce fut un succès. Les invités ont adoré la personnalisation et beaucoup les ont gardés en souvenir.',
+    'testimonial.3.role': 'Mariage — Quinta do Lago',
+    'testimonial.4.quote': 'Cela fait 3 ans que nous commandons pour nos festivals d\'été. La constance de la qualité et le respect des délais font toute la différence pour les événements de grande envergure.',
+    'testimonial.4.role': 'MEO Sudoeste',
+    'testimonial.5.quote': 'Nous avons mis en place les gobelets réutilisables dans toute notre chaîne de magasins. Cela a réduit notre consommation de plastique de 80% et les clients adorent le concept éco-responsable.',
+    'testimonial.5.role': 'Padaria Portuguesa',
+    'legal.privacy.title': 'Politique de Confidentialité',
+    'legal.terms.title': 'Conditions Générales',
+    'legal.cookies.title': 'Politique de Cookies',
+    'legal.returns.title': 'Politique de Retours',
+    'legal.shipping.title': 'Politique de Livraison',
+    'legal.lastUpdated': 'Dernière mise à jour',
+    'legal.date': 'Mars 2026',
+    'footer.legal': 'Légal',
+    'footer.privacy': 'Politique de Confidentialité',
+    'footer.terms': 'Conditions Générales',
+    'footer.cookies': 'Politique de Cookies',
+    'footer.returns': 'Retours',
+    'footer.shipping': 'Politique de Livraison',
   },
 };
 
@@ -1601,11 +1681,14 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('testimonials.title')}</h2>
           <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>{t('testimonials.subtitle')}</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
             {[
               { name: 'Ana Rodrigues', role: t('testimonial.0.role'), quote: t('testimonial.0.quote') },
               { name: 'Miguel Santos', role: t('testimonial.1.role'), quote: t('testimonial.1.quote') },
               { name: 'Carla Ferreira', role: t('testimonial.2.role'), quote: t('testimonial.2.quote') },
+              { name: 'Ricardo Oliveira', role: t('testimonial.3.role'), quote: t('testimonial.3.quote') },
+              { name: 'Sofia Martins', role: t('testimonial.4.role'), quote: t('testimonial.4.quote') },
+              { name: 'João Almeida', role: t('testimonial.5.role'), quote: t('testimonial.5.quote') },
             ].map((item, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 12, padding: 28, boxShadow: C.cardShadow, border: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ fontSize: 32, color: C.accent, marginBottom: 12, lineHeight: 1 }}>&ldquo;</div>
@@ -1684,8 +1767,15 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
       setLogoPreviewUrl(null);
       return;
     }
-    const isImage = uploadedFile.type.startsWith('image/') || uploadedFile.name.endsWith('.svg');
-    if (!isImage) {
+    const ext = uploadedFile.name.split('.').pop()?.toLowerCase() || '';
+    const isImage = uploadedFile.type.startsWith('image/') || ext === 'svg';
+    const isVector = ['pdf', 'ai', 'eps'].includes(ext);
+    if (!isImage && !isVector) {
+      setLogoPreviewUrl(null);
+      return;
+    }
+    if (isVector) {
+      // Vector/PDF files can't be previewed but are accepted
       setLogoPreviewUrl(null);
       return;
     }
@@ -1897,6 +1987,13 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
               <p style={{ margin: '8px 0 0', fontSize: 12, color: C.textMuted }}>
                 {t('products.step3.bestResult')}
               </p>
+              {uploadedFile && !logoPreviewUrl && !removingBg && (
+                <div style={{ marginTop: 12, padding: 12, background: '#FEF9E7', borderRadius: 8, border: '1px solid #F9E79F' }}>
+                  <p style={{ margin: 0, fontSize: 13, color: '#7D6608' }}>
+                    {t('products.step3.vectorNotice')}
+                  </p>
+                </div>
+              )}
               {/* Auto-remove background toggle */}
               {uploadedFile && !uploadedFile.name.endsWith('.svg') && (
                 <label style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12, cursor: 'pointer', fontSize: 14, color: C.text }}>
@@ -2017,6 +2114,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                     logoScale={logoScale}
                     logoYOffset={logoYOffset}
                     printColor={PRINT_COLORS.find(c => c.value === printColor)?.hex ?? '#000000'}
+                    capacity={product.capacity}
                   />
                 </div>
                 {removingBg && (
@@ -2437,6 +2535,92 @@ function ContactPage({ t }: { t: TFunc }) {
   );
 }
 
+// ==================== LEGAL PAGE ====================
+
+function LegalPage({ type, t }: { type: string; t: TFunc }) {
+  const content: Record<string, { title: string; sections: { heading: string; text: string }[] }> = {
+    privacy: {
+      title: t('legal.privacy.title'),
+      sections: [
+        { heading: 'Responsável pelo Tratamento', text: 'A PrimeGift, com sede em Portugal, é a responsável pelo tratamento dos dados pessoais recolhidos através deste website.' },
+        { heading: 'Dados Recolhidos', text: 'Recolhemos os seguintes dados pessoais: nome, email, telefone, empresa e mensagem, exclusivamente quando submetidos voluntariamente através do formulário de contacto ou encomenda.' },
+        { heading: 'Finalidade do Tratamento', text: 'Os dados pessoais são tratados com a finalidade de responder a pedidos de contacto, processar encomendas, enviar orçamentos e prestar apoio ao cliente.' },
+        { heading: 'Base Legal', text: 'O tratamento dos dados baseia-se no consentimento do titular (ao submeter o formulário) e na execução de contrato ou diligências pré-contratuais.' },
+        { heading: 'Conservação dos Dados', text: 'Os dados pessoais são conservados pelo período necessário ao cumprimento das finalidades para que foram recolhidos, ou pelo período exigido por lei.' },
+        { heading: 'Direitos do Titular', text: 'Nos termos do RGPD, tem direito de acesso, retificação, apagamento, limitação do tratamento, portabilidade e oposição ao tratamento dos seus dados. Para exercer estes direitos, contacte-nos através de info@metalprime.pt.' },
+        { heading: 'Segurança', text: 'Implementamos medidas técnicas e organizativas adequadas para proteger os dados pessoais contra perda, uso indevido, acesso não autorizado ou divulgação.' },
+      ]
+    },
+    terms: {
+      title: t('legal.terms.title'),
+      sections: [
+        { heading: 'Identificação', text: 'O presente website é propriedade e operado pela PrimeGift (MetalPrime), com sede em Portugal. Email: info@metalprime.pt.' },
+        { heading: 'Produtos e Serviços', text: 'A PrimeGift comercializa copos de plástico reutilizáveis personalizados com tampografia e serigrafia. Os produtos apresentados no website são meramente ilustrativos, podendo existir ligeiras variações de cor ou dimensão.' },
+        { heading: 'Encomendas', text: 'A encomenda mínima é de 100 unidades. Todas as encomendas estão sujeitas a aprovação de maquete digital antes da produção. O prazo de produção é de 5 dias úteis após aprovação da maquete, acrescido do prazo de entrega.' },
+        { heading: 'Preços', text: 'Os preços indicados no website não incluem IVA (23%). Os preços incluem impressão a 1 cor. O transporte é calculado com base no peso e destino da encomenda. Portes grátis para encomendas acima de 150€ (antes de IVA).' },
+        { heading: 'Pagamento', text: 'Aceitamos pagamento por PayPal, Transferência Bancária, MB WAY e Apple Pay. O pagamento é exigido na totalidade antes do início da produção.' },
+        { heading: 'Propriedade Intelectual', text: 'O cliente garante que detém os direitos sobre os logótipos e designs enviados para personalização. A PrimeGift não se responsabiliza por violações de direitos de propriedade intelectual de terceiros.' },
+        { heading: 'Limitação de Responsabilidade', text: 'A PrimeGift não se responsabiliza por atrasos causados por terceiros (transportadoras, serviços postais) ou por casos de força maior.' },
+      ]
+    },
+    cookies: {
+      title: t('legal.cookies.title'),
+      sections: [
+        { heading: 'O Que São Cookies', text: 'Cookies são pequenos ficheiros de texto armazenados no seu dispositivo quando visita um website. São amplamente utilizados para fazer os websites funcionarem de forma mais eficiente.' },
+        { heading: 'Cookies Utilizados', text: 'Este website utiliza apenas cookies essenciais e de funcionalidade: armazenamento da preferência de idioma (localStorage). Não utilizamos cookies de rastreamento, publicidade ou analytics de terceiros.' },
+        { heading: 'Cookies Essenciais', text: 'primegift-lang: Armazena a sua preferência de idioma (PT, ES, EN, FR). Este cookie é estritamente necessário para o funcionamento do website e não pode ser desativado.' },
+        { heading: 'Cookies de Terceiros', text: 'Não utilizamos cookies de terceiros. As imagens do website são servidas através do Unsplash, que pode utilizar os seus próprios cookies conforme a sua política de privacidade.' },
+        { heading: 'Gestão de Cookies', text: 'Pode gerir ou eliminar cookies através das definições do seu browser. Note que a eliminação do cookie de idioma resultará no website ser apresentado em Português por defeito.' },
+      ]
+    },
+    returns: {
+      title: t('legal.returns.title'),
+      sections: [
+        { heading: 'Produtos Personalizados', text: 'Por se tratar de produtos personalizados feitos por encomenda, os copos com impressão personalizada não são elegíveis para devolução ou troca, exceto em caso de defeito de fabrico, conforme previsto no Decreto-Lei n.º 67/2003.' },
+        { heading: 'Defeitos de Fabrico', text: 'Em caso de defeito de fabrico (impressão com defeito, produto danificado, quantidade incorreta), o cliente deve reportar o problema no prazo de 48 horas após a receção da encomenda, enviando fotografias do defeito para info@metalprime.pt.' },
+        { heading: 'Processo de Reclamação', text: '1) Contacte-nos por email com fotografias do defeito; 2) Analisaremos a reclamação em 48 horas úteis; 3) Se o defeito for confirmado, procederemos à reposição ou reembolso total do valor.' },
+        { heading: 'Aprovação de Maquete', text: 'Após aprovação da maquete digital pelo cliente, quaisquer erros presentes na maquete aprovada são da responsabilidade do cliente. Recomendamos uma revisão cuidadosa de todos os elementos antes da aprovação.' },
+        { heading: 'Cancelamento', text: 'Encomendas podem ser canceladas sem custos antes do início da produção. Após o início da produção, não é possível cancelar a encomenda.' },
+      ]
+    },
+    shipping: {
+      title: t('legal.shipping.title'),
+      sections: [
+        { heading: 'Prazos de Entrega', text: 'Produção: 5 dias úteis após aprovação da maquete. Entrega Expresso: 2 dias úteis adicionais. Envio Standard: 5 dias úteis adicionais. Total estimado: 7 a 10 dias úteis.' },
+        { heading: 'Zonas de Entrega', text: 'Portugal Continental, Ilhas (Açores e Madeira), Espanha Peninsular, Europa (Zona 2 e 3). Para envios internacionais fora da UE, contacte-nos para orçamento personalizado.' },
+        { heading: 'Custos de Envio', text: 'Os custos de envio são calculados com base no peso total da encomenda e na zona de destino. Portes grátis para encomendas com subtotal superior a 150€ (antes de IVA). Para encomendas acima de 30kg, contacte-nos para o melhor preço.' },
+        { heading: 'Transportadora', text: 'Os envios são realizados através da CTT Expresso para Portugal e Espanha, e através de transportadoras internacionais para a restante Europa.' },
+        { heading: 'Rastreamento', text: 'Após o envio, receberá um email com o número de rastreamento para acompanhar a sua encomenda em tempo real.' },
+        { heading: 'Receção da Encomenda', text: 'Na receção, verifique o estado da embalagem e dos produtos. Em caso de danos visíveis, recuse a entrega ou assinale os danos no comprovativo de entrega e contacte-nos imediatamente.' },
+      ]
+    },
+  };
+
+  const c = content[type];
+  if (!c) return null;
+
+  return (
+    <div>
+      <section style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, padding: '40px 24px', textAlign: 'center' }}>
+        <h1 style={{ color: C.white, fontSize: 36, fontWeight: 700, margin: 0 }}>{c.title}</h1>
+      </section>
+      <section style={{ ...container, padding: '48px 24px', maxWidth: 800, margin: '0 auto' }}>
+        {c.sections.map((s, i) => (
+          <div key={i} style={{ marginBottom: 32 }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{s.heading}</h2>
+            <p style={{ fontSize: 15, color: C.textSec, lineHeight: 1.8, margin: 0 }}>{s.text}</p>
+          </div>
+        ))}
+        <div style={{ marginTop: 48, padding: 24, background: C.lightBg, borderRadius: 12, textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 14, color: C.textSec }}>
+            {t('legal.lastUpdated')}: {t('legal.date')}
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 // ==================== FOOTER ====================
 
 function Footer({ setPage, t }: { setPage: (p: string) => void; t: TFunc }) {
@@ -2462,6 +2646,27 @@ function Footer({ setPage, t }: { setPage: (p: string) => void; t: TFunc }) {
             { id: 'products', key: 'nav.products' },
             { id: 'how-it-works', key: 'nav.howItWorks' },
             { id: 'contact', key: 'nav.contact' },
+          ].map(item => (
+            <div key={item.id} style={{ marginBottom: 8 }}>
+              <a onClick={() => { setPage(item.id); window.scrollTo(0, 0); }}
+                style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14, cursor: 'pointer', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = C.white)}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}>
+                {t(item.key)}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* Legal */}
+        <div style={{ flex: '0 0 180px' }}>
+          <h4 style={{ color: C.white, fontSize: 14, fontWeight: 700, margin: '0 0 16px', textTransform: 'uppercase', letterSpacing: 1 }}>{t('footer.legal')}</h4>
+          {[
+            { id: 'privacy', key: 'footer.privacy' },
+            { id: 'terms', key: 'footer.terms' },
+            { id: 'cookies', key: 'footer.cookies' },
+            { id: 'returns', key: 'footer.returns' },
+            { id: 'shipping-policy', key: 'footer.shipping' },
           ].map(item => (
             <div key={item.id} style={{ marginBottom: 8 }}>
               <a onClick={() => { setPage(item.id); window.scrollTo(0, 0); }}
@@ -2527,6 +2732,11 @@ export default function PrimeGiftApp() {
         {page === 'products' && <ProductsPage key={initialProduct ?? 'default'} goToContact={() => { setPage('contact'); window.scrollTo(0, 0); }} initialProduct={initialProduct} t={t} />}
         {page === 'how-it-works' && <HowItWorksPage t={t} />}
         {page === 'contact' && <ContactPage t={t} />}
+        {page === 'privacy' && <LegalPage type="privacy" t={t} />}
+        {page === 'terms' && <LegalPage type="terms" t={t} />}
+        {page === 'cookies' && <LegalPage type="cookies" t={t} />}
+        {page === 'returns' && <LegalPage type="returns" t={t} />}
+        {page === 'shipping-policy' && <LegalPage type="shipping" t={t} />}
       </main>
       <Footer setPage={setPage} t={t} />
     </div>

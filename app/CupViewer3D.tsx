@@ -1,8 +1,5 @@
 'use client';
-import React, { useRef, useMemo, useEffect, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
+import React, { useRef, useEffect, useState } from 'react';
 
 interface CupViewer3DProps {
   radiusTop: number;
@@ -11,148 +8,276 @@ interface CupViewer3DProps {
   logoUrl: string | null;
   logoScale: number;
   logoYOffset: number;
+  printColor?: string;
+  capacity?: string;
 }
 
-// Canvas texture that wraps the logo around the full cylinder UV
-function useLogoTexture(logoUrl: string | null, logoScale: number, logoYOffset: number) {
-  const [texture, setTexture] = useState<THREE.CanvasTexture | null>(null);
-  const prevRef = useRef<THREE.CanvasTexture | null>(null);
+export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, logoScale, logoYOffset, printColor = '#000000', capacity }: CupViewer3DProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const logoImg = useRef<HTMLImageElement | null>(null);
+  const [logoLoaded, setLogoLoaded] = useState(false);
 
+  // Load logo image
   useEffect(() => {
-    let cancelled = false;
-
     if (!logoUrl) {
-      if (prevRef.current) { prevRef.current.dispose(); prevRef.current = null; }
-      setTexture(null);
+      logoImg.current = null;
+      setLogoLoaded(false);
       return;
     }
-
     const img = new Image();
-    img.crossOrigin = 'anonymous';
     img.onload = () => {
-      if (cancelled) return;
+      logoImg.current = img;
+      setLogoLoaded(true);
+    };
+    img.onerror = () => {
+      logoImg.current = null;
+      setLogoLoaded(false);
+    };
+    img.src = logoUrl;
+    return () => { img.onload = null; img.onerror = null; };
+  }, [logoUrl]);
 
-      const canvas = document.createElement('canvas');
-      const W = 2048; // full circumference unwrapped
-      const H = 512;  // cup height
-      canvas.width = W;
-      canvas.height = H;
-      const ctx = canvas.getContext('2d')!;
+  // Draw cup on canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const W = 380;
+    const H = 494;
+    canvas.width = W * 2; // retina
+    canvas.height = H * 2;
+    ctx.scale(2, 2);
+
+    // Normalize proportions
+    const maxDim = Math.max(radiusTop * 2, height);
+    const scale = 320 / maxDim;
+    const cupH = height * scale;
+    const topR = radiusTop * scale;
+    const botR = radiusBottom * scale;
+    const cx = W / 2;
+    const topY = (H - cupH) / 2 - 10;
+    const botY = topY + cupH;
+
+    const draw = () => {
       ctx.clearRect(0, 0, W, H);
 
-      const s = logoScale / 100;
-      // At 100% scale, logo covers ~35% of circumference; at 300% wraps fully
-      const targetW = W * 0.35 * s;
-      const targetH = H * 0.75 * s;
-      const ratio = Math.min(targetW / img.width, targetH / img.height);
-      const drawW = img.width * ratio;
-      const drawH = img.height * ratio;
+      // Background gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+      bgGrad.addColorStop(0, '#1a1a2e');
+      bgGrad.addColorStop(0.5, '#16213e');
+      bgGrad.addColorStop(1, '#0f3460');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
 
-      // Center at x=W/2 (maps to front of cup with thetaStart=PI)
-      const drawX = (W - drawW) / 2;
-      const yOff = (logoYOffset / 100) * H * 0.35;
-      const drawY = (H - drawH) / 2 + yOff;
+      // Floor reflection
+      ctx.save();
+      ctx.globalAlpha = 0.08;
+      const floorGrad = ctx.createRadialGradient(cx, botY + 30, 10, cx, botY + 30, topR * 1.5);
+      floorGrad.addColorStop(0, '#ffffff');
+      floorGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = floorGrad;
+      ctx.fillRect(0, botY + 10, W, 60);
+      ctx.restore();
 
-      ctx.globalAlpha = 0.92;
-      ctx.drawImage(img, drawX, drawY, drawW, drawH);
-      // Wrap overflow around the cylinder seamlessly
-      if (drawX + drawW > W) ctx.drawImage(img, drawX - W, drawY, drawW, drawH);
-      if (drawX < 0) ctx.drawImage(img, drawX + W, drawY, drawW, drawH);
+      // Shadow under cup
+      ctx.save();
+      ctx.globalAlpha = 0.3;
+      ctx.beginPath();
+      ctx.ellipse(cx, botY + 8, botR * 0.8, 6, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ctx.restore();
 
-      if (prevRef.current) prevRef.current.dispose();
-      const tex = new THREE.CanvasTexture(canvas);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.needsUpdate = true;
-      prevRef.current = tex;
-      setTexture(tex);
+      // Cup body
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cx - topR, topY);
+      ctx.lineTo(cx - botR, botY);
+      ctx.lineTo(cx + botR, botY);
+      ctx.lineTo(cx + topR, topY);
+      ctx.closePath();
+
+      // Glass gradient
+      const bodyGrad = ctx.createLinearGradient(cx - topR, 0, cx + topR, 0);
+      bodyGrad.addColorStop(0, 'rgba(140,170,200,0.35)');
+      bodyGrad.addColorStop(0.15, 'rgba(180,210,235,0.5)');
+      bodyGrad.addColorStop(0.35, 'rgba(220,240,255,0.65)');
+      bodyGrad.addColorStop(0.5, 'rgba(200,225,245,0.55)');
+      bodyGrad.addColorStop(0.7, 'rgba(170,200,225,0.45)');
+      bodyGrad.addColorStop(0.85, 'rgba(150,180,210,0.4)');
+      bodyGrad.addColorStop(1, 'rgba(120,155,190,0.3)');
+      ctx.fillStyle = bodyGrad;
+      ctx.fill();
+
+      // Cup outline
+      ctx.strokeStyle = 'rgba(180,210,240,0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.restore();
+
+      // Logo on cup (monochrome in selected print color)
+      if (logoImg.current && logoLoaded) {
+        ctx.save();
+        // Clip to cup body
+        ctx.beginPath();
+        ctx.moveTo(cx - topR + 4, topY + 4);
+        ctx.lineTo(cx - botR + 4, botY - 4);
+        ctx.lineTo(cx + botR - 4, botY - 4);
+        ctx.lineTo(cx + topR - 4, topY + 4);
+        ctx.closePath();
+        ctx.clip();
+
+        const s = logoScale / 100;
+        const logoAreaW = (topR + botR) * 0.7 * s;
+        const logoAreaH = cupH * 0.5 * s;
+        const img = logoImg.current;
+        const imgRatio = Math.min(logoAreaW / img.width, logoAreaH / img.height);
+        const drawW = img.width * imgRatio;
+        const drawH = img.height * imgRatio;
+
+        // Static centered logo
+        const yOff = (logoYOffset / 100) * cupH * 0.25;
+        const drawX = cx - drawW / 2;
+        const drawY = topY + (cupH - drawH) / 2 + yOff;
+
+        // Convert logo to monochrome print color:
+        // 1. Draw original to offscreen canvas
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = Math.ceil(drawW * 2);
+        offCanvas.height = Math.ceil(drawH * 2);
+        const offCtx = offCanvas.getContext('2d')!;
+        offCtx.drawImage(img, 0, 0, offCanvas.width, offCanvas.height);
+
+        // 2. Get pixel data and convert to monochrome
+        const imgData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
+        const px = imgData.data;
+        // Parse printColor hex to RGB
+        const pR = parseInt(printColor.slice(1, 3), 16);
+        const pG = parseInt(printColor.slice(3, 5), 16);
+        const pB = parseInt(printColor.slice(5, 7), 16);
+        for (let i = 0; i < px.length; i += 4) {
+          // Convert pixel to grayscale luminance
+          const lum = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
+          // Use inverse luminance as intensity (dark parts of logo = full color)
+          const intensity = 1 - lum / 255;
+          px[i] = pR;
+          px[i + 1] = pG;
+          px[i + 2] = pB;
+          px[i + 3] = Math.round(px[i + 3] * intensity);
+        }
+        offCtx.putImageData(imgData, 0, 0);
+
+        ctx.globalAlpha = 0.92;
+        ctx.drawImage(offCanvas, drawX, drawY, drawW, drawH);
+
+        ctx.restore();
+      }
+
+      // Shine highlight (left)
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cx - topR + topR * 0.15, topY + 5);
+      ctx.lineTo(cx - botR + botR * 0.15, botY - 5);
+      ctx.lineTo(cx - botR + botR * 0.3, botY - 5);
+      ctx.lineTo(cx - topR + topR * 0.3, topY + 5);
+      ctx.closePath();
+      const shineGrad = ctx.createLinearGradient(cx - topR, 0, cx - topR + topR * 0.4, 0);
+      shineGrad.addColorStop(0, 'rgba(255,255,255,0)');
+      shineGrad.addColorStop(0.5, 'rgba(255,255,255,0.35)');
+      shineGrad.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = shineGrad;
+      ctx.fill();
+      ctx.restore();
+
+      // Center shine
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cx - topR * 0.05, topY + 8);
+      ctx.lineTo(cx - botR * 0.02, botY - 8);
+      ctx.lineTo(cx + botR * 0.12, botY - 8);
+      ctx.lineTo(cx + topR * 0.15, topY + 8);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fill();
+      ctx.restore();
+
+      // Rim (top ellipse)
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(cx, topY, topR, 8, 0, 0, Math.PI * 2);
+      const rimGrad = ctx.createLinearGradient(cx - topR, topY - 8, cx + topR, topY + 8);
+      rimGrad.addColorStop(0, 'rgba(200,220,240,0.7)');
+      rimGrad.addColorStop(0.3, 'rgba(240,248,255,0.9)');
+      rimGrad.addColorStop(0.7, 'rgba(220,235,250,0.8)');
+      rimGrad.addColorStop(1, 'rgba(180,205,230,0.6)');
+      ctx.fillStyle = rimGrad;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(180,210,240,0.5)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.restore();
+
+      // Inner rim
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(cx, topY, topR - 3, 5.5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(25,40,60,0.15)';
+      ctx.fill();
+      ctx.restore();
+
+      // Bottom ellipse
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(cx, botY, botR, 4, 0, 0, Math.PI * 2);
+      const baseGrad = ctx.createLinearGradient(cx - botR, botY, cx + botR, botY);
+      baseGrad.addColorStop(0, 'rgba(140,165,190,0.5)');
+      baseGrad.addColorStop(0.5, 'rgba(180,200,220,0.6)');
+      baseGrad.addColorStop(1, 'rgba(140,165,190,0.5)');
+      ctx.fillStyle = baseGrad;
+      ctx.fill();
+      ctx.restore();
+
+      // "O Seu Logo" placeholder when no logo
+      if (!logoImg.current || !logoLoaded) {
+        ctx.save();
+        ctx.globalAlpha = 0.4;
+        const placeholderY = topY + cupH * 0.38;
+        // Dashed rectangle
+        ctx.setLineDash([4, 3]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+        ctx.lineWidth = 1.5;
+        const pw = topR * 0.9;
+        const ph = cupH * 0.25;
+        ctx.strokeRect(cx - pw / 2, placeholderY, pw, ph);
+        ctx.setLineDash([]);
+        // Text
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.font = '600 11px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('O SEU LOGO', cx, placeholderY + ph / 2 + 4);
+        ctx.restore();
+      }
+
+      // Cup size label
+      ctx.save();
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.font = '600 13px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(capacity || '', cx, botY + 25);
+      ctx.restore();
     };
-    img.onerror = () => { if (!cancelled) setTexture(null); };
-    img.src = logoUrl;
 
-    return () => { cancelled = true; };
-  }, [logoUrl, logoScale, logoYOffset]);
-
-  useEffect(() => () => { if (prevRef.current) prevRef.current.dispose(); }, []);
-
-  return texture;
-}
-
-function Cup({ rTop, rBot, h, logoUrl, logoScale, logoYOffset }: {
-  rTop: number; rBot: number; h: number;
-  logoUrl: string | null; logoScale: number; logoYOffset: number;
-}) {
-  const wall = Math.min(rBot, rTop) * 0.08;
-
-  // Hollow cup via LatheGeometry (profile: outer wall → rim → inner wall → bottom)
-  const cupGeometry = useMemo(() => {
-    const pts: THREE.Vector2[] = [
-      new THREE.Vector2(0, -h / 2),            // center bottom (outside face)
-      new THREE.Vector2(rBot, -h / 2),         // outer bottom edge
-      new THREE.Vector2(rTop, h / 2),          // outer top edge
-      new THREE.Vector2(rTop - wall, h / 2),   // inner top (rim)
-      new THREE.Vector2(rBot - wall, -h / 2),  // inner bottom edge
-      new THREE.Vector2(0, -h / 2),            // center bottom (inside face)
-    ];
-    return new THREE.LatheGeometry(pts, 64);
-  }, [rTop, rBot, h, wall]);
-
-  // Logo overlay: open cylinder slightly outside the cup, seam at back
-  const logoGeometry = useMemo(() => {
-    return new THREE.CylinderGeometry(
-      rTop + 0.003, rBot + 0.003, h * 0.95,
-      64, 1, true,
-      Math.PI, Math.PI * 2  // thetaStart=PI → seam at back, u=0.5 = front
-    );
-  }, [rTop, rBot, h]);
-
-  const logoTexture = useLogoTexture(logoUrl, logoScale, logoYOffset);
+    draw();
+  }, [radiusTop, radiusBottom, height, logoScale, logoYOffset, logoLoaded, printColor, capacity]);
 
   return (
-    <group>
-      {/* Cup body — transparent hollow plastic */}
-      <mesh geometry={cupGeometry}>
-        <meshPhysicalMaterial
-          color="#e8eef2"
-          transparent
-          opacity={0.32}
-          roughness={0.12}
-          metalness={0}
-          side={THREE.DoubleSide}
-          depthWrite={false}
-        />
-      </mesh>
-
-      {/* Logo wrapped on outer surface */}
-      {logoTexture && (
-        <mesh geometry={logoGeometry}>
-          <meshBasicMaterial
-            map={logoTexture}
-            transparent
-            side={THREE.DoubleSide}
-            depthTest
-          />
-        </mesh>
-      )}
-    </group>
-  );
-}
-
-export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, logoScale, logoYOffset }: CupViewer3DProps) {
-  const s = 1 / height;
-  return (
-    <div id="cup-viewer-3d" style={{ width: 380, height: 494 }}>
-      <Canvas
-        camera={{ position: [0, 0.3, 3], fov: 35 }}
-        gl={{ preserveDrawingBuffer: true, alpha: true }}
-        style={{ background: 'transparent' }}
-      >
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[5, 5, 5]} intensity={0.9} />
-        <directionalLight position={[-3, 2, -2]} intensity={0.3} />
-        <directionalLight position={[0, -3, 2]} intensity={0.2} />
-        <Cup rTop={radiusTop * s} rBot={radiusBottom * s} h={1} logoUrl={logoUrl} logoScale={logoScale} logoYOffset={logoYOffset} />
-        <OrbitControls enablePan={false} minDistance={2} maxDistance={6} autoRotate autoRotateSpeed={1} />
-      </Canvas>
+    <div id="cup-viewer-3d" style={{ width: 380, height: 494, borderRadius: 12, overflow: 'hidden' }}>
+      <canvas
+        ref={canvasRef}
+        style={{ width: 380, height: 494 }}
+      />
     </div>
   );
 }
