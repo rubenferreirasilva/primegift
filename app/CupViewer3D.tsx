@@ -50,12 +50,10 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
     canvas.height = H * 2;
     ctx.scale(2, 2);
 
-    // Normalize proportions
-    const maxDim = Math.max(radiusTop * 2, height);
-    const scale = 320 / maxDim;
-    const cupH = height * scale;
-    const topR = radiusTop * scale;
-    const botR = radiusBottom * scale;
+    // Fixed cup size — all cups render at the same visual dimensions
+    const cupH = 280;
+    const topR = 90;
+    const botR = 60;
     const cx = W / 2;
     const topY = (H - cupH) / 2 - 10;
     const botY = topY + cupH;
@@ -270,7 +268,7 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
     };
 
     draw();
-  }, [radiusTop, radiusBottom, height, logoScale, logoYOffset, logoLoaded, printColor, capacity]);
+  }, [logoScale, logoYOffset, logoLoaded, printColor, capacity]);
 
   return (
     <div id="cup-viewer-3d" style={{ width: 380, height: 494, borderRadius: 12, overflow: 'hidden' }}>
