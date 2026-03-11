@@ -2317,6 +2317,15 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
         <div style={{ marginTop: 64 }}>
           <h2 style={{ fontSize: 28, fontWeight: 700, color: C.primary, margin: '0 0 8px' }}>{t('priceTable.title')}</h2>
           <p style={{ color: C.textSec, fontSize: 14, margin: '0 0 24px' }}>{t('priceTable.subtitle')}</p>
+          {/* Technique toggle for price table */}
+          <div style={{ display: 'flex', gap: 0, marginBottom: 16, borderRadius: 8, overflow: 'hidden', border: `2px solid ${C.primary}`, width: 'fit-content' }}>
+            {(['tampografia', 'serigrafia'] as const).map(tech => (
+              <button key={tech} onClick={() => setPrintTechnique(tech)}
+                style={{ padding: '8px 20px', fontWeight: 600, fontSize: 14, border: 'none', cursor: 'pointer', background: printTechnique === tech ? C.primary : C.white, color: printTechnique === tech ? C.white : C.primary, transition: 'all 0.2s' }}>
+                {t(`products.step2.${tech}`)}
+              </button>
+            ))}
+          </div>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
@@ -2328,7 +2337,9 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                 </tr>
               </thead>
               <tbody>
-                {PRODUCTS.map((p, idx) => (
+                {PRODUCTS.map((p, idx) => {
+                  const prices = printTechnique === 'serigrafia' ? p.serigrafiasPrices : p.prices;
+                  return (
                   <tr key={p.id} style={{ background: idx % 2 === 0 ? C.white : C.lightBg }}>
                     <td style={{ padding: '12px 16px', fontWeight: 600, color: C.text }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -2337,10 +2348,11 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                       </div>
                     </td>
                     {[100, 250, 500, 1000, 2000, 5000].map(q => (
-                      <td key={q} style={{ padding: '12px 8px', textAlign: 'center', color: C.text }}>{fmt(p.prices[q])}</td>
+                      <td key={q} style={{ padding: '12px 8px', textAlign: 'center', color: C.text }}>{fmt(prices[q])}</td>
                     ))}
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
