@@ -160,11 +160,11 @@ const CUP_IMAGES: Record<string, string> = {
 function CupImage({ product, size = 120, showCapacity = false }: { product: Product; size?: number; showCapacity?: boolean }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ width: size, height: size, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
         <img
           src={CUP_IMAGES[product.id]}
           alt={`${product.name} — ${product.capacity}`}
-          style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+          style={{ width: size * 0.75, height: size * 0.9, objectFit: 'contain' }}
         />
       </div>
       {showCapacity && (
