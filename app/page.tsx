@@ -1782,12 +1782,29 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const [logoScale, setLogoScale] = useState(100);
   const [cart, setCart] = useState<CartItem[]>([]);
 
+  const ALLOWED_EXTS = ['pdf', 'ai', 'eps', 'png', 'svg', 'jpg', 'jpeg'];
+  const validateFile = (file: File): boolean => {
+    const ext = file.name.split('.').pop()?.toLowerCase() || '';
+    if (!ALLOWED_EXTS.includes(ext)) {
+      alert(`Formato .${ext} não suportado. Use: ${ALLOWED_EXTS.join(', ')}`);
+      return false;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      alert(t('products.step4.fileTooLarge'));
+      return false;
+    }
+    return true;
+  };
+
   // Upload file to Vercel Blob when selected
   useEffect(() => {
     if (!uploadedFile) return;
     const formData = new FormData();
     formData.append('file', uploadedFile);
-    fetch('/api/upload', { method: 'POST', body: formData }).catch(() => {});
+    fetch('/api/upload', { method: 'POST', body: formData })
+      .then(r => r.json())
+      .then(data => { if (data.error) console.error('Upload error:', data.error); })
+      .catch(err => console.error('Upload failed:', err));
   }, [uploadedFile]);
 
   // Generate preview URL when file or autoRemoveBg changes
@@ -1797,7 +1814,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
       return;
     }
     const ext = uploadedFile.name.split('.').pop()?.toLowerCase() || '';
-    const isImage = uploadedFile.type.startsWith('image/') || ext === 'svg';
+    const isImage = uploadedFile.type.startsWith('image/') || ['png', 'jpg', 'jpeg', 'svg'].includes(ext);
     const isVector = ['pdf', 'ai', 'eps'].includes(ext);
     if (!isImage && !isVector) {
       setLogoPreviewUrl(null);
@@ -1977,15 +1994,11 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
               <input
                 ref={fileInputRef}
                 type="file"
-                accept=".pdf,.ai,.eps,.png,.svg,.jpg,.jpeg"
+                accept=".pdf,.ai,.eps,.png,.svg,.jpg,.jpeg,application/pdf,application/postscript,image/png,image/svg+xml,image/jpeg"
                 style={{ display: 'none' }}
                 onChange={e => {
                   const file = e.target.files?.[0];
-                  if (file) {
-                    if (file.size > 10 * 1024 * 1024) {
-                      alert(t('products.step4.fileTooLarge'));
-                      return;
-                    }
+                  if (file && validateFile(file)) {
                     setUploadedFile(file);
                   }
                 }}
@@ -2004,11 +2017,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                   e.preventDefault();
                   e.stopPropagation();
                   const file = e.dataTransfer.files?.[0];
-                  if (file) {
-                    if (file.size > 10 * 1024 * 1024) {
-                      alert(t('products.step4.fileTooLarge'));
-                      return;
-                    }
+                  if (file && validateFile(file)) {
                     setUploadedFile(file);
                   }
                 }}

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { put } from '@vercel/blob';
 
-const ALLOWED_EXTENSIONS = ['pdf', 'ai', 'eps', 'png', 'svg'];
+const ALLOWED_EXTENSIONS = ['pdf', 'ai', 'eps', 'png', 'svg', 'jpg', 'jpeg'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
 
 export async function POST(request: NextRequest) {
