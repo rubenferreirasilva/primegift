@@ -120,7 +120,7 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
       ctx.stroke();
       ctx.restore();
 
-      // Logo on cup (monochrome in selected print color)
+      // Logo on cup (monochrome in selected print color) with cylindrical distortion
       const drawLogo = (rotation: number) => {
         if (!logoImg.current || !logoLoaded) return;
         ctx.save();
@@ -140,25 +140,19 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
         const imgRatio = Math.min(logoAreaW / img.width, logoAreaH / img.height);
         const baseDrawW = img.width * imgRatio;
         const drawH = img.height * imgRatio;
-
-        // Rotation: logo moves horizontally and narrows at edges (perspective)
-        const cosR = Math.cos(rotation);
-        const sinR = Math.sin(rotation);
-        const drawW = baseDrawW * Math.abs(cosR);
-        const xShift = sinR * topR * 0.8;
-
         const yOff = (logoYOffset / 100) * cupH * 0.25;
-        const drawX = cx - drawW / 2 + xShift;
         const drawY = topY + (cupH - drawH) / 2 + yOff - cupH * 0.06;
 
-        // Convert logo to monochrome print color
+        // Pre-render monochrome logo at full resolution to offscreen canvas
+        const srcW = Math.max(1, Math.ceil(baseDrawW * 2));
+        const srcH = Math.max(1, Math.ceil(drawH * 2));
         const offCanvas = document.createElement('canvas');
-        offCanvas.width = Math.max(1, Math.ceil(drawW * 2));
-        offCanvas.height = Math.max(1, Math.ceil(drawH * 2));
+        offCanvas.width = srcW;
+        offCanvas.height = srcH;
         const offCtx = offCanvas.getContext('2d')!;
-        offCtx.drawImage(img, 0, 0, offCanvas.width, offCanvas.height);
+        offCtx.drawImage(img, 0, 0, srcW, srcH);
 
-        const imgData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
+        const imgData = offCtx.getImageData(0, 0, srcW, srcH);
         const px = imgData.data;
         const pR = parseInt(printColor.slice(1, 3), 16);
         const pG = parseInt(printColor.slice(3, 5), 16);
@@ -173,10 +167,39 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
         }
         offCtx.putImageData(imgData, 0, 0);
 
-        // Fade out when logo wraps around to the back
-        ctx.globalAlpha = 0.92 * Math.max(0, cosR);
-        if (drawW > 0.5) {
-          ctx.drawImage(offCanvas, drawX, drawY, drawW, drawH);
+        // Cylindrical mapping: render logo in vertical slices wrapped around cup
+        const numSlices = Math.ceil(baseDrawW);
+        // Angular span the logo covers on the cylinder (~120° for full-width logo)
+        const angularSpan = (baseDrawW / topR) * 1.1;
+
+        for (let i = 0; i < numSlices; i++) {
+          const u = (i / numSlices) - 0.5; // -0.5 to 0.5 across logo width
+          const angle = rotation + u * angularSpan;
+          const cosA = Math.cos(angle);
+          const sinA = Math.sin(angle);
+
+          // Skip slices on the back of the cylinder
+          if (cosA <= 0) continue;
+
+          // X position on screen: sin maps angle to horizontal position
+          const screenX = cx + sinA * topR * 0.85;
+          // Width of this slice (foreshortened by cosine)
+          const sliceScreenW = (angularSpan / numSlices) * topR * 0.85 * cosA;
+
+          if (sliceScreenW < 0.1) continue;
+
+          // Source slice from the pre-rendered logo
+          const srcX = (i / numSlices) * srcW;
+          const srcSliceW = srcW / numSlices;
+
+          // Alpha: fade based on how much the surface faces the viewer
+          ctx.globalAlpha = 0.92 * cosA;
+
+          ctx.drawImage(
+            offCanvas,
+            srcX, 0, Math.max(1, srcSliceW), srcH,
+            screenX - sliceScreenW / 2, drawY, Math.max(0.5, sliceScreenW), drawH
+          );
         }
 
         ctx.restore();
@@ -259,16 +282,16 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
           const placeholderY = topY + cupH * 0.25;
           const pw = topR * 0.9 * Math.abs(cosR);
           const ph = cupH * 0.25;
-          const pxShift = sinR * topR * 0.8;
+          const screenX = cx + sinR * topR * 0.85;
           ctx.setLineDash([4, 3]);
           ctx.strokeStyle = 'rgba(255,255,255,0.6)';
           ctx.lineWidth = 1.5;
-          ctx.strokeRect(cx - pw / 2 + pxShift, placeholderY, pw, ph);
+          ctx.strokeRect(screenX - pw / 2, placeholderY, pw, ph);
           ctx.setLineDash([]);
           ctx.fillStyle = 'rgba(255,255,255,0.7)';
           ctx.font = '600 11px system-ui, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText('O SEU LOGO', cx + pxShift, placeholderY + ph / 2 + 4);
+          ctx.fillText('O SEU LOGO', screenX, placeholderY + ph / 2 + 4);
           ctx.restore();
         }
       }
