@@ -157,13 +157,20 @@ const CUP_IMAGES: Record<string, string> = {
   pg500: '/cup-500.png',
 };
 
-function CupImage({ product, size = 120 }: { product: Product; size?: number }) {
+function CupImage({ product, size = 120, showCapacity = false }: { product: Product; size?: number; showCapacity?: boolean }) {
   return (
-    <img
-      src={CUP_IMAGES[product.id]}
-      alt={`${product.name} — ${product.capacity}`}
-      style={{ height: size, width: 'auto', objectFit: 'contain' }}
-    />
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img
+          src={CUP_IMAGES[product.id]}
+          alt={`${product.name} — ${product.capacity}`}
+          style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+        />
+      </div>
+      {showCapacity && (
+        <span style={{ fontSize: Math.max(11, size * 0.13), color: C.textSec, fontWeight: 600, marginTop: 4 }}>{product.capacity}</span>
+      )}
+    </div>
   );
 }
 
@@ -272,10 +279,9 @@ function HomePage({ setPage }: { setPage: (p: string) => void }) {
                 onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = C.cardShadowHover; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = C.cardShadow; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'; }}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
-                  <CupImage product={product} size={100} />
+                  <CupImage product={product} size={100} showCapacity />
                 </div>
                 <h3 style={{ margin: '0 0 4px', fontSize: 20, fontWeight: 700, color: C.primary }}>{product.name}</h3>
-                <p style={{ margin: '0 0 4px', fontSize: 15, color: C.text, fontWeight: 500 }}>{product.capacity}</p>
                 <p style={{ margin: '0 0 4px', fontSize: 14, color: C.textSec }}>{product.description}</p>
                 <p style={{ margin: '0 0 12px', fontSize: 12, color: C.textMuted }}>⌀{product.cupTopW}mm × {product.cupHeight}mm altura</p>
                 <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: C.success }}>desde {fmt(product.prices[5000])}/un.</p>
@@ -345,7 +351,48 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
   const [quantity, setQuantity] = useState(100);
   const [colors, setColors] = useState(1);
   const [printTechnique, setPrintTechnique] = useState('tampografia');
-  const [uploadedFile, setUploadedFile] = useState<{ name: string; preview: string | null } | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<{ name: string; size: number; preview: string | null } | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (file: File) => {
+    setUploadError(null);
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (!res.ok) {
+        setUploadError(data.error || 'Erro no upload');
+        setUploadedFile(null);
+      } else {
+        const isImage = file.type.startsWith('image/');
+        setUploadedFile({
+          name: data.fileName,
+          size: data.size,
+          preview: isImage ? URL.createObjectURL(file) : null,
+        });
+      }
+    } catch {
+      setUploadError('Erro de ligação ao servidor');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) handleFileUpload(file);
+  };
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) handleFileUpload(file);
+    e.target.value = '';
+  };
   const [shippingRegion, setShippingRegion] = useState('pt-continental');
   const [shippingMethod, setShippingMethod] = useState('2-days');
   const [showModal, setShowModal] = useState(false);
@@ -395,11 +442,8 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
                 {PRODUCTS.map(p => (
                   <div key={p.id} onClick={() => setSelectedProduct(p.id)}
-                    style={{ flex: '1 1 130px', maxWidth: 160, padding: 16, borderRadius: 10, border: `2px solid ${selectedProduct === p.id ? C.accent : C.border}`, background: selectedProduct === p.id ? C.lightBg : C.white, cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s', position: 'relative' }}>
-                    <div style={{ position: 'absolute', top: 8, right: 8, background: C.accent, color: C.white, padding: '3px 8px', borderRadius: 12, fontSize: 12, fontWeight: 700 }}>
-                      {p.capacity}
-                    </div>
-                    <CupImage product={p} size={60} />
+                    style={{ flex: '1 1 130px', maxWidth: 160, padding: 16, borderRadius: 10, border: `2px solid ${selectedProduct === p.id ? C.accent : C.border}`, background: selectedProduct === p.id ? C.lightBg : C.white, cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s' }}>
+                    <CupImage product={p} size={60} showCapacity />
                     <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, marginTop: 8 }}>{p.name}</div>
                     <div style={{ fontSize: 11, color: C.textMuted }}>⌀{p.cupTopW}mm × {p.cupHeight}mm</div>
                     <div style={{ fontSize: 12, color: C.textSec, marginTop: 4 }}>{p.description}</div>
@@ -457,25 +501,18 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
             {/* Step 3: File Upload */}
             <div style={sectionStyle}>
               <h3 style={stepTitleStyle}><span style={stepNumStyle}>3</span> Envie o seu ficheiro</h3>
-              <input
-                type="file"
-                id="file-upload"
-                accept=".pdf,.ai,.eps,.png,.svg,.jpg,.jpeg"
-                style={{ display: 'none' }}
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const isImage = file.type.startsWith('image/');
-                    setUploadedFile({
-                      name: file.name,
-                      preview: isImage ? URL.createObjectURL(file) : null
-                    });
-                  }
-                }}
-              />
-              <label htmlFor="file-upload"
-                style={{ display: 'block', border: `2px dashed ${uploadedFile ? C.success : C.border}`, borderRadius: 12, padding: 40, textAlign: 'center', cursor: 'pointer', background: uploadedFile ? '#EAFAF1' : '#FAFAFA', transition: 'all 0.2s' }}>
-                {uploadedFile ? (
+              <input ref={fileInputRef} type="file" accept=".pdf,.ai,.eps,.png,.svg" style={{ display: 'none' }} onChange={handleFileInput} />
+              <div
+                onClick={() => { if (uploadedFile) { setUploadedFile(null); setUploadError(null); } else { fileInputRef.current?.click(); } }}
+                onDrop={handleDrop}
+                onDragOver={e => e.preventDefault()}
+                style={{ border: `2px dashed ${uploadedFile ? C.success : uploadError ? '#E74C3C' : C.border}`, borderRadius: 12, padding: 40, textAlign: 'center', cursor: 'pointer', background: uploadedFile ? '#EAFAF1' : uploadError ? '#FDEDEC' : '#FAFAFA', transition: 'all 0.2s' }}>
+                {uploading ? (
+                  <>
+                    <div style={{ fontSize: 36, marginBottom: 8 }}>⏳</div>
+                    <p style={{ margin: 0, fontWeight: 600, color: C.text }}>A enviar ficheiro...</p>
+                  </>
+                ) : uploadedFile ? (
                   <>
                     {uploadedFile.preview ? (
                       <img src={uploadedFile.preview} alt="Preview" style={{ maxWidth: 150, maxHeight: 100, marginBottom: 12, borderRadius: 8 }} />
@@ -483,20 +520,17 @@ function ProductsPage({ goToContact }: { goToContact: () => void }) {
                       <div style={{ fontSize: 36, marginBottom: 8 }}>✅</div>
                     )}
                     <p style={{ margin: 0, fontWeight: 600, color: C.success }}>Ficheiro carregado com sucesso</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{uploadedFile.name}</p>
-                    <button onClick={(e) => { e.preventDefault(); setUploadedFile(null); }}
-                      style={{ marginTop: 8, background: 'none', border: 'none', color: C.accent, fontSize: 13, cursor: 'pointer', textDecoration: 'underline' }}>
-                      Remover ficheiro
-                    </button>
+                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{uploadedFile.name} ({(uploadedFile.size / 1024).toFixed(0)} KB) — Clique para remover</p>
                   </>
                 ) : (
                   <>
                     <div style={{ fontSize: 36, marginBottom: 8 }}>📁</div>
                     <p style={{ margin: 0, fontWeight: 600, color: C.text }}>Arraste o ficheiro ou clique para enviar</p>
                     <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>PDF, AI, EPS, PNG ou SVG (máx. 10MB)</p>
+                    {uploadError && <p style={{ margin: '8px 0 0', fontSize: 13, color: '#E74C3C', fontWeight: 600 }}>{uploadError}</p>}
                   </>
                 )}
-              </label>
+              </div>
             </div>
 
             {/* Shipping */}
