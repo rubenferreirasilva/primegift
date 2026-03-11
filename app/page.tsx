@@ -1003,6 +1003,7 @@ type Product = {
   cupTopW: number;
   cupBotW: number;
   prices: Record<number, number>;
+  serigrafiasPrices: Record<number, number>;
 };
 
 type CartItem = {
@@ -1010,13 +1011,22 @@ type CartItem = {
   productId: string;
   quantity: number;
   printColor: string;
+  printTechnique: 'tampografia' | 'serigrafia';
 };
 
 const PRODUCTS: Product[] = [
-  { id: 'pg200', name: 'Copo de 200ml', capacity: '200ml', description: 'Café e degustação', weight: 15, cupHeight: 65, cupTopW: 50, cupBotW: 36, prices: { 100: 0.30, 250: 0.25, 500: 0.20, 1000: 0.16, 2000: 0.14, 5000: 0.12 } },
-  { id: 'pg300', name: 'Copo de 300ml', capacity: '300ml', description: 'Sumos e refrigerantes', weight: 20, cupHeight: 80, cupTopW: 54, cupBotW: 38, prices: { 100: 0.33, 250: 0.28, 500: 0.23, 1000: 0.18, 2000: 0.16, 5000: 0.14 } },
-  { id: 'pg330', name: 'Copo de 330ml', capacity: '330ml', description: 'Cerveja e cocktails', weight: 22, cupHeight: 88, cupTopW: 56, cupBotW: 39, prices: { 100: 0.35, 250: 0.30, 500: 0.25, 1000: 0.20, 2000: 0.17, 5000: 0.15 } },
-  { id: 'pg500', name: 'Copo de 500ml', capacity: '500ml', description: 'Festivais e eventos', weight: 30, cupHeight: 105, cupTopW: 62, cupBotW: 42, prices: { 100: 0.42, 250: 0.36, 500: 0.30, 1000: 0.24, 2000: 0.21, 5000: 0.18 } },
+  { id: 'pg200', name: 'Copo de 200ml', capacity: '200ml', description: 'Café e degustação', weight: 15, cupHeight: 65, cupTopW: 50, cupBotW: 36,
+    prices: { 100: 0.30, 250: 0.25, 500: 0.20, 1000: 0.16, 2000: 0.14, 5000: 0.12 },
+    serigrafiasPrices: { 100: 0.35, 250: 0.29, 500: 0.23, 1000: 0.19, 2000: 0.16, 5000: 0.14 } },
+  { id: 'pg300', name: 'Copo de 300ml', capacity: '300ml', description: 'Sumos e refrigerantes', weight: 20, cupHeight: 80, cupTopW: 54, cupBotW: 38,
+    prices: { 100: 0.33, 250: 0.28, 500: 0.23, 1000: 0.18, 2000: 0.16, 5000: 0.14 },
+    serigrafiasPrices: { 100: 0.38, 250: 0.33, 500: 0.27, 1000: 0.21, 2000: 0.18, 5000: 0.16 } },
+  { id: 'pg330', name: 'Copo de 330ml', capacity: '330ml', description: 'Cerveja e cocktails', weight: 22, cupHeight: 88, cupTopW: 56, cupBotW: 39,
+    prices: { 100: 0.35, 250: 0.30, 500: 0.25, 1000: 0.20, 2000: 0.17, 5000: 0.15 },
+    serigrafiasPrices: { 100: 0.40, 250: 0.35, 500: 0.29, 1000: 0.23, 2000: 0.20, 5000: 0.17 } },
+  { id: 'pg500', name: 'Copo de 500ml', capacity: '500ml', description: 'Festivais e eventos', weight: 30, cupHeight: 105, cupTopW: 62, cupBotW: 42,
+    prices: { 100: 0.42, 250: 0.36, 500: 0.30, 1000: 0.24, 2000: 0.21, 5000: 0.18 },
+    serigrafiasPrices: { 100: 0.49, 250: 0.42, 500: 0.35, 1000: 0.28, 2000: 0.24, 5000: 0.21 } },
 ];
 
 const PRINT_COLORS = [
@@ -1078,13 +1088,14 @@ const PAYMENT_METHODS = [
 
 // ==================== HELPERS ====================
 
-function getUnitPrice(product: Product, quantity: number): number {
+function getUnitPrice(product: Product, quantity: number, technique: 'tampografia' | 'serigrafia' = 'tampografia'): number {
   const tiers = [100, 250, 500, 1000, 2000, 5000];
   let tier = 100;
   for (const t of tiers) {
     if (quantity >= t) tier = t;
   }
-  return product.prices[tier];
+  const priceTable = technique === 'serigrafia' ? product.serigrafiasPrices : product.prices;
+  return priceTable[tier];
 }
 
 function getColorSurcharge(printColor: string): number {
@@ -1119,7 +1130,7 @@ function getCartSubtotal(cart: CartItem[]): number {
   return cart.reduce((sum, item) => {
     const product = PRODUCTS.find(p => p.id === item.productId);
     if (!product) return sum;
-    return sum + (getUnitPrice(product, item.quantity) + getColorSurcharge(item.printColor)) * item.quantity;
+    return sum + (getUnitPrice(product, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor)) * item.quantity;
   }, 0);
 }
 
@@ -1873,7 +1884,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const total = totalBeforeVAT + vat;
 
   // Staging item price (for preview in configurator)
-  const stagingUnitPrice = product ? getUnitPrice(product, quantity) + getColorSurcharge(printColor) : 0;
+  const stagingUnitPrice = product ? getUnitPrice(product, quantity, printTechnique) + getColorSurcharge(printColor) : 0;
   const stagingSubtotal = stagingUnitPrice * quantity;
 
   // Reset shipping method when region changes
@@ -1892,6 +1903,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
       productId: selectedProduct,
       quantity,
       printColor,
+      printTechnique,
     }]);
   };
 
@@ -2074,7 +2086,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                   {cart.map(item => {
                     const p = PRODUCTS.find(pr => pr.id === item.productId);
                     if (!p) return null;
-                    const up = getUnitPrice(p, item.quantity) + getColorSurcharge(item.printColor);
+                    const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
                     const itemTotal = up * item.quantity;
                     return (
                       <div key={item.itemId} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: 12, background: C.white, borderRadius: 8, border: `1px solid ${C.border}` }}>
@@ -2238,7 +2250,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                       {cart.map(item => {
                         const p = PRODUCTS.find(pr => pr.id === item.productId);
                         if (!p) return null;
-                        const up = getUnitPrice(p, item.quantity) + getColorSurcharge(item.printColor);
+                        const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
                         const itemTotal = up * item.quantity;
                         return (
                           <div key={item.itemId} style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 8 }}>
@@ -2378,7 +2390,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
           {cart.map(item => {
             const p = PRODUCTS.find(pr => pr.id === item.productId);
             if (!p) return null;
-            const up = getUnitPrice(p, item.quantity) + getColorSurcharge(item.printColor);
+            const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
             const itemTotal = up * item.quantity;
             return (
               <div key={item.itemId} style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 12 }}>
