@@ -135,22 +135,27 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.title': 'Configure a Sua Encomenda',
     'products.subtitle': 'Selecione o produto, quantidade e personalize',
     'products.step1': 'Escolha o copo',
-    'products.step2': 'Quantidade e cores',
-    'products.step2.qty': 'Quantidade',
-    'products.step2.units': 'unidades',
-    'products.step2.customQuote': '+10.000? Pedir orçamento personalizado',
-    'products.step2.printColor': 'Cor de impressão',
-    'products.step2.addToCart': '+ Adicionar ao Carrinho',
-    'products.step3': 'Envie o seu ficheiro',
-    'products.step3.fileUploaded': 'Ficheiro carregado com sucesso',
-    'products.step3.clickToRemove': 'Clique para remover',
-    'products.step3.dragOrClick': 'Arraste o ficheiro ou clique para enviar',
-    'products.step3.formats': 'PDF, AI, EPS, PNG ou SVG (máx. 10MB)',
-    'products.step3.bestResult': 'Para melhor resultado, envie PNG com fundo transparente ou SVG',
-    'products.step3.autoRemoveBg': 'Remover fundo automaticamente',
-    'products.step3.bgRemoved': 'Fundo removido',
-    'products.step3.originalImage': 'Imagem original',
-    'products.step3.fileTooLarge': 'Ficheiro demasiado grande. Máximo 10MB.',
+    'products.step2': 'Técnica de impressão',
+    'products.step2.tampografia': 'Tampografia',
+    'products.step2.tampografia.desc': 'Ideal para logos simples, até 4 cores',
+    'products.step2.serigrafia': 'Serigrafia Rotativa',
+    'products.step2.serigrafia.desc': 'Impressão 360° em toda a volta do copo',
+    'products.step3': 'Quantidade e cores',
+    'products.step3.qty': 'Quantidade',
+    'products.step3.units': 'unidades',
+    'products.step3.customQuote': '+10.000? Pedir orçamento personalizado',
+    'products.step3.printColor': 'Cor de impressão',
+    'products.step3.addToCart': '+ Adicionar ao Carrinho',
+    'products.step4': 'Envie o seu ficheiro',
+    'products.step4.fileUploaded': 'Ficheiro carregado com sucesso',
+    'products.step4.clickToRemove': 'Clique para remover',
+    'products.step4.dragOrClick': 'Arraste o ficheiro ou clique para enviar',
+    'products.step4.formats': 'PDF, AI, EPS, PNG ou SVG (máx. 10MB)',
+    'products.step4.bestResult': 'Para melhor resultado, envie PNG com fundo transparente ou SVG',
+    'products.step4.autoRemoveBg': 'Remover fundo automaticamente',
+    'products.step4.bgRemoved': 'Fundo removido',
+    'products.step4.originalImage': 'Imagem original',
+    'products.step4.fileTooLarge': 'Ficheiro demasiado grande. Máximo 10MB.',
     // Cart
     'cart.title': 'Carrinho',
     'cart.item': 'item',
@@ -252,7 +257,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navegação',
     'footer.payment': 'Pagamento',
     'footer.copyright': '© 2026 PrimeGift. Todos os direitos reservados.',
-    'products.step3.vectorNotice': 'Ficheiros PDF, AI e EPS não podem ser pré-visualizados no mockup. O seu ficheiro será usado na maquete final enviada para aprovação.',
+    'products.step4.vectorNotice': 'Ficheiros PDF, AI e EPS não podem ser pré-visualizados no mockup. O seu ficheiro será usado na maquete final enviada para aprovação.',
     'testimonial.3.quote': 'Usámos os copos da PrimeGift no nosso casamento e foi um sucesso. Os convidados ficaram encantados com a personalização e muitos levaram como lembrança.',
     'testimonial.3.role': 'Casamento — Quinta do Lago',
     'testimonial.4.quote': 'Há 3 anos que encomendamos para os nossos festivais de verão. A consistência da qualidade e o cumprimento dos prazos fazem toda a diferença quando organizamos eventos de grande escala.',
@@ -376,22 +381,27 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.title': 'Configura Tu Pedido',
     'products.subtitle': 'Selecciona el producto, cantidad y personaliza',
     'products.step1': 'Elige el vaso',
-    'products.step2': 'Cantidad y colores',
-    'products.step2.qty': 'Cantidad',
-    'products.step2.units': 'unidades',
-    'products.step2.customQuote': '+10.000? Pedir presupuesto personalizado',
-    'products.step2.printColor': 'Color de impresión',
-    'products.step2.addToCart': '+ Añadir al Carrito',
-    'products.step3': 'Sube tu fichero',
-    'products.step3.fileUploaded': 'Fichero subido con éxito',
-    'products.step3.clickToRemove': 'Haz clic para eliminar',
-    'products.step3.dragOrClick': 'Arrastra el fichero o haz clic para subir',
-    'products.step3.formats': 'PDF, AI, EPS, PNG o SVG (máx. 10MB)',
-    'products.step3.bestResult': 'Para mejor resultado, envía PNG con fondo transparente o SVG',
-    'products.step3.autoRemoveBg': 'Eliminar fondo automáticamente',
-    'products.step3.bgRemoved': 'Fondo eliminado',
-    'products.step3.originalImage': 'Imagen original',
-    'products.step3.fileTooLarge': 'Fichero demasiado grande. Máximo 10MB.',
+    'products.step2': 'Técnica de impresión',
+    'products.step2.tampografia': 'Tampografía',
+    'products.step2.tampografia.desc': 'Ideal para logos simples, hasta 4 colores',
+    'products.step2.serigrafia': 'Serigrafía Rotativa',
+    'products.step2.serigrafia.desc': 'Impresión 360° alrededor del vaso',
+    'products.step3': 'Cantidad y colores',
+    'products.step3.qty': 'Cantidad',
+    'products.step3.units': 'unidades',
+    'products.step3.customQuote': '+10.000? Pedir presupuesto personalizado',
+    'products.step3.printColor': 'Color de impresión',
+    'products.step3.addToCart': '+ Añadir al Carrito',
+    'products.step4': 'Sube tu fichero',
+    'products.step4.fileUploaded': 'Fichero subido con éxito',
+    'products.step4.clickToRemove': 'Haz clic para eliminar',
+    'products.step4.dragOrClick': 'Arrastra el fichero o haz clic para subir',
+    'products.step4.formats': 'PDF, AI, EPS, PNG o SVG (máx. 10MB)',
+    'products.step4.bestResult': 'Para mejor resultado, envía PNG con fondo transparente o SVG',
+    'products.step4.autoRemoveBg': 'Eliminar fondo automáticamente',
+    'products.step4.bgRemoved': 'Fondo eliminado',
+    'products.step4.originalImage': 'Imagen original',
+    'products.step4.fileTooLarge': 'Fichero demasiado grande. Máximo 10MB.',
     'cart.title': 'Carrito',
     'cart.item': 'artículo',
     'cart.items': 'artículos',
@@ -484,7 +494,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navegación',
     'footer.payment': 'Pago',
     'footer.copyright': '© 2026 PrimeGift. Todos los derechos reservados.',
-    'products.step3.vectorNotice': 'Los archivos PDF, AI y EPS no pueden previsualizarse en la maqueta. Tu archivo será utilizado en la maqueta final enviada para aprobación.',
+    'products.step4.vectorNotice': 'Los archivos PDF, AI y EPS no pueden previsualizarse en la maqueta. Tu archivo será utilizado en la maqueta final enviada para aprobación.',
     'testimonial.3.quote': 'Usamos los vasos de PrimeGift en nuestra boda y fue un éxito. Los invitados quedaron encantados con la personalización y muchos se los llevaron de recuerdo.',
     'testimonial.3.role': 'Boda — Quinta do Lago',
     'testimonial.4.quote': 'Hace 3 años que pedimos para nuestros festivales de verano. La consistencia de la calidad y el cumplimiento de los plazos marcan la diferencia en eventos de gran escala.',
@@ -608,22 +618,27 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.title': 'Configure Your Order',
     'products.subtitle': 'Select the product, quantity and customise',
     'products.step1': 'Choose the cup',
-    'products.step2': 'Quantity and colours',
-    'products.step2.qty': 'Quantity',
-    'products.step2.units': 'units',
-    'products.step2.customQuote': '+10,000? Request custom quote',
-    'products.step2.printColor': 'Print colour',
-    'products.step2.addToCart': '+ Add to Cart',
-    'products.step3': 'Upload your file',
-    'products.step3.fileUploaded': 'File uploaded successfully',
-    'products.step3.clickToRemove': 'Click to remove',
-    'products.step3.dragOrClick': 'Drag file or click to upload',
-    'products.step3.formats': 'PDF, AI, EPS, PNG or SVG (max. 10MB)',
-    'products.step3.bestResult': 'For best results, send PNG with transparent background or SVG',
-    'products.step3.autoRemoveBg': 'Remove background automatically',
-    'products.step3.bgRemoved': 'Background removed',
-    'products.step3.originalImage': 'Original image',
-    'products.step3.fileTooLarge': 'File too large. Maximum 10MB.',
+    'products.step2': 'Printing technique',
+    'products.step2.tampografia': 'Pad printing',
+    'products.step2.tampografia.desc': 'Ideal for simple logos, up to 4 colours',
+    'products.step2.serigrafia': 'Rotary screen printing',
+    'products.step2.serigrafia.desc': '360° printing all around the cup',
+    'products.step3': 'Quantity and colours',
+    'products.step3.qty': 'Quantity',
+    'products.step3.units': 'units',
+    'products.step3.customQuote': '+10,000? Request custom quote',
+    'products.step3.printColor': 'Print colour',
+    'products.step3.addToCart': '+ Add to Cart',
+    'products.step4': 'Upload your file',
+    'products.step4.fileUploaded': 'File uploaded successfully',
+    'products.step4.clickToRemove': 'Click to remove',
+    'products.step4.dragOrClick': 'Drag file or click to upload',
+    'products.step4.formats': 'PDF, AI, EPS, PNG or SVG (max. 10MB)',
+    'products.step4.bestResult': 'For best results, send PNG with transparent background or SVG',
+    'products.step4.autoRemoveBg': 'Remove background automatically',
+    'products.step4.bgRemoved': 'Background removed',
+    'products.step4.originalImage': 'Original image',
+    'products.step4.fileTooLarge': 'File too large. Maximum 10MB.',
     'cart.title': 'Cart',
     'cart.item': 'item',
     'cart.items': 'items',
@@ -716,7 +731,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navigation',
     'footer.payment': 'Payment',
     'footer.copyright': '© 2026 PrimeGift. All rights reserved.',
-    'products.step3.vectorNotice': 'PDF, AI and EPS files cannot be previewed on the mockup. Your file will be used in the final mockup sent for approval.',
+    'products.step4.vectorNotice': 'PDF, AI and EPS files cannot be previewed on the mockup. Your file will be used in the final mockup sent for approval.',
     'testimonial.3.quote': 'We used PrimeGift cups at our wedding and it was a huge success. Guests loved the personalisation and many took them home as souvenirs.',
     'testimonial.3.role': 'Wedding — Quinta do Lago',
     'testimonial.4.quote': 'We\'ve been ordering for our summer festivals for 3 years now. The consistency in quality and meeting deadlines makes all the difference for large-scale events.',
@@ -840,22 +855,27 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.title': 'Configurez Votre Commande',
     'products.subtitle': 'Sélectionnez le produit, la quantité et personnalisez',
     'products.step1': 'Choisissez le gobelet',
-    'products.step2': 'Quantité et couleurs',
-    'products.step2.qty': 'Quantité',
-    'products.step2.units': 'unités',
-    'products.step2.customQuote': '+10 000 ? Demander un devis personnalisé',
-    'products.step2.printColor': 'Couleur d\'impression',
-    'products.step2.addToCart': '+ Ajouter au Panier',
-    'products.step3': 'Envoyez votre fichier',
-    'products.step3.fileUploaded': 'Fichier téléchargé avec succès',
-    'products.step3.clickToRemove': 'Cliquez pour supprimer',
-    'products.step3.dragOrClick': 'Glissez le fichier ou cliquez pour envoyer',
-    'products.step3.formats': 'PDF, AI, EPS, PNG ou SVG (max. 10 Mo)',
-    'products.step3.bestResult': 'Pour un meilleur résultat, envoyez un PNG avec fond transparent ou SVG',
-    'products.step3.autoRemoveBg': 'Supprimer le fond automatiquement',
-    'products.step3.bgRemoved': 'Fond supprimé',
-    'products.step3.originalImage': 'Image originale',
-    'products.step3.fileTooLarge': 'Fichier trop volumineux. Maximum 10 Mo.',
+    'products.step2': 'Technique d\'impression',
+    'products.step2.tampografia': 'Tampographie',
+    'products.step2.tampografia.desc': 'Idéal pour logos simples, jusqu\'à 4 couleurs',
+    'products.step2.serigrafia': 'Sérigraphie rotative',
+    'products.step2.serigrafia.desc': 'Impression 360° sur tout le tour du gobelet',
+    'products.step3': 'Quantité et couleurs',
+    'products.step3.qty': 'Quantité',
+    'products.step3.units': 'unités',
+    'products.step3.customQuote': '+10 000 ? Demander un devis personnalisé',
+    'products.step3.printColor': 'Couleur d\'impression',
+    'products.step3.addToCart': '+ Ajouter au Panier',
+    'products.step4': 'Envoyez votre fichier',
+    'products.step4.fileUploaded': 'Fichier téléchargé avec succès',
+    'products.step4.clickToRemove': 'Cliquez pour supprimer',
+    'products.step4.dragOrClick': 'Glissez le fichier ou cliquez pour envoyer',
+    'products.step4.formats': 'PDF, AI, EPS, PNG ou SVG (max. 10 Mo)',
+    'products.step4.bestResult': 'Pour un meilleur résultat, envoyez un PNG avec fond transparent ou SVG',
+    'products.step4.autoRemoveBg': 'Supprimer le fond automatiquement',
+    'products.step4.bgRemoved': 'Fond supprimé',
+    'products.step4.originalImage': 'Image originale',
+    'products.step4.fileTooLarge': 'Fichier trop volumineux. Maximum 10 Mo.',
     'cart.title': 'Panier',
     'cart.item': 'article',
     'cart.items': 'articles',
@@ -948,7 +968,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.nav': 'Navigation',
     'footer.payment': 'Paiement',
     'footer.copyright': '© 2026 PrimeGift. Tous droits réservés.',
-    'products.step3.vectorNotice': 'Les fichiers PDF, AI et EPS ne peuvent pas être prévisualisés sur la maquette. Votre fichier sera utilisé dans la maquette finale envoyée pour approbation.',
+    'products.step4.vectorNotice': 'Les fichiers PDF, AI et EPS ne peuvent pas être prévisualisés sur la maquette. Votre fichier sera utilisé dans la maquette finale envoyée pour approbation.',
     'testimonial.3.quote': 'Nous avons utilisé les gobelets PrimeGift pour notre mariage et ce fut un succès. Les invités ont adoré la personnalisation et beaucoup les ont gardés en souvenir.',
     'testimonial.3.role': 'Mariage — Quinta do Lago',
     'testimonial.4.quote': 'Cela fait 3 ans que nous commandons pour nos festivals d\'été. La constance de la qualité et le respect des délais font toute la différence pour les événements de grande envergure.',
@@ -1747,6 +1767,7 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
 
 function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => void; initialProduct: string | null; t: TFunc }) {
   const [selectedProduct, setSelectedProduct] = useState<string | null>(initialProduct);
+  const [printTechnique, setPrintTechnique] = useState<'tampografia' | 'serigrafia'>('tampografia');
   const [quantity, setQuantity] = useState(100);
   const [printColor, setPrintColor] = useState('black');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -1892,25 +1913,39 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
               </div>
             </div>
 
-            {/* Step 2: Quantity & Colors */}
+            {/* Step 2: Printing Technique */}
             <div style={sectionStyle}>
               <h3 style={stepTitleStyle}><span style={stepNumStyle}>2</span> {t('products.step2')}</h3>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                {(['tampografia', 'serigrafia'] as const).map(tech => (
+                  <div key={tech} onClick={() => setPrintTechnique(tech)}
+                    style={{ flex: '1 1 200px', padding: '16px 20px', borderRadius: 10, border: `2px solid ${printTechnique === tech ? C.accent : C.border}`, background: printTechnique === tech ? C.lightBg : C.white, cursor: 'pointer', transition: 'all 0.2s' }}>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: printTechnique === tech ? C.accent : C.text, marginBottom: 4 }}>{t(`products.step2.${tech}`)}</div>
+                    <div style={{ fontSize: 13, color: C.textMuted }}>{t(`products.step2.${tech}.desc`)}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 3: Quantity & Colors */}
+            <div style={sectionStyle}>
+              <h3 style={stepTitleStyle}><span style={stepNumStyle}>3</span> {t('products.step3')}</h3>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
                 <div style={{ flex: '1 1 200px' }}>
-                  <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: C.textSec, marginBottom: 6 }}>{t('products.step2.qty')}</label>
+                  <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: C.textSec, marginBottom: 6 }}>{t('products.step3.qty')}</label>
                   <select value={quantity} onChange={e => setQuantity(Number(e.target.value))}
                     style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 15, color: C.text, background: C.white, cursor: 'pointer' }}>
                     {QUANTITIES.map(q => (
-                      <option key={q} value={q}>{q.toLocaleString('pt-PT')} {t('products.step2.units')}</option>
+                      <option key={q} value={q}>{q.toLocaleString('pt-PT')} {t('products.step3.units')}</option>
                     ))}
                   </select>
                   <button onClick={() => { goToContact(); }}
                     style={{ marginTop: 8, background: 'none', border: 'none', color: C.accent, fontSize: 13, cursor: 'pointer', padding: 0, textDecoration: 'underline' }}>
-                    {t('products.step2.customQuote')}
+                    {t('products.step3.customQuote')}
                   </button>
                 </div>
                 <div style={{ flex: '1 1 200px' }}>
-                  <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: C.textSec, marginBottom: 6 }}>{t('products.step2.printColor')}</label>
+                  <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: C.textSec, marginBottom: 6 }}>{t('products.step3.printColor')}</label>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {PRINT_COLORS.map(c => (
                       <button key={c.value} onClick={() => setPrintColor(c.value)}
@@ -1930,15 +1965,15 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                   </div>
                   <button onClick={addToCart}
                     style={{ padding: '10px 24px', borderRadius: 8, background: C.success, color: C.white, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap' }}>
-                    {t('products.step2.addToCart')}
+                    {t('products.step3.addToCart')}
                   </button>
                 </div>
               )}
             </div>
 
-            {/* Step 3: File Upload */}
+            {/* Step 4: File Upload */}
             <div style={sectionStyle}>
-              <h3 style={stepTitleStyle}><span style={stepNumStyle}>3</span> {t('products.step3')}</h3>
+              <h3 style={stepTitleStyle}><span style={stepNumStyle}>4</span> {t('products.step4')}</h3>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -1948,7 +1983,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                   const file = e.target.files?.[0];
                   if (file) {
                     if (file.size > 10 * 1024 * 1024) {
-                      alert(t('products.step3.fileTooLarge'));
+                      alert(t('products.step4.fileTooLarge'));
                       return;
                     }
                     setUploadedFile(file);
@@ -1971,7 +2006,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                   const file = e.dataTransfer.files?.[0];
                   if (file) {
                     if (file.size > 10 * 1024 * 1024) {
-                      alert(t('products.step3.fileTooLarge'));
+                      alert(t('products.step4.fileTooLarge'));
                       return;
                     }
                     setUploadedFile(file);
@@ -1981,24 +2016,24 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                 {uploadedFile ? (
                   <>
                     <div style={{ fontSize: 36, marginBottom: 8 }}>&#x2705;</div>
-                    <p style={{ margin: 0, fontWeight: 600, color: C.success }}>{t('products.step3.fileUploaded')}</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{uploadedFile.name} ({(uploadedFile.size / 1024).toFixed(0)}KB) — {t('products.step3.clickToRemove')}</p>
+                    <p style={{ margin: 0, fontWeight: 600, color: C.success }}>{t('products.step4.fileUploaded')}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{uploadedFile.name} ({(uploadedFile.size / 1024).toFixed(0)}KB) — {t('products.step4.clickToRemove')}</p>
                   </>
                 ) : (
                   <>
                     <div style={{ fontSize: 36, marginBottom: 8 }}>&#x1F4C1;</div>
-                    <p style={{ margin: 0, fontWeight: 600, color: C.text }}>{t('products.step3.dragOrClick')}</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{t('products.step3.formats')}</p>
+                    <p style={{ margin: 0, fontWeight: 600, color: C.text }}>{t('products.step4.dragOrClick')}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 13, color: C.textMuted }}>{t('products.step4.formats')}</p>
                   </>
                 )}
               </div>
               <p style={{ margin: '8px 0 0', fontSize: 12, color: C.textMuted }}>
-                {t('products.step3.bestResult')}
+                {t('products.step4.bestResult')}
               </p>
               {uploadedFile && !logoPreviewUrl && !removingBg && (
                 <div style={{ marginTop: 12, padding: 12, background: '#FEF9E7', borderRadius: 8, border: '1px solid #F9E79F' }}>
                   <p style={{ margin: 0, fontSize: 13, color: '#7D6608' }}>
-                    {t('products.step3.vectorNotice')}
+                    {t('products.step4.vectorNotice')}
                   </p>
                 </div>
               )}
@@ -2011,9 +2046,9 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                     onChange={e => setAutoRemoveBg(e.target.checked)}
                     style={{ width: 18, height: 18, cursor: 'pointer', accentColor: C.accent }}
                   />
-                  <span style={{ fontWeight: 600 }}>{t('products.step3.autoRemoveBg')}</span>
+                  <span style={{ fontWeight: 600 }}>{t('products.step4.autoRemoveBg')}</span>
                   <span style={{ fontSize: 12, color: C.textMuted, marginLeft: 4 }}>
-                    ({autoRemoveBg ? t('products.step3.bgRemoved') : t('products.step3.originalImage')})
+                    ({autoRemoveBg ? t('products.step4.bgRemoved') : t('products.step4.originalImage')})
                   </span>
                 </label>
               )}
@@ -2056,7 +2091,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
             {/* Shipping */}
             <div style={sectionStyle}>
-              <h3 style={stepTitleStyle}><span style={stepNumStyle}>4</span> {t('shipping.title')}</h3>
+              <h3 style={stepTitleStyle}><span style={stepNumStyle}>5</span> {t('shipping.title')}</h3>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
                 <div style={{ flex: '1 1 200px' }}>
                   <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: C.textSec, marginBottom: 6 }}>{t('shipping.destination')}</label>
@@ -2123,6 +2158,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                     logoYOffset={logoYOffset}
                     printColor={PRINT_COLORS.find(c => c.value === printColor)?.hex ?? '#000000'}
                     capacity={product.capacity}
+                    rotating={printTechnique === 'serigrafia'}
                   />
                 </div>
                 {removingBg && (

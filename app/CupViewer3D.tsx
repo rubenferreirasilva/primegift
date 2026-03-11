@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 interface CupViewer3DProps {
   radiusTop: number;
@@ -10,12 +10,15 @@ interface CupViewer3DProps {
   logoYOffset: number;
   printColor?: string;
   capacity?: string;
+  rotating?: boolean;
 }
 
-export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, logoScale, logoYOffset, printColor = '#000000', capacity }: CupViewer3DProps) {
+export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, logoScale, logoYOffset, printColor = '#000000', capacity, rotating = false }: CupViewer3DProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const logoImg = useRef<HTMLImageElement | null>(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
+  const animFrameRef = useRef<number>(0);
+  const rotationRef = useRef(0);
 
   // Load logo image
   useEffect(() => {
@@ -118,7 +121,8 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
       ctx.restore();
 
       // Logo on cup (monochrome in selected print color)
-      if (logoImg.current && logoLoaded) {
+      const drawLogo = (rotation: number) => {
+        if (!logoImg.current || !logoLoaded) return;
         ctx.save();
         // Clip to cup body
         ctx.beginPath();
@@ -134,33 +138,33 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
         const logoAreaH = cupH * 0.5 * s;
         const img = logoImg.current;
         const imgRatio = Math.min(logoAreaW / img.width, logoAreaH / img.height);
-        const drawW = img.width * imgRatio;
+        const baseDrawW = img.width * imgRatio;
         const drawH = img.height * imgRatio;
 
-        // Static centered logo
+        // Rotation: logo moves horizontally and narrows at edges (perspective)
+        const cosR = Math.cos(rotation);
+        const sinR = Math.sin(rotation);
+        const drawW = baseDrawW * Math.abs(cosR);
+        const xShift = sinR * topR * 0.8;
+
         const yOff = (logoYOffset / 100) * cupH * 0.25;
-        const drawX = cx - drawW / 2;
+        const drawX = cx - drawW / 2 + xShift;
         const drawY = topY + (cupH - drawH) / 2 + yOff - cupH * 0.06;
 
-        // Convert logo to monochrome print color:
-        // 1. Draw original to offscreen canvas
+        // Convert logo to monochrome print color
         const offCanvas = document.createElement('canvas');
-        offCanvas.width = Math.ceil(drawW * 2);
-        offCanvas.height = Math.ceil(drawH * 2);
+        offCanvas.width = Math.max(1, Math.ceil(drawW * 2));
+        offCanvas.height = Math.max(1, Math.ceil(drawH * 2));
         const offCtx = offCanvas.getContext('2d')!;
         offCtx.drawImage(img, 0, 0, offCanvas.width, offCanvas.height);
 
-        // 2. Get pixel data and convert to monochrome
         const imgData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
         const px = imgData.data;
-        // Parse printColor hex to RGB
         const pR = parseInt(printColor.slice(1, 3), 16);
         const pG = parseInt(printColor.slice(3, 5), 16);
         const pB = parseInt(printColor.slice(5, 7), 16);
         for (let i = 0; i < px.length; i += 4) {
-          // Convert pixel to grayscale luminance
           const lum = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
-          // Use inverse luminance as intensity (dark parts of logo = full color)
           const intensity = 1 - lum / 255;
           px[i] = pR;
           px[i + 1] = pG;
@@ -169,11 +173,16 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
         }
         offCtx.putImageData(imgData, 0, 0);
 
-        ctx.globalAlpha = 0.92;
-        ctx.drawImage(offCanvas, drawX, drawY, drawW, drawH);
+        // Fade out when logo wraps around to the back
+        ctx.globalAlpha = 0.92 * Math.max(0, cosR);
+        if (drawW > 0.5) {
+          ctx.drawImage(offCanvas, drawX, drawY, drawW, drawH);
+        }
 
         ctx.restore();
-      }
+      };
+
+      drawLogo(rotationRef.current);
 
       // Shine highlight (left)
       ctx.save();
@@ -241,23 +250,27 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
 
       // "O Seu Logo" placeholder when no logo
       if (!logoImg.current || !logoLoaded) {
-        ctx.save();
-        ctx.globalAlpha = 0.4;
-        const placeholderY = topY + cupH * 0.25;
-        // Dashed rectangle
-        ctx.setLineDash([4, 3]);
-        ctx.strokeStyle = 'rgba(255,255,255,0.6)';
-        ctx.lineWidth = 1.5;
-        const pw = topR * 0.9;
-        const ph = cupH * 0.25;
-        ctx.strokeRect(cx - pw / 2, placeholderY, pw, ph);
-        ctx.setLineDash([]);
-        // Text
-        ctx.fillStyle = 'rgba(255,255,255,0.7)';
-        ctx.font = '600 11px system-ui, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('O SEU LOGO', cx, placeholderY + ph / 2 + 4);
-        ctx.restore();
+        const cosR = Math.cos(rotationRef.current);
+        const sinR = Math.sin(rotationRef.current);
+        const placeholderAlpha = Math.max(0, cosR);
+        if (placeholderAlpha > 0.05) {
+          ctx.save();
+          ctx.globalAlpha = 0.4 * placeholderAlpha;
+          const placeholderY = topY + cupH * 0.25;
+          const pw = topR * 0.9 * Math.abs(cosR);
+          const ph = cupH * 0.25;
+          const pxShift = sinR * topR * 0.8;
+          ctx.setLineDash([4, 3]);
+          ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(cx - pw / 2 + pxShift, placeholderY, pw, ph);
+          ctx.setLineDash([]);
+          ctx.fillStyle = 'rgba(255,255,255,0.7)';
+          ctx.font = '600 11px system-ui, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('O SEU LOGO', cx + pxShift, placeholderY + ph / 2 + 4);
+          ctx.restore();
+        }
       }
 
       // Cup size label
@@ -269,8 +282,23 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
       ctx.restore();
     };
 
-    draw();
-  }, [height, logoScale, logoYOffset, logoLoaded, printColor, capacity]);
+    // Animation loop or single draw
+    cancelAnimationFrame(animFrameRef.current);
+
+    if (rotating) {
+      const animate = () => {
+        rotationRef.current += 0.015;
+        draw();
+        animFrameRef.current = requestAnimationFrame(animate);
+      };
+      animate();
+    } else {
+      rotationRef.current = 0;
+      draw();
+    }
+
+    return () => cancelAnimationFrame(animFrameRef.current);
+  }, [height, logoScale, logoYOffset, logoLoaded, printColor, capacity, rotating]);
 
   return (
     <div id="cup-viewer-3d" style={{ width: 380, height: 494, borderRadius: 12, overflow: 'hidden' }}>
