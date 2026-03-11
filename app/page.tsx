@@ -207,6 +207,13 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     // Modal
     'modal.title': 'Confirmar Encomenda',
     'modal.paymentMethod': 'Método de Pagamento',
+    'modal.invoice': 'Dados de Faturação',
+    'modal.invoice.hint': 'Preencha para receber fatura',
+    'modal.invoice.name': 'Nome / Empresa',
+    'modal.invoice.nif': 'NIF / NIPC',
+    'modal.invoice.address': 'Morada',
+    'modal.invoice.postalCode': 'Código Postal',
+    'modal.invoice.city': 'Localidade',
     'modal.cancel': 'Cancelar',
     'modal.confirm': 'Confirmar Encomenda',
     // How it works page
@@ -448,6 +455,13 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.freeShipping': 'Portes gratis para pedidos superiores a 150€',
     'modal.title': 'Confirmar Pedido',
     'modal.paymentMethod': 'Método de Pago',
+    'modal.invoice': 'Datos de Facturación',
+    'modal.invoice.hint': 'Complete para recibir factura',
+    'modal.invoice.name': 'Nombre / Empresa',
+    'modal.invoice.nif': 'NIF / CIF',
+    'modal.invoice.address': 'Dirección',
+    'modal.invoice.postalCode': 'Código Postal',
+    'modal.invoice.city': 'Localidad',
     'modal.cancel': 'Cancelar',
     'modal.confirm': 'Confirmar Pedido',
     'hiwPage.step1.title': 'Elige Tu Vaso',
@@ -686,6 +700,13 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.freeShipping': 'Free shipping for orders over 150€',
     'modal.title': 'Confirm Order',
     'modal.paymentMethod': 'Payment Method',
+    'modal.invoice': 'Billing Details',
+    'modal.invoice.hint': 'Fill in to receive an invoice',
+    'modal.invoice.name': 'Name / Company',
+    'modal.invoice.nif': 'Tax ID / VAT Number',
+    'modal.invoice.address': 'Address',
+    'modal.invoice.postalCode': 'Postal Code',
+    'modal.invoice.city': 'City',
     'modal.cancel': 'Cancel',
     'modal.confirm': 'Confirm Order',
     'hiwPage.step1.title': 'Choose Your Cup',
@@ -924,6 +945,13 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.freeShipping': 'Livraison gratuite pour commandes supérieures à 150€',
     'modal.title': 'Confirmer la Commande',
     'modal.paymentMethod': 'Mode de Paiement',
+    'modal.invoice': 'Données de Facturation',
+    'modal.invoice.hint': 'Remplissez pour recevoir une facture',
+    'modal.invoice.name': 'Nom / Entreprise',
+    'modal.invoice.nif': 'Numéro de TVA / SIRET',
+    'modal.invoice.address': 'Adresse',
+    'modal.invoice.postalCode': 'Code Postal',
+    'modal.invoice.city': 'Ville',
     'modal.cancel': 'Annuler',
     'modal.confirm': 'Confirmer la Commande',
     'hiwPage.step1.title': 'Choisissez Votre Gobelet',
@@ -2336,6 +2364,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
   cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc;
 }) {
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
+  const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
 
   const PAYMENT_URLS: Record<string, string> = {
     paypal: 'https://www.paypal.com',
@@ -2402,6 +2431,24 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
               <span style={{ fontWeight: 600, fontSize: 14 }}>{t('payment.' + pm.id)}</span>
             </label>
           ))}
+        </div>
+
+        {/* Billing / Invoice Details */}
+        <h3 style={{ fontSize: 16, fontWeight: 700, color: C.text, margin: '0 0 4px' }}>{t('modal.invoice')}</h3>
+        <p style={{ fontSize: 12, color: C.textMuted, margin: '0 0 12px' }}>{t('modal.invoice.hint')}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+          <input value={invoice.name} onChange={e => setInvoice(prev => ({ ...prev, name: e.target.value }))} placeholder={t('modal.invoice.name')}
+            style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+          <input value={invoice.nif} onChange={e => setInvoice(prev => ({ ...prev, nif: e.target.value }))} placeholder={t('modal.invoice.nif')}
+            style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+          <input value={invoice.address} onChange={e => setInvoice(prev => ({ ...prev, address: e.target.value }))} placeholder={t('modal.invoice.address')}
+            style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+          <div style={{ display: 'flex', gap: 10 }}>
+            <input value={invoice.postalCode} onChange={e => setInvoice(prev => ({ ...prev, postalCode: e.target.value }))} placeholder={t('modal.invoice.postalCode')}
+              style={{ flex: '0 0 140px', padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+            <input value={invoice.city} onChange={e => setInvoice(prev => ({ ...prev, city: e.target.value }))} placeholder={t('modal.invoice.city')}
+              style={{ flex: 1, padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+          </div>
         </div>
 
         <div style={{ display: 'flex', gap: 12 }}>
