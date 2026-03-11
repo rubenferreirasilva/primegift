@@ -50,10 +50,12 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
     canvas.height = H * 2;
     ctx.scale(2, 2);
 
-    // Fixed cup size — all cups render at the same visual dimensions
-    const cupH = 280;
-    const topR = 90;
-    const botR = 60;
+    // Cup grows slightly with size — height drives a subtle scale (200ml→0.85, 500ml→1.0)
+    const t = Math.min(1, Math.max(0, (height - 65) / (105 - 65))); // 0..1 from smallest to largest
+    const scale = 0.85 + t * 0.15;
+    const cupH = 280 * scale;
+    const topR = 90 * scale;
+    const botR = 60 * scale;
     const cx = W / 2;
     const topY = (H - cupH) / 2 - 10;
     const botY = topY + cupH;
@@ -138,7 +140,7 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
         // Static centered logo
         const yOff = (logoYOffset / 100) * cupH * 0.25;
         const drawX = cx - drawW / 2;
-        const drawY = topY + (cupH - drawH) / 2 + yOff;
+        const drawY = topY + (cupH - drawH) / 2 + yOff - cupH * 0.06;
 
         // Convert logo to monochrome print color:
         // 1. Draw original to offscreen canvas
@@ -241,7 +243,7 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
       if (!logoImg.current || !logoLoaded) {
         ctx.save();
         ctx.globalAlpha = 0.4;
-        const placeholderY = topY + cupH * 0.38;
+        const placeholderY = topY + cupH * 0.25;
         // Dashed rectangle
         ctx.setLineDash([4, 3]);
         ctx.strokeStyle = 'rgba(255,255,255,0.6)';
@@ -268,7 +270,7 @@ export default function CupViewer3D({ radiusTop, radiusBottom, height, logoUrl, 
     };
 
     draw();
-  }, [logoScale, logoYOffset, logoLoaded, printColor, capacity]);
+  }, [height, logoScale, logoYOffset, logoLoaded, printColor, capacity]);
 
   return (
     <div id="cup-viewer-3d" style={{ width: 380, height: 494, borderRadius: 12, overflow: 'hidden' }}>
