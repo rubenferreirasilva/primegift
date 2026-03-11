@@ -1777,7 +1777,7 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
 // ==================== PRODUCTS PAGE ====================
 
 function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => void; initialProduct: string | null; t: TFunc }) {
-  const [selectedProduct, setSelectedProduct] = useState<string | null>(initialProduct);
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(initialProduct || PRODUCTS[0].id);
   const [printTechnique, setPrintTechnique] = useState<'tampografia' | 'serigrafia'>('tampografia');
   const [quantity, setQuantity] = useState(100);
   const [printColor, setPrintColor] = useState('black');
@@ -1896,20 +1896,20 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
     }
   };
 
-  const addToCart = () => {
-    if (!selectedProduct) return;
-    setCart(prev => [...prev, {
-      itemId: crypto.randomUUID(),
+  // Auto-sync cart with current configuration (single item)
+  useEffect(() => {
+    if (!selectedProduct) {
+      setCart([]);
+      return;
+    }
+    setCart([{
+      itemId: 'main',
       productId: selectedProduct,
       quantity,
       printColor,
       printTechnique,
     }]);
-  };
-
-  const removeFromCart = (itemId: string) => {
-    setCart(prev => prev.filter(i => i.itemId !== itemId));
-  };
+  }, [selectedProduct, quantity, printColor, printTechnique]);
 
   const sectionStyle: CSSProperties = { marginBottom: 32 };
   const stepTitleStyle: CSSProperties = { fontSize: 16, fontWeight: 700, color: C.primary, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 10 };
@@ -1986,16 +1986,12 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                   </div>
                 </div>
               </div>
-              {/* Staging preview */}
+              {/* Price summary */}
               {product && (
-                <div style={{ marginTop: 16, padding: 16, background: C.lightBg, borderRadius: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+                <div style={{ marginTop: 16, padding: 16, background: C.lightBg, borderRadius: 8 }}>
                   <div style={{ fontSize: 14, color: C.text }}>
-                    <strong>{t(`product.${product.id}.name`)}</strong> — {quantity.toLocaleString('pt-PT')} un. — {fmt(stagingUnitPrice)}/un. = <strong>{fmt(stagingSubtotal)}</strong>
+                    <strong>{t(`product.${product.id}.name`)}</strong> — {quantity.toLocaleString('pt-PT')} un. × {fmt(stagingUnitPrice)}/un. = <strong style={{ color: C.primary, fontSize: 16 }}>{fmt(stagingSubtotal)}</strong>
                   </div>
-                  <button onClick={addToCart}
-                    style={{ padding: '10px 24px', borderRadius: 8, background: C.success, color: C.white, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap' }}>
-                    {t('products.step3.addToCart')}
-                  </button>
                 </div>
               )}
             </div>
@@ -2074,41 +2070,6 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                 </label>
               )}
             </div>
-
-            {/* Cart Items */}
-            {cart.length > 0 && (
-              <div style={sectionStyle}>
-                <h3 style={stepTitleStyle}>
-                  <span style={{ ...stepNumStyle, background: C.success }}>&#x1F6D2;</span>
-                  {t('cart.title')} ({cart.length} {cart.length === 1 ? t('cart.item') : t('cart.items')})
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {cart.map(item => {
-                    const p = PRODUCTS.find(pr => pr.id === item.productId);
-                    if (!p) return null;
-                    const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
-                    const itemTotal = up * item.quantity;
-                    return (
-                      <div key={item.itemId} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: 12, background: C.white, borderRadius: 8, border: `1px solid ${C.border}` }}>
-                        <CupImage product={p} size={36} />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontWeight: 600, fontSize: 14, color: C.text }}>{t(`product.${p.id}.name`)} — {p.capacity}</div>
-                          <div style={{ fontSize: 12, color: C.textSec }}>
-                            {item.quantity.toLocaleString('pt-PT')} un. · {t(`color.${item.printColor}`)} · {fmt(up)}/un.
-                          </div>
-                        </div>
-                        <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, whiteSpace: 'nowrap' }}>{fmt(itemTotal)}</div>
-                        <button onClick={() => removeFromCart(item.itemId)}
-                          style={{ background: 'none', border: 'none', color: '#E74C3C', fontSize: 18, cursor: 'pointer', padding: '4px 8px', lineHeight: 1 }}
-                          title={t('cart.remove')}>
-                          ✕
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
 
             {/* Shipping */}
             <div style={sectionStyle}>
@@ -2243,30 +2204,24 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                 <h3 style={{ color: C.white, margin: 0, fontSize: 18, fontWeight: 700 }}>{t('order.title')}</h3>
               </div>
               <div style={{ padding: 24 }}>
-                {cart.length > 0 ? (
+                {product ? (
                   <>
-                    {/* Cart items summary */}
+                    {/* Current item summary */}
                     <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: `1px solid ${C.border}` }}>
-                      {cart.map(item => {
-                        const p = PRODUCTS.find(pr => pr.id === item.productId);
-                        if (!p) return null;
-                        const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
-                        const itemTotal = up * item.quantity;
-                        return (
-                          <div key={item.itemId} style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 8 }}>
-                            <CupImage product={p} size={32} />
-                            <div style={{ flex: 1, minWidth: 0 }}>
-                              <div style={{ fontWeight: 600, fontSize: 13, color: C.text }}>{t(`product.${p.id}.name`)}</div>
-                              <div style={{ fontSize: 11, color: C.textSec }}>{item.quantity.toLocaleString('pt-PT')} un. × {fmt(up)}</div>
-                            </div>
-                            <div style={{ fontWeight: 600, fontSize: 13, color: C.text, whiteSpace: 'nowrap' }}>{fmt(itemTotal)}</div>
+                      <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                        <CupImage product={product} size={32} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontWeight: 600, fontSize: 13, color: C.text }}>{t(`product.${product.id}.name`)} — {product.capacity}</div>
+                          <div style={{ fontSize: 11, color: C.textSec }}>
+                            {quantity.toLocaleString('pt-PT')} un. × {fmt(stagingUnitPrice)} · {t(`products.step2.${printTechnique}`)} · {t(`color.${printColor}`)}
                           </div>
-                        );
-                      })}
+                        </div>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, whiteSpace: 'nowrap' }}>{fmt(stagingSubtotal)}</div>
+                      </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: C.textSec }}>{t('order.subtotal')} ({cart.length} {cart.length === 1 ? t('cart.item') : t('cart.items')})</span>
+                        <span style={{ color: C.textSec }}>{t('order.subtotal')}</span>
                         <span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span>
                       </div>
                       {!isInternational && !overweight && (
@@ -2285,7 +2240,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                         <span style={{ fontWeight: 700, color: C.primary }}>{fmt(total)}</span>
                       </div>
                     </div>
-                    <p style={{ fontSize: 12, color: C.success, margin: '16px 0', fontWeight: 600 }}>✓ {t('order.freeMockup')}</p>
+                    <p style={{ fontSize: 12, color: C.success, margin: '16px 0', fontWeight: 600 }}>&#x2713; {t('order.freeMockup')}</p>
                     <button onClick={() => setShowModal(true)}
                       style={{ width: '100%', padding: '14px', borderRadius: 8, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, color: C.white, border: 'none', fontSize: 16, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}>
                       {t('order.finalize')}
@@ -2304,7 +2259,6 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                   </>
                 ) : (
                   <div style={{ textAlign: 'center', padding: '32px 0', color: C.textMuted }}>
-                    <div style={{ fontSize: 40, marginBottom: 12 }}>🛒</div>
                     <p style={{ margin: 0, fontSize: 14 }}>{t('order.emptyCart')}</p>
                   </div>
                 )}
