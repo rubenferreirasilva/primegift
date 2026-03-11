@@ -1017,16 +1017,16 @@ type CartItem = {
 const PRODUCTS: Product[] = [
   { id: 'pg200', name: 'Copo de 200ml', capacity: '200ml', description: 'Café e degustação', weight: 15, cupHeight: 65, cupTopW: 50, cupBotW: 36,
     prices: { 100: 0.30, 250: 0.25, 500: 0.20, 1000: 0.16, 2000: 0.14, 5000: 0.12 },
-    serigrafiasPrices: { 100: 0.35, 250: 0.29, 500: 0.23, 1000: 0.19, 2000: 0.16, 5000: 0.14 } },
+    serigrafiasPrices: { 100: 0.54, 250: 0.45, 500: 0.36, 1000: 0.29, 2000: 0.25, 5000: 0.22 } },
   { id: 'pg300', name: 'Copo de 300ml', capacity: '300ml', description: 'Sumos e refrigerantes', weight: 20, cupHeight: 80, cupTopW: 54, cupBotW: 38,
     prices: { 100: 0.33, 250: 0.28, 500: 0.23, 1000: 0.18, 2000: 0.16, 5000: 0.14 },
-    serigrafiasPrices: { 100: 0.38, 250: 0.33, 500: 0.27, 1000: 0.21, 2000: 0.18, 5000: 0.16 } },
+    serigrafiasPrices: { 100: 0.59, 250: 0.50, 500: 0.41, 1000: 0.32, 2000: 0.29, 5000: 0.25 } },
   { id: 'pg330', name: 'Copo de 330ml', capacity: '330ml', description: 'Cerveja e cocktails', weight: 22, cupHeight: 88, cupTopW: 56, cupBotW: 39,
     prices: { 100: 0.35, 250: 0.30, 500: 0.25, 1000: 0.20, 2000: 0.17, 5000: 0.15 },
-    serigrafiasPrices: { 100: 0.40, 250: 0.35, 500: 0.29, 1000: 0.23, 2000: 0.20, 5000: 0.17 } },
+    serigrafiasPrices: { 100: 0.63, 250: 0.54, 500: 0.45, 1000: 0.36, 2000: 0.31, 5000: 0.27 } },
   { id: 'pg500', name: 'Copo de 500ml', capacity: '500ml', description: 'Festivais e eventos', weight: 30, cupHeight: 105, cupTopW: 62, cupBotW: 42,
     prices: { 100: 0.42, 250: 0.36, 500: 0.30, 1000: 0.24, 2000: 0.21, 5000: 0.18 },
-    serigrafiasPrices: { 100: 0.49, 250: 0.42, 500: 0.35, 1000: 0.28, 2000: 0.24, 5000: 0.21 } },
+    serigrafiasPrices: { 100: 0.76, 250: 0.65, 500: 0.54, 1000: 0.43, 2000: 0.38, 5000: 0.32 } },
 ];
 
 const PRINT_COLORS = [
