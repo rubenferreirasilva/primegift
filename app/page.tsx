@@ -147,6 +147,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step3.printColor': 'Cor de impressão',
     'products.step3.addToCart': '+ Adicionar ao Carrinho',
     'products.step4': 'Envie o seu ficheiro',
+    'products.step4.hint': 'Carregue o seu logo para o visualizar no mockup do copo',
     'products.step4.fileUploaded': 'Ficheiro carregado com sucesso',
     'products.step4.clickToRemove': 'Clique para remover',
     'products.step4.dragOrClick': 'Arraste o ficheiro ou clique para enviar',
@@ -393,6 +394,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step3.printColor': 'Color de impresión',
     'products.step3.addToCart': '+ Añadir al Carrito',
     'products.step4': 'Sube tu fichero',
+    'products.step4.hint': 'Sube tu logo para verlo en el mockup del vaso',
     'products.step4.fileUploaded': 'Fichero subido con éxito',
     'products.step4.clickToRemove': 'Haz clic para eliminar',
     'products.step4.dragOrClick': 'Arrastra el fichero o haz clic para subir',
@@ -630,6 +632,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step3.printColor': 'Print colour',
     'products.step3.addToCart': '+ Add to Cart',
     'products.step4': 'Upload your file',
+    'products.step4.hint': 'Upload your logo to preview it on the cup mockup',
     'products.step4.fileUploaded': 'File uploaded successfully',
     'products.step4.clickToRemove': 'Click to remove',
     'products.step4.dragOrClick': 'Drag file or click to upload',
@@ -867,6 +870,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step3.printColor': 'Couleur d\'impression',
     'products.step3.addToCart': '+ Ajouter au Panier',
     'products.step4': 'Envoyez votre fichier',
+    'products.step4.hint': 'Téléchargez votre logo pour le visualiser sur le mockup du gobelet',
     'products.step4.fileUploaded': 'Fichier téléchargé avec succès',
     'products.step4.clickToRemove': 'Cliquez pour supprimer',
     'products.step4.dragOrClick': 'Glissez le fichier ou cliquez pour envoyer',
@@ -1998,7 +2002,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
             {/* Step 4: File Upload */}
             <div style={sectionStyle}>
-              <h3 style={stepTitleStyle}><span style={stepNumStyle}>4</span> {t('products.step4')}</h3>
+              <h3 style={stepTitleStyle}><span style={stepNumStyle}>4</span> {t('products.step4')} <span style={{ fontWeight: 400, fontSize: 13, color: C.textMuted }}>— {t('products.step4.hint')}</span></h3>
               <input
                 ref={fileInputRef}
                 type="file"
