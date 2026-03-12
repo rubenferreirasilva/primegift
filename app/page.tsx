@@ -56,7 +56,11 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Transferência Bancária',
     'payment.mbway': 'MB WAY',
-    'payment.applepay': 'Apple Pay',
+    'payment.transfer.info': 'Dados para transferência:',
+    'payment.transfer.holder': 'Titular',
+    'payment.transfer.bank': 'Banco',
+    'payment.paypal.info': 'Envie o pagamento para:',
+    'payment.mbway.info': 'Envie o pagamento para o número:',
     // Hero
     'hero.tag': 'Festivais · Festas · Restaurantes',
     'hero.title1': 'A Sua Marca',
@@ -319,7 +323,11 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Transferencia Bancaria',
     'payment.mbway': 'MB WAY',
-    'payment.applepay': 'Apple Pay',
+    'payment.transfer.info': 'Datos para transferencia:',
+    'payment.transfer.holder': 'Titular',
+    'payment.transfer.bank': 'Banco',
+    'payment.paypal.info': 'Envíe el pago a:',
+    'payment.mbway.info': 'Envíe el pago al número:',
     'hero.tag': 'Festivales · Fiestas · Restaurantes',
     'hero.title1': 'Tu Marca',
     'hero.title2': 'en Cada Vaso',
@@ -564,7 +572,11 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Bank Transfer',
     'payment.mbway': 'MB WAY',
-    'payment.applepay': 'Apple Pay',
+    'payment.transfer.info': 'Bank transfer details:',
+    'payment.transfer.holder': 'Account holder',
+    'payment.transfer.bank': 'Bank',
+    'payment.paypal.info': 'Send payment to:',
+    'payment.mbway.info': 'Send payment to number:',
     'hero.tag': 'Festivals · Parties · Restaurants',
     'hero.title1': 'Your Brand',
     'hero.title2': 'on Every Cup',
@@ -809,7 +821,11 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Virement Bancaire',
     'payment.mbway': 'MB WAY',
-    'payment.applepay': 'Apple Pay',
+    'payment.transfer.info': 'Coordonnées bancaires :',
+    'payment.transfer.holder': 'Titulaire',
+    'payment.transfer.bank': 'Banque',
+    'payment.paypal.info': 'Envoyez le paiement à :',
+    'payment.mbway.info': 'Envoyez le paiement au numéro :',
     'hero.tag': 'Festivals · Fêtes · Restaurants',
     'hero.title1': 'Votre Marque',
     'hero.title2': 'sur Chaque Gobelet',
@@ -1115,7 +1131,6 @@ const PAYMENT_METHODS = [
   { id: 'paypal', label: 'PayPal' },
   { id: 'transfer', label: 'Transferência Bancária' },
   { id: 'mbway', label: 'MB WAY' },
-  { id: 'applepay', label: 'Apple Pay' },
 ];
 
 // ==================== HELPERS ====================
@@ -2366,17 +2381,9 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
 
-  const PAYMENT_URLS: Record<string, string> = {
-    paypal: 'https://www.paypal.com',
-    transfer: 'https://www.bancobpi.pt',
-    mbway: 'https://www.mbway.pt',
-    applepay: 'https://www.apple.com/apple-pay/',
-  };
-
   const handleConfirm = () => {
     if (!selectedPayment) return;
-    const url = PAYMENT_URLS[selectedPayment];
-    if (url) window.open(url, '_blank');
+    onClose();
   };
 
   return (
@@ -2422,14 +2429,39 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
         <h3 style={{ fontSize: 16, fontWeight: 700, color: C.text, margin: '0 0 12px' }}>{t('modal.paymentMethod')}</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
           {PAYMENT_METHODS.map(pm => (
-            <label key={pm.id} onClick={() => setSelectedPayment(pm.id)}
-              style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderRadius: 8, border: `2px solid ${selectedPayment === pm.id ? C.accent : C.border}`, background: selectedPayment === pm.id ? C.lightBg : C.white, cursor: 'pointer', transition: 'all 0.2s' }}>
-              <div style={{ width: 20, height: 20, borderRadius: '50%', border: `2px solid ${selectedPayment === pm.id ? C.accent : C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {selectedPayment === pm.id && <div style={{ width: 10, height: 10, borderRadius: '50%', background: C.accent }} />}
-              </div>
-              <PaymentIcon method={pm.id} />
-              <span style={{ fontWeight: 600, fontSize: 14 }}>{t('payment.' + pm.id)}</span>
-            </label>
+            <div key={pm.id}>
+              <label onClick={() => setSelectedPayment(pm.id)}
+                style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderRadius: selectedPayment === pm.id ? '8px 8px 0 0' : 8, border: `2px solid ${selectedPayment === pm.id ? C.accent : C.border}`, borderBottom: selectedPayment === pm.id ? 'none' : undefined, background: selectedPayment === pm.id ? C.lightBg : C.white, cursor: 'pointer', transition: 'all 0.2s' }}>
+                <div style={{ width: 20, height: 20, borderRadius: '50%', border: `2px solid ${selectedPayment === pm.id ? C.accent : C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {selectedPayment === pm.id && <div style={{ width: 10, height: 10, borderRadius: '50%', background: C.accent }} />}
+                </div>
+                <PaymentIcon method={pm.id} />
+                <span style={{ fontWeight: 600, fontSize: 14 }}>{t('payment.' + pm.id)}</span>
+              </label>
+              {/* Payment details when selected */}
+              {selectedPayment === 'transfer' && pm.id === 'transfer' && (
+                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
+                  <p style={{ margin: '0 0 8px', fontWeight: 600, color: C.text }}>{t('payment.transfer.info')}</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4, color: C.textSec }}>
+                    <div><strong>{t('payment.transfer.holder')}:</strong> METALPRIME, LDA</div>
+                    <div><strong>IBAN:</strong> <span style={{ fontFamily: 'monospace', letterSpacing: 1 }}>PT50 0010 0000 6313 9290 0016 5</span></div>
+                    <div><strong>{t('payment.transfer.bank')}:</strong> Banco BPI</div>
+                  </div>
+                </div>
+              )}
+              {selectedPayment === 'paypal' && pm.id === 'paypal' && (
+                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
+                  <p style={{ margin: '0 0 4px', fontWeight: 600, color: C.text }}>{t('payment.paypal.info')}</p>
+                  <div style={{ color: C.textSec }}><strong>info@metalprime.pt</strong></div>
+                </div>
+              )}
+              {selectedPayment === 'mbway' && pm.id === 'mbway' && (
+                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
+                  <p style={{ margin: '0 0 4px', fontWeight: 600, color: C.text }}>{t('payment.mbway.info')}</p>
+                  <div style={{ color: C.textSec, fontFamily: 'monospace', fontSize: 15, fontWeight: 700 }}>916 799 188</div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
