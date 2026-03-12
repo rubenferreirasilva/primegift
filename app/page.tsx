@@ -61,7 +61,10 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.transfer.bank': 'Banco',
     'payment.paypal.info': 'Envie o pagamento para:',
     'payment.mbway.info': 'Envie o pagamento para o número:',
+    'payment.revolut': 'Revolut',
+    'payment.revolut.info': 'Envie o pagamento para:',
     // Hero
+    'hero.brand': 'Uma marca do Grupo MetalPrime',
     'hero.tag': 'Festivais · Festas · Restaurantes',
     'hero.title1': 'A Sua Marca',
     'hero.title2': 'em Cada Copo',
@@ -176,7 +179,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Envio de grande volume (acima de 30kg).',
     'shipping.overweightLink': 'Contacte-nos',
     'shipping.overweightSuffix': 'para melhor preço.',
-    'shipping.freeShipping': 'Transporte OFERTA! Encomendas acima de 150€.',
+    'shipping.freeShipping': 'Transporte OFERTA! Encomendas acima de 250€.',
     'shipping.estimatedWeight': 'Peso estimado:',
     'shipping.deadline': 'Prazo:',
     // Mockup
@@ -207,13 +210,16 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.validation.deliveryAddress': 'Preencha a morada de entrega',
     'order.validation.deliveryPostalCode': 'Preencha o código postal',
     'order.validation.deliveryCity': 'Preencha a localidade',
+    'order.validation.customerName': 'Preencha o nome do cliente',
+    'order.validation.deliveryEmail': 'Preencha o email',
+    'order.validation.deliveryEmailInvalid': 'Email inválido',
     // Price table
     'priceTable.title': 'Tabela de Preços Completa',
     'priceTable.subtitle': 'Preços por unidade, sem IVA. 1 cor incluída. Desconto progressivo por quantidade.',
     'priceTable.product': 'Produto',
     'priceTable.printColors': 'Impressão: Preto, Branco ou Cinzento',
     'priceTable.vatNote': 'IVA não incluído (23%)',
-    'priceTable.freeShipping': 'Portes grátis para encomendas acima de 150€',
+    'priceTable.freeShipping': 'Portes grátis para encomendas acima de 250€',
     // Modal
     'modal.title': 'Confirmar Encomenda',
     'modal.paymentMethod': 'Método de Pagamento',
@@ -229,6 +235,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.delivery.address': 'Morada',
     'modal.delivery.postalCode': 'Código Postal',
     'modal.delivery.city': 'Localidade',
+    'modal.delivery.email': 'Email',
+    'modal.delivery.phone': 'Telefone (opcional)',
+    'customer.title': 'Dados do Cliente',
+    'customer.name': 'Nome completo',
+    'customer.email': 'Email',
+    'customer.phone': 'Telefone',
     'modal.reference': 'Referência',
     'modal.cancel': 'Cancelar',
     'modal.confirm': 'Confirmar Encomenda',
@@ -342,6 +354,9 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.transfer.bank': 'Banco',
     'payment.paypal.info': 'Envíe el pago a:',
     'payment.mbway.info': 'Envíe el pago al número:',
+    'payment.revolut': 'Revolut',
+    'payment.revolut.info': 'Envíe el pago a:',
+    'hero.brand': 'Una marca del Grupo MetalPrime',
     'hero.tag': 'Festivales · Fiestas · Restaurantes',
     'hero.title1': 'Tu Marca',
     'hero.title2': 'en Cada Vaso',
@@ -446,7 +461,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Envío de gran volumen (más de 30kg).',
     'shipping.overweightLink': 'Contáctenos',
     'shipping.overweightSuffix': 'para mejor precio.',
-    'shipping.freeShipping': '¡Transporte GRATIS! Pedidos superiores a 150€.',
+    'shipping.freeShipping': '¡Transporte GRATIS! Pedidos superiores a 250€.',
     'shipping.estimatedWeight': 'Peso estimado:',
     'shipping.deadline': 'Plazo:',
     'mockup.preview': 'Previsualización',
@@ -475,12 +490,15 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.validation.deliveryAddress': 'Rellena la dirección de entrega',
     'order.validation.deliveryPostalCode': 'Rellena el código postal',
     'order.validation.deliveryCity': 'Rellena la localidad',
+    'order.validation.customerName': 'Rellena el nombre del cliente',
+    'order.validation.deliveryEmail': 'Rellena el email',
+    'order.validation.deliveryEmailInvalid': 'Email inválido',
     'priceTable.title': 'Tabla de Precios Completa',
     'priceTable.subtitle': 'Precios por unidad, sin IVA. 1 color incluido. Descuento progresivo por cantidad.',
     'priceTable.product': 'Producto',
     'priceTable.printColors': 'Impresión: Negro, Blanco o Gris',
     'priceTable.vatNote': 'IVA no incluido (23%)',
-    'priceTable.freeShipping': 'Portes gratis para pedidos superiores a 150€',
+    'priceTable.freeShipping': 'Portes gratis para pedidos superiores a 250€',
     'modal.title': 'Confirmar Pedido',
     'modal.paymentMethod': 'Método de Pago',
     'modal.invoice': 'Datos de Facturación',
@@ -495,6 +513,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.delivery.address': 'Dirección',
     'modal.delivery.postalCode': 'Código Postal',
     'modal.delivery.city': 'Localidad',
+    'modal.delivery.email': 'Email',
+    'modal.delivery.phone': 'Teléfono (opcional)',
+    'customer.title': 'Datos del Cliente',
+    'customer.name': 'Nombre completo',
+    'customer.email': 'Email',
+    'customer.phone': 'Teléfono',
     'modal.reference': 'Referencia',
     'modal.cancel': 'Cancelar',
     'modal.confirm': 'Confirmar Pedido',
@@ -605,6 +629,9 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.transfer.bank': 'Bank',
     'payment.paypal.info': 'Send payment to:',
     'payment.mbway.info': 'Send payment to number:',
+    'payment.revolut': 'Revolut',
+    'payment.revolut.info': 'Send payment to:',
+    'hero.brand': 'A MetalPrime Group brand',
     'hero.tag': 'Festivals · Parties · Restaurants',
     'hero.title1': 'Your Brand',
     'hero.title2': 'on Every Cup',
@@ -709,7 +736,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Large volume shipment (over 30kg).',
     'shipping.overweightLink': 'Contact us',
     'shipping.overweightSuffix': 'for a better price.',
-    'shipping.freeShipping': 'FREE shipping! Orders over 150€.',
+    'shipping.freeShipping': 'FREE shipping! Orders over 250€.',
     'shipping.estimatedWeight': 'Estimated weight:',
     'shipping.deadline': 'Delivery time:',
     'mockup.preview': 'Preview',
@@ -738,12 +765,15 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.validation.deliveryAddress': 'Fill in the delivery address',
     'order.validation.deliveryPostalCode': 'Fill in the postal code',
     'order.validation.deliveryCity': 'Fill in the city',
+    'order.validation.customerName': 'Fill in the customer name',
+    'order.validation.deliveryEmail': 'Fill in the email',
+    'order.validation.deliveryEmailInvalid': 'Invalid email',
     'priceTable.title': 'Complete Price Table',
     'priceTable.subtitle': 'Prices per unit, excl. VAT. 1 colour included. Progressive volume discount.',
     'priceTable.product': 'Product',
     'priceTable.printColors': 'Print: Black, White or Grey',
     'priceTable.vatNote': 'VAT not included (23%)',
-    'priceTable.freeShipping': 'Free shipping for orders over 150€',
+    'priceTable.freeShipping': 'Free shipping for orders over 250€',
     'modal.title': 'Confirm Order',
     'modal.paymentMethod': 'Payment Method',
     'modal.invoice': 'Billing Details',
@@ -758,6 +788,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.delivery.address': 'Address',
     'modal.delivery.postalCode': 'Postal Code',
     'modal.delivery.city': 'City',
+    'modal.delivery.email': 'Email',
+    'modal.delivery.phone': 'Phone (optional)',
+    'customer.title': 'Customer Details',
+    'customer.name': 'Full name',
+    'customer.email': 'Email',
+    'customer.phone': 'Phone',
     'modal.reference': 'Reference',
     'modal.cancel': 'Cancel',
     'modal.confirm': 'Confirm Order',
@@ -868,6 +904,9 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'payment.transfer.bank': 'Banque',
     'payment.paypal.info': 'Envoyez le paiement à :',
     'payment.mbway.info': 'Envoyez le paiement au numéro :',
+    'payment.revolut': 'Revolut',
+    'payment.revolut.info': 'Envoyez le paiement à :',
+    'hero.brand': 'Une marque du Groupe MetalPrime',
     'hero.tag': 'Festivals · Fêtes · Restaurants',
     'hero.title1': 'Votre Marque',
     'hero.title2': 'sur Chaque Gobelet',
@@ -972,7 +1011,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Envoi volumineux (plus de 30kg).',
     'shipping.overweightLink': 'Contactez-nous',
     'shipping.overweightSuffix': 'pour un meilleur prix.',
-    'shipping.freeShipping': 'Livraison OFFERTE ! Commandes supérieures à 150€.',
+    'shipping.freeShipping': 'Livraison OFFERTE ! Commandes supérieures à 250€.',
     'shipping.estimatedWeight': 'Poids estimé :',
     'shipping.deadline': 'Délai :',
     'mockup.preview': 'Aperçu',
@@ -1001,12 +1040,15 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.validation.deliveryAddress': 'Remplissez l\'adresse de livraison',
     'order.validation.deliveryPostalCode': 'Remplissez le code postal',
     'order.validation.deliveryCity': 'Remplissez la ville',
+    'order.validation.customerName': 'Remplissez le nom du client',
+    'order.validation.deliveryEmail': 'Remplissez l\'email',
+    'order.validation.deliveryEmailInvalid': 'Email invalide',
     'priceTable.title': 'Tableau de Prix Complet',
     'priceTable.subtitle': 'Prix par unité, hors TVA. 1 couleur incluse. Remise progressive par quantité.',
     'priceTable.product': 'Produit',
     'priceTable.printColors': 'Impression : Noir, Blanc ou Gris',
     'priceTable.vatNote': 'TVA non incluse (23%)',
-    'priceTable.freeShipping': 'Livraison gratuite pour commandes supérieures à 150€',
+    'priceTable.freeShipping': 'Livraison gratuite pour commandes supérieures à 250€',
     'modal.title': 'Confirmer la Commande',
     'modal.paymentMethod': 'Mode de Paiement',
     'modal.invoice': 'Données de Facturation',
@@ -1021,6 +1063,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.delivery.address': 'Adresse',
     'modal.delivery.postalCode': 'Code Postal',
     'modal.delivery.city': 'Ville',
+    'modal.delivery.email': 'Email',
+    'modal.delivery.phone': 'Téléphone (facultatif)',
+    'customer.title': 'Coordonnées du Client',
+    'customer.name': 'Nom complet',
+    'customer.email': 'Email',
+    'customer.phone': 'Téléphone',
     'modal.reference': 'Référence',
     'modal.cancel': 'Annuler',
     'modal.confirm': 'Confirmer la Commande',
@@ -1187,6 +1235,7 @@ const PAYMENT_METHODS = [
   { id: 'paypal', label: 'PayPal' },
   { id: 'transfer', label: 'Transferência Bancária' },
   { id: 'mbway', label: 'MB WAY' },
+  { id: 'revolut', label: 'Revolut' },
 ];
 
 // ==================== HELPERS ====================
@@ -1463,6 +1512,9 @@ function PaymentIcon({ method }: { method: string }) {
   if (method === 'mbway') return (
     <svg width={s} height={s} viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2" fill="none" stroke="#E4002B" strokeWidth="2" /><circle cx="12" cy="18" r="1.5" fill="#E4002B" /><text x="12" y="13" textAnchor="middle" fontSize="6" fontWeight="bold" fill="#E4002B">MB</text></svg>
   );
+  if (method === 'revolut') return (
+    <svg width={s} height={s} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#0075EB" strokeWidth="2" /><text x="12" y="16" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#0075EB">R</text></svg>
+  );
   return (
     <svg width={s} height={s} viewBox="0 0 24 24"><path d="M17,3H7A4,4 0 003,7v10a4,4 0 004,4h10a4,4 0 004-4V7A4,4 0 0017,3Z" fill="none" stroke="#000" strokeWidth="1.5" /><path d="M12,7.5A3,3 0 009,10.5c0,3 3,5 3,5s3-2 3-5A3,3 0 0012,7.5Z" fill="#000" /></svg>
   );
@@ -1728,6 +1780,7 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
         {/* Conteúdo texto — lado esquerdo */}
         <div style={{ position: 'relative', zIndex: 2, width: '50%', minHeight: 540, display: 'flex', alignItems: 'center', padding: '60px 48px 60px 5%' }}>
           <div>
+            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', margin: '0 0 12px', fontWeight: 500, letterSpacing: 0.5, textTransform: 'uppercase' }}>{t('hero.brand')}</p>
             <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: '6px 16px', marginBottom: 16, backdropFilter: 'blur(8px)' }}>
               <span style={{ fontSize: 13, fontWeight: 600, color: C.white, letterSpacing: 0.5 }}>{t('hero.tag')}</span>
             </div>
@@ -1926,6 +1979,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const [showModal, setShowModal] = useState(false);
   const [orderErrors, setOrderErrors] = useState<string[]>([]);
   const [delivery, setDelivery] = useState({ name: '', address: '', postalCode: '', city: '', country: 'PT' });
+  const [customer, setCustomer] = useState({ name: '', email: '', phone: '' });
   const [orderRef, setOrderRef] = useState('');
   const [removingBg, setRemovingBg] = useState(false);
   const [autoRemoveBg, setAutoRemoveBg] = useState(true);
@@ -2019,7 +2073,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const cartWeightKg = getCartWeight(cart);
   const overweight = cartWeightKg > 30;
   const isInternational = shippingRegion === 'international';
-  const freeShipping = cartSubtotal > 150;
+  const freeShipping = cartSubtotal > 250;
   const shippingCost = (!isInternational && !overweight && cart.length > 0) ? (freeShipping ? 0 : (getShippingCost(cartWeightKg, shippingRegion, shippingMethod) ?? 0)) : 0;
   const totalBeforeVAT = cartSubtotal + shippingCost;
   const vat = totalBeforeVAT * 0.23;
@@ -2299,6 +2353,21 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                 </div>
               )}
             </div>
+
+            {/* Step 6: Customer Data */}
+            <div style={sectionStyle}>
+              <h3 style={stepTitleStyle}><span style={stepNumStyle}>6</span> {t('customer.title')}</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <input value={customer.name} onChange={e => setCustomer(prev => ({ ...prev, name: e.target.value }))} placeholder={t('customer.name')}
+                  style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <input value={customer.email} onChange={e => setCustomer(prev => ({ ...prev, email: e.target.value }))} placeholder={t('customer.email')} type="email"
+                    style={{ flex: 1, padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+                  <input value={customer.phone} onChange={e => setCustomer(prev => ({ ...prev, phone: e.target.value }))} placeholder={t('customer.phone')} type="tel"
+                    style={{ flex: 1, padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* RIGHT: Mockup + Order Summary */}
@@ -2431,6 +2500,9 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                       if (!delivery.address.trim()) errors.push(t('order.validation.deliveryAddress'));
                       if (!delivery.postalCode.trim()) errors.push(t('order.validation.deliveryPostalCode'));
                       if (!delivery.city.trim()) errors.push(t('order.validation.deliveryCity'));
+                      if (!customer.name.trim()) errors.push(t('order.validation.customerName'));
+                      if (!customer.email.trim()) errors.push(t('order.validation.deliveryEmail'));
+                      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email.trim())) errors.push(t('order.validation.deliveryEmailInvalid'));
                       setOrderErrors(errors);
                       if (errors.length > 0) return;
                       setOrderRef('PG-' + Math.random().toString(36).substring(2, 8).toUpperCase());
@@ -2521,7 +2593,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
       {/* Confirmation Modal */}
       {showModal && cart.length > 0 && (
-        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} uploadedFileName={uploadedFile?.name || null} uploadedBlobUrl={uploadedBlobUrl} printTechnique={printTechnique} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} />
+        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} uploadedFileName={uploadedFile?.name || null} uploadedBlobUrl={uploadedBlobUrl} printTechnique={printTechnique} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} customer={customer} />
       )}
     </div>
   );
@@ -2529,8 +2601,8 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
 // ==================== CONFIRMATION MODAL ====================
 
-function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, uploadedFileName, uploadedBlobUrl, printTechnique, delivery, setDelivery, orderRef }: {
-  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; uploadedFileName: string | null; uploadedBlobUrl: string | null; printTechnique: 'tampografia' | 'serigrafia'; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string;
+function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, uploadedFileName, uploadedBlobUrl, printTechnique, delivery, setDelivery, orderRef, customer }: {
+  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; uploadedFileName: string | null; uploadedBlobUrl: string | null; printTechnique: 'tampografia' | 'serigrafia'; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; customer: { name: string; email: string; phone: string };
 }) {
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
@@ -2564,6 +2636,9 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
           paymentMethod: selectedPayment,
           shippingMethod,
           shippingRegion,
+          customerName: customer.name,
+          customerEmail: customer.email,
+          customerPhone: customer.phone,
           deliveryName: delivery.name,
           deliveryAddress: delivery.address,
           deliveryPostalCode: delivery.postalCode,
@@ -2676,6 +2751,12 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
                 <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
                   <p style={{ margin: '0 0 4px', fontWeight: 600, color: C.text }}>{t('payment.mbway.info')}</p>
                   <div style={{ color: C.textSec, fontFamily: 'monospace', fontSize: 15, fontWeight: 700 }}>916 799 188</div>
+                </div>
+              )}
+              {selectedPayment === 'revolut' && pm.id === 'revolut' && (
+                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
+                  <p style={{ margin: '0 0 4px', fontWeight: 600, color: C.text }}>{t('payment.revolut.info')}</p>
+                  <div style={{ color: C.textSec }}><strong>@metalprime</strong></div>
                 </div>
               )}
             </div>
@@ -2911,7 +2992,7 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
         { heading: 'Identificação', text: 'O presente website é propriedade e operado pela PrimeGift (MetalPrime), com sede em Portugal. Email: info@metalprime.pt.' },
         { heading: 'Produtos e Serviços', text: 'A PrimeGift comercializa copos de plástico reutilizáveis personalizados com tampografia e serigrafia. Os produtos apresentados no website são meramente ilustrativos, podendo existir ligeiras variações de cor ou dimensão.' },
         { heading: 'Encomendas', text: 'A encomenda mínima é de 100 unidades. Todas as encomendas estão sujeitas a aprovação de maquete digital antes da produção. O prazo de produção é de 5 dias úteis após aprovação da maquete, acrescido do prazo de entrega.' },
-        { heading: 'Preços', text: 'Os preços indicados no website não incluem IVA (23%). Os preços incluem impressão a 1 cor. O transporte é calculado com base no peso e destino da encomenda. Portes grátis para encomendas acima de 150€ (antes de IVA).' },
+        { heading: 'Preços', text: 'Os preços indicados no website não incluem IVA (23%). Os preços incluem impressão a 1 cor. O transporte é calculado com base no peso e destino da encomenda. Portes grátis para encomendas acima de 250€ (antes de IVA).' },
         { heading: 'Pagamento', text: 'Aceitamos pagamento por PayPal, Transferência Bancária, MB WAY e Apple Pay. O pagamento é exigido na totalidade antes do início da produção.' },
         { heading: 'Propriedade Intelectual', text: 'O cliente garante que detém os direitos sobre os logótipos e designs enviados para personalização. A PrimeGift não se responsabiliza por violações de direitos de propriedade intelectual de terceiros.' },
         { heading: 'Limitação de Responsabilidade', text: 'A PrimeGift não se responsabiliza por atrasos causados por terceiros (transportadoras, serviços postais) ou por casos de força maior.' },
@@ -2942,7 +3023,7 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
       sections: [
         { heading: 'Prazos de Entrega', text: 'Produção: 5 dias úteis após aprovação da maquete. Entrega Expresso: 2 dias úteis adicionais. Envio Standard: 5 dias úteis adicionais. Total estimado: 7 a 10 dias úteis.' },
         { heading: 'Zonas de Entrega', text: 'Portugal Continental, Ilhas (Açores e Madeira), Espanha Peninsular, Europa (Zona 2 e 3). Para envios internacionais fora da UE, contacte-nos para orçamento personalizado.' },
-        { heading: 'Custos de Envio', text: 'Os custos de envio são calculados com base no peso total da encomenda e na zona de destino. Portes grátis para encomendas com subtotal superior a 150€ (antes de IVA). Para encomendas acima de 30kg, contacte-nos para o melhor preço.' },
+        { heading: 'Custos de Envio', text: 'Os custos de envio são calculados com base no peso total da encomenda e na zona de destino. Portes grátis para encomendas com subtotal superior a 250€ (antes de IVA). Para encomendas acima de 30kg, contacte-nos para o melhor preço.' },
         { heading: 'Transportadora', text: 'Os envios são realizados através da CTT Expresso para Portugal e Espanha, e através de transportadoras internacionais para a restante Europa.' },
         { heading: 'Rastreamento', text: 'Após o envio, receberá um email com o número de rastreamento para acompanhar a sua encomenda em tempo real.' },
         { heading: 'Receção da Encomenda', text: 'Na receção, verifique o estado da embalagem e dos produtos. Em caso de danos visíveis, recuse a entrega ou assinale os danos no comprovativo de entrega e contacte-nos imediatamente.' },
