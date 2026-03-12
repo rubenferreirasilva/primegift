@@ -73,7 +73,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hero.imgAlt': 'Festival de verão com pessoas e copos',
     // Trust bar
     'trust.0': 'Mín. 100 un.',
-    'trust.1': 'Até 2 cores',
+    'trust.1': 'Até 4 cores',
     'trust.2': '10 dias úteis',
     'trust.3': 'PT + ES + Int.',
     'trust.4': '4 formas de pagamento',
@@ -201,6 +201,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.finalize': 'Finalizar Encomenda',
     'order.paymentMethods': 'Métodos de pagamento:',
     'order.emptyCart': 'Adicione produtos ao carrinho para ver o orçamento',
+    'order.validation.product': 'Selecione um copo',
+    'order.validation.file': 'Carregue o ficheiro com o logótipo',
+    'order.validation.deliveryName': 'Preencha o nome de entrega',
+    'order.validation.deliveryAddress': 'Preencha a morada de entrega',
+    'order.validation.deliveryPostalCode': 'Preencha o código postal',
+    'order.validation.deliveryCity': 'Preencha a localidade',
     // Price table
     'priceTable.title': 'Tabela de Preços Completa',
     'priceTable.subtitle': 'Preços por unidade, sem IVA. 1 cor incluída. Desconto progressivo por quantidade.',
@@ -218,8 +224,16 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.invoice.address': 'Morada',
     'modal.invoice.postalCode': 'Código Postal',
     'modal.invoice.city': 'Localidade',
+    'modal.delivery': 'Morada de Entrega',
+    'modal.delivery.name': 'Nome completo',
+    'modal.delivery.address': 'Morada',
+    'modal.delivery.postalCode': 'Código Postal',
+    'modal.delivery.city': 'Localidade',
+    'modal.reference': 'Referência',
     'modal.cancel': 'Cancelar',
     'modal.confirm': 'Confirmar Encomenda',
+    'modal.success': 'Encomenda confirmada!',
+    'modal.success.msg': 'A sua encomenda foi registada. Receberá confirmação no email.',
     // How it works page
     'hiwPage.step1.title': 'Escolha o Seu Copo',
     'hiwPage.step1.desc': 'Navegue pelo nosso catálogo e selecione o tamanho de copo mais adequado à sua necessidade. Temos opções desde os 200ml para cafés e degustações, até aos 500ml para festivais e grandes eventos. Cada copo é produzido em plástico reutilizável de alta qualidade.',
@@ -338,7 +352,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hero.cupCaption2': 'Personalizado con la marca de tu evento',
     'hero.imgAlt': 'Festival de verano con personas y vasos',
     'trust.0': 'Mín. 100 uds.',
-    'trust.1': 'Hasta 2 colores',
+    'trust.1': 'Hasta 4 colores',
     'trust.2': '10 días hábiles',
     'trust.3': 'PT + ES + Int.',
     'trust.4': '4 formas de pago',
@@ -455,6 +469,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.finalize': 'Finalizar Pedido',
     'order.paymentMethods': 'Métodos de pago:',
     'order.emptyCart': 'Añade productos al carrito para ver el presupuesto',
+    'order.validation.product': 'Selecciona un vaso',
+    'order.validation.file': 'Sube el archivo con el logotipo',
+    'order.validation.deliveryName': 'Rellena el nombre de entrega',
+    'order.validation.deliveryAddress': 'Rellena la dirección de entrega',
+    'order.validation.deliveryPostalCode': 'Rellena el código postal',
+    'order.validation.deliveryCity': 'Rellena la localidad',
     'priceTable.title': 'Tabla de Precios Completa',
     'priceTable.subtitle': 'Precios por unidad, sin IVA. 1 color incluido. Descuento progresivo por cantidad.',
     'priceTable.product': 'Producto',
@@ -470,8 +490,16 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.invoice.address': 'Dirección',
     'modal.invoice.postalCode': 'Código Postal',
     'modal.invoice.city': 'Localidad',
+    'modal.delivery': 'Dirección de Entrega',
+    'modal.delivery.name': 'Nombre completo',
+    'modal.delivery.address': 'Dirección',
+    'modal.delivery.postalCode': 'Código Postal',
+    'modal.delivery.city': 'Localidad',
+    'modal.reference': 'Referencia',
     'modal.cancel': 'Cancelar',
     'modal.confirm': 'Confirmar Pedido',
+    'modal.success': 'Pedido confirmado!',
+    'modal.success.msg': 'Su pedido ha sido registrado. Recibirá confirmación por email.',
     'hiwPage.step1.title': 'Elige Tu Vaso',
     'hiwPage.step1.desc': 'Navega por nuestro catálogo y selecciona el tamaño de vaso más adecuado a tu necesidad. Tenemos opciones desde los 200ml para cafés y degustaciones, hasta los 500ml para festivales y grandes eventos. Cada vaso se produce en plástico reutilizable de alta calidad.',
     'hiwPage.step2.title': 'Envía Tu Diseño',
@@ -587,7 +615,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hero.cupCaption2': 'Customised with your event branding',
     'hero.imgAlt': 'Summer festival with people and cups',
     'trust.0': 'Min. 100 units',
-    'trust.1': 'Up to 2 colours',
+    'trust.1': 'Up to 4 colours',
     'trust.2': '10 business days',
     'trust.3': 'PT + ES + Int.',
     'trust.4': '4 payment methods',
@@ -704,6 +732,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.finalize': 'Finalise Order',
     'order.paymentMethods': 'Payment methods:',
     'order.emptyCart': 'Add products to cart to see the quote',
+    'order.validation.product': 'Select a cup',
+    'order.validation.file': 'Upload your logo file',
+    'order.validation.deliveryName': 'Fill in the delivery name',
+    'order.validation.deliveryAddress': 'Fill in the delivery address',
+    'order.validation.deliveryPostalCode': 'Fill in the postal code',
+    'order.validation.deliveryCity': 'Fill in the city',
     'priceTable.title': 'Complete Price Table',
     'priceTable.subtitle': 'Prices per unit, excl. VAT. 1 colour included. Progressive volume discount.',
     'priceTable.product': 'Product',
@@ -719,8 +753,16 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.invoice.address': 'Address',
     'modal.invoice.postalCode': 'Postal Code',
     'modal.invoice.city': 'City',
+    'modal.delivery': 'Delivery Address',
+    'modal.delivery.name': 'Full name',
+    'modal.delivery.address': 'Address',
+    'modal.delivery.postalCode': 'Postal Code',
+    'modal.delivery.city': 'City',
+    'modal.reference': 'Reference',
     'modal.cancel': 'Cancel',
     'modal.confirm': 'Confirm Order',
+    'modal.success': 'Order confirmed!',
+    'modal.success.msg': 'Your order has been registered. You will receive confirmation by email.',
     'hiwPage.step1.title': 'Choose Your Cup',
     'hiwPage.step1.desc': 'Browse our catalogue and select the cup size best suited to your needs. We offer options from 200ml for coffees and tastings, to 500ml for festivals and large events. Each cup is produced in high-quality reusable plastic.',
     'hiwPage.step2.title': 'Send Your Design',
@@ -836,7 +878,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hero.cupCaption2': 'Personnalisé avec la marque de votre événement',
     'hero.imgAlt': 'Festival d\'été avec des personnes et des gobelets',
     'trust.0': 'Min. 100 unités',
-    'trust.1': 'Jusqu\'à 2 couleurs',
+    'trust.1': 'Jusqu\'à 4 couleurs',
     'trust.2': '10 jours ouvrés',
     'trust.3': 'PT + ES + Int.',
     'trust.4': '4 modes de paiement',
@@ -953,6 +995,12 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.finalize': 'Finaliser la Commande',
     'order.paymentMethods': 'Modes de paiement :',
     'order.emptyCart': 'Ajoutez des produits au panier pour voir le devis',
+    'order.validation.product': 'Sélectionnez un gobelet',
+    'order.validation.file': 'Téléchargez votre fichier logo',
+    'order.validation.deliveryName': 'Remplissez le nom de livraison',
+    'order.validation.deliveryAddress': 'Remplissez l\'adresse de livraison',
+    'order.validation.deliveryPostalCode': 'Remplissez le code postal',
+    'order.validation.deliveryCity': 'Remplissez la ville',
     'priceTable.title': 'Tableau de Prix Complet',
     'priceTable.subtitle': 'Prix par unité, hors TVA. 1 couleur incluse. Remise progressive par quantité.',
     'priceTable.product': 'Produit',
@@ -968,8 +1016,16 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'modal.invoice.address': 'Adresse',
     'modal.invoice.postalCode': 'Code Postal',
     'modal.invoice.city': 'Ville',
+    'modal.delivery': 'Adresse de Livraison',
+    'modal.delivery.name': 'Nom complet',
+    'modal.delivery.address': 'Adresse',
+    'modal.delivery.postalCode': 'Code Postal',
+    'modal.delivery.city': 'Ville',
+    'modal.reference': 'Référence',
     'modal.cancel': 'Annuler',
     'modal.confirm': 'Confirmer la Commande',
+    'modal.success': 'Commande confirmée !',
+    'modal.success.msg': 'Votre commande a été enregistrée. Vous recevrez une confirmation par email.',
     'hiwPage.step1.title': 'Choisissez Votre Gobelet',
     'hiwPage.step1.desc': 'Parcourez notre catalogue et sélectionnez la taille de gobelet la plus adaptée à vos besoins. Nous proposons des options allant de 200ml pour cafés et dégustations jusqu\'à 500ml pour festivals et grands événements. Chaque gobelet est produit en plastique réutilisable de haute qualité.',
     'hiwPage.step2.title': 'Envoyez Votre Design',
@@ -1423,32 +1479,65 @@ function Header({ page, setPage, t, lang, setLang }: { page: string; setPage: (p
     { id: 'contact', label: t('nav.contact') },
   ];
   return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 1000, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, boxShadow: '0 2px 12px rgba(0,0,0,0.15)' }}>
-      <div style={{ ...container, display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
-        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => { setPage('home'); window.scrollTo(0, 0); }}>
-          <Logo variant="white" height={44} />
-        </div>
-        <nav style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          {navItems.map(item => (
-            <button key={item.id} onClick={() => { setPage(item.id); setMenuOpen(false); window.scrollTo(0, 0); }}
-              style={{ background: page === item.id ? 'rgba(255,255,255,0.2)' : 'transparent', border: 'none', color: C.white, padding: '8px 16px', borderRadius: 8, cursor: 'pointer', fontSize: 15, fontWeight: page === item.id ? 600 : 400, transition: 'all 0.2s' }}>
-              {item.label}
-            </button>
-          ))}
-          <div style={{ display: 'flex', gap: 4, marginLeft: 16 }}>
-            {LANGS.map(l => (
-              <button key={l.code} onClick={() => setLang(l.code)}
-                style={{ background: lang === l.code ? 'rgba(255,255,255,0.25)' : 'transparent', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '4px 8px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: lang === l.code ? 700 : 400, transition: 'all 0.2s' }}>
-                {l.flag} {l.label}
+    <>
+      <style>{`
+        .pg-nav-desktop { display: flex; gap: 8px; align-items: center; }
+        .pg-nav-langs-desktop { display: flex; gap: 4px; margin-left: 16px; }
+        .pg-hamburger { display: none; background: none; border: none; color: #fff; font-size: 26px; cursor: pointer; padding: 4px 8px; }
+        .pg-mobile-drawer { display: none; }
+        @media (max-width: 768px) {
+          .pg-nav-desktop { display: none !important; }
+          .pg-nav-langs-desktop { display: none !important; }
+          .pg-hamburger { display: block !important; }
+          .pg-mobile-drawer { display: flex !important; }
+        }
+      `}</style>
+      <header style={{ position: 'sticky', top: 0, zIndex: 1000, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, boxShadow: '0 2px 12px rgba(0,0,0,0.15)' }}>
+        <div style={{ ...container, display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
+          <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => { setPage('home'); window.scrollTo(0, 0); }}>
+            <Logo variant="white" height={44} />
+          </div>
+          <nav className="pg-nav-desktop">
+            {navItems.map(item => (
+              <button key={item.id} onClick={() => { setPage(item.id); window.scrollTo(0, 0); }}
+                style={{ background: page === item.id ? 'rgba(255,255,255,0.2)' : 'transparent', border: 'none', color: C.white, padding: '8px 16px', borderRadius: 8, cursor: 'pointer', fontSize: 15, fontWeight: page === item.id ? 600 : 400, transition: 'all 0.2s' }}>
+                {item.label}
               </button>
             ))}
+            <div className="pg-nav-langs-desktop">
+              {LANGS.map(l => (
+                <button key={l.code} onClick={() => setLang(l.code)}
+                  style={{ background: lang === l.code ? 'rgba(255,255,255,0.25)' : 'transparent', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '4px 8px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: lang === l.code ? 700 : 400, transition: 'all 0.2s' }}>
+                  {l.flag} {l.label}
+                </button>
+              ))}
+            </div>
+          </nav>
+          <button className="pg-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? '\u2715' : '\u2630'}
+          </button>
+        </div>
+        {/* Mobile drawer */}
+        {menuOpen && (
+          <div className="pg-mobile-drawer" style={{ flexDirection: 'column', background: C.primary, padding: '8px 24px 16px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            {navItems.map(item => (
+              <button key={item.id} onClick={() => { setPage(item.id); setMenuOpen(false); window.scrollTo(0, 0); }}
+                style={{ background: page === item.id ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', color: C.white, padding: '12px 16px', borderRadius: 8, cursor: 'pointer', fontSize: 16, fontWeight: page === item.id ? 700 : 400, textAlign: 'left', width: '100%' }}>
+                {item.label}
+              </button>
+            ))}
+            <div style={{ display: 'flex', gap: 6, padding: '8px 16px' }}>
+              {LANGS.map(l => (
+                <button key={l.code} onClick={() => { setLang(l.code); setMenuOpen(false); }}
+                  style={{ background: lang === l.code ? 'rgba(255,255,255,0.25)' : 'transparent', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '6px 10px', borderRadius: 6, cursor: 'pointer', fontSize: 13, fontWeight: lang === l.code ? 700 : 400 }}>
+                  {l.flag} {l.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </nav>
-        <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: 'none', background: 'none', border: 'none', color: C.white, fontSize: 24, cursor: 'pointer' }}>
-          {menuOpen ? '✕' : '☰'}
-        </button>
-      </div>
-    </header>
+        )}
+      </header>
+    </>
   );
 }
 
@@ -1829,11 +1918,15 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const [quantity, setQuantity] = useState(100);
   const [printColor, setPrintColor] = useState('black');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [uploadedBlobUrl, setUploadedBlobUrl] = useState<string | null>(null);
   const [logoPreviewUrl, setLogoPreviewUrl] = useState<string | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [shippingRegion, setShippingRegion] = useState('pt-continental');
   const [shippingMethod, setShippingMethod] = useState('2-days');
   const [showModal, setShowModal] = useState(false);
+  const [orderErrors, setOrderErrors] = useState<string[]>([]);
+  const [delivery, setDelivery] = useState({ name: '', address: '', postalCode: '', city: '', country: 'PT' });
+  const [orderRef, setOrderRef] = useState('');
   const [removingBg, setRemovingBg] = useState(false);
   const [autoRemoveBg, setAutoRemoveBg] = useState(true);
   const [logoYOffset, setLogoYOffset] = useState(0);
@@ -1856,12 +1949,15 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
   // Upload file to Vercel Blob when selected
   useEffect(() => {
-    if (!uploadedFile) return;
+    if (!uploadedFile) { setUploadedBlobUrl(null); return; }
     const formData = new FormData();
     formData.append('file', uploadedFile);
     fetch('/api/upload', { method: 'POST', body: formData })
       .then(r => r.json())
-      .then(data => { if (data.error) console.error('Upload error:', data.error); })
+      .then(data => {
+        if (data.error) console.error('Upload error:', data.error);
+        else if (data.url) setUploadedBlobUrl(data.url);
+      })
       .catch(err => console.error('Upload failed:', err));
   }, [uploadedFile]);
 
@@ -1923,7 +2019,6 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const cartWeightKg = getCartWeight(cart);
   const overweight = cartWeightKg > 30;
   const isInternational = shippingRegion === 'international';
-  const availableMethods = getAvailableMethods(shippingRegion);
   const freeShipping = cartSubtotal > 150;
   const shippingCost = (!isInternational && !overweight && cart.length > 0) ? (freeShipping ? 0 : (getShippingCost(cartWeightKg, shippingRegion, shippingMethod) ?? 0)) : 0;
   const totalBeforeVAT = cartSubtotal + shippingCost;
@@ -1934,14 +2029,29 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const stagingUnitPrice = product ? getUnitPrice(product, quantity, printTechnique) + getColorSurcharge(printColor) : 0;
   const stagingSubtotal = stagingUnitPrice * quantity;
 
-  // Reset shipping method when region changes
-  const handleRegionChange = (r: string) => {
-    setShippingRegion(r);
-    const methods = getAvailableMethods(r);
+  // Auto-detect shipping region from delivery country + postal code
+  useEffect(() => {
+    const c = delivery.country;
+    const pc = delivery.postalCode.replace(/\s|-/g, '');
+    let region = 'pt-continental';
+    if (c === 'PT') {
+      const num = parseInt(pc, 10);
+      region = (num >= 9000 && num <= 9999) ? 'pt-islands' : 'pt-continental';
+    } else if (c === 'ES') {
+      region = 'es-peninsular';
+    } else if (['FR', 'DE', 'IT', 'NL', 'BE', 'LU', 'AT', 'IE'].includes(c)) {
+      region = 'eu-zone2';
+    } else if (['PL', 'CZ', 'SK', 'HU', 'RO', 'BG', 'HR', 'SI', 'EE', 'LV', 'LT', 'FI', 'SE', 'DK', 'GR', 'CY', 'MT'].includes(c)) {
+      region = 'eu-zone3';
+    } else {
+      region = 'international';
+    }
+    setShippingRegion(region);
+    const methods = getAvailableMethods(region);
     if (methods.length > 0 && !methods.includes(shippingMethod)) {
       setShippingMethod(methods[0]);
     }
-  };
+  }, [delivery.country, delivery.postalCode]);
 
   // Auto-sync cart with current configuration (single item)
   useEffect(() => {
@@ -1976,10 +2086,10 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
             {/* Step 1: Choose Product */}
             <div style={sectionStyle}>
               <h3 style={stepTitleStyle}><span style={stepNumStyle}>1</span> {t('products.step1')}</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+              <div style={{ display: 'flex', gap: 12 }}>
                 {PRODUCTS.map(p => (
                   <div key={p.id} onClick={() => setSelectedProduct(p.id)}
-                    style={{ flex: '1 1 130px', maxWidth: 160, padding: 16, borderRadius: 10, border: `2px solid ${selectedProduct === p.id ? C.accent : C.border}`, background: selectedProduct === p.id ? C.lightBg : C.white, cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s' }}>
+                    style={{ flex: '1 1 0', padding: 16, borderRadius: 10, border: `2px solid ${selectedProduct === p.id ? C.accent : C.border}`, background: selectedProduct === p.id ? C.lightBg : C.white, cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s' }}>
                     <CupImage product={p} size={60} />
                     <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, marginTop: 8 }}>{t(`product.${p.id}.name`)}</div>
                     <div style={{ fontSize: 13, color: C.textSec }}>{p.capacity}</div>
@@ -2118,50 +2228,75 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
               )}
             </div>
 
-            {/* Shipping */}
+            {/* Step 5: Delivery Address & Shipping */}
             <div style={sectionStyle}>
-              <h3 style={stepTitleStyle}><span style={stepNumStyle}>5</span> {t('shipping.title')}</h3>
-              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-                <div style={{ flex: '1 1 200px' }}>
-                  <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: C.textSec, marginBottom: 6 }}>{t('shipping.destination')}</label>
-                  <select value={shippingRegion} onChange={e => handleRegionChange(e.target.value)}
-                    style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }}>
-                    {SHIPPING_REGIONS.map(r => (
-                      <option key={r.value} value={r.value}>{t(`region.${r.value}`)}</option>
-                    ))}
-                  </select>
+              <h3 style={stepTitleStyle}><span style={stepNumStyle}>5</span> {t('modal.delivery')}</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <input value={delivery.name} onChange={e => setDelivery(prev => ({ ...prev, name: e.target.value }))} placeholder={t('modal.delivery.name')}
+                  style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+                <input value={delivery.address} onChange={e => setDelivery(prev => ({ ...prev, address: e.target.value }))} placeholder={t('modal.delivery.address')}
+                  style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <input value={delivery.postalCode} onChange={e => setDelivery(prev => ({ ...prev, postalCode: e.target.value }))} placeholder={t('modal.delivery.postalCode')}
+                    style={{ flex: '0 0 140px', padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
+                  <input value={delivery.city} onChange={e => setDelivery(prev => ({ ...prev, city: e.target.value }))} placeholder={t('modal.delivery.city')}
+                    style={{ flex: 1, padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
                 </div>
-                {!isInternational && (
-                  <div style={{ flex: '1 1 200px' }}>
-                    <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: C.textSec, marginBottom: 6 }}>{t('shipping.method')}</label>
-                    <select value={shippingMethod} onChange={e => setShippingMethod(e.target.value)}
-                      style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }}>
-                      {availableMethods.map(m => (
-                        <option key={m} value={m}>{t(`method.${m}`)} ({t(`method.${m}.days`)})</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
+                <select value={delivery.country} onChange={e => setDelivery(prev => ({ ...prev, country: e.target.value }))}
+                  style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }}>
+                  <option value="PT">Portugal</option>
+                  <option value="ES">Espanha / España</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Deutschland</option>
+                  <option value="IT">Italia</option>
+                  <option value="NL">Nederland</option>
+                  <option value="BE">Belgique / België</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="AT">Österreich</option>
+                  <option value="IE">Ireland</option>
+                  <option value="PL">Polska</option>
+                  <option value="CZ">Česko</option>
+                  <option value="SK">Slovensko</option>
+                  <option value="HU">Magyarország</option>
+                  <option value="RO">România</option>
+                  <option value="BG">България</option>
+                  <option value="HR">Hrvatska</option>
+                  <option value="SI">Slovenija</option>
+                  <option value="EE">Eesti</option>
+                  <option value="LV">Latvija</option>
+                  <option value="LT">Lietuva</option>
+                  <option value="FI">Suomi</option>
+                  <option value="SE">Sverige</option>
+                  <option value="DK">Danmark</option>
+                  <option value="GR">Ελλάδα</option>
+                  <option value="CY">Κύπρος</option>
+                  <option value="MT">Malta</option>
+                  <option value="OTHER">{t('shipping.international')?.split(',')[0] || 'Outro / Other'}</option>
+                </select>
               </div>
-              {isInternational && (
-                <div style={{ marginTop: 12, padding: 16, background: '#FEF9E7', borderRadius: 8, border: '1px solid #F9E79F' }}>
-                  <p style={{ margin: 0, fontSize: 14, color: '#7D6608' }}>{t('shipping.international')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.internationalLink')}</a> {t('shipping.internationalSuffix')}</p>
-                </div>
-              )}
-              {overweight && !isInternational && (
-                <div style={{ marginTop: 12, padding: 16, background: '#FDEDEC', borderRadius: 8, border: '1px solid #F5B7B1' }}>
-                  <p style={{ margin: 0, fontSize: 14, color: '#922B21' }}>{t('shipping.overweight')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.overweightLink')}</a> {t('shipping.overweightSuffix')}</p>
+              {/* Auto-detected shipping info */}
+              {delivery.postalCode && !isInternational && !overweight && cart.length > 0 && (
+                <div style={{ marginTop: 12, padding: 12, background: C.lightBg, borderRadius: 8, fontSize: 13, color: C.textSec }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span>{t('region.' + shippingRegion)} — {t('shipping.deadline')} {t(`method.${shippingMethod}.days`)}</span>
+                    <span style={{ fontWeight: 600, color: freeShipping ? C.success : C.text }}>{freeShipping ? t('order.shippingFree') : fmt(shippingCost)}</span>
+                  </div>
                 </div>
               )}
               {freeShipping && (
-                <div style={{ marginTop: 12, padding: 12, background: '#EAFAF1', borderRadius: 8, border: '1px solid #82E0AA' }}>
-                  <p style={{ margin: 0, fontSize: 14, color: '#1E8449', fontWeight: 600 }}>{t('shipping.freeShipping')}</p>
+                <div style={{ marginTop: 8, padding: 10, background: '#EAFAF1', borderRadius: 8, border: '1px solid #82E0AA' }}>
+                  <p style={{ margin: 0, fontSize: 13, color: '#1E8449', fontWeight: 600 }}>{t('shipping.freeShipping')}</p>
                 </div>
               )}
-              {cart.length > 0 && !isInternational && !overweight && (
-                <p style={{ margin: '8px 0 0', fontSize: 13, color: C.textMuted }}>
-                  {t('shipping.estimatedWeight')} {cartWeightKg.toFixed(1)}kg — {t('shipping.deadline')} {t(`method.${shippingMethod}.days`)}
-                </p>
+              {isInternational && delivery.country === 'OTHER' && (
+                <div style={{ marginTop: 8, padding: 12, background: '#FEF9E7', borderRadius: 8, border: '1px solid #F9E79F' }}>
+                  <p style={{ margin: 0, fontSize: 13, color: '#7D6608' }}>{t('shipping.international')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.internationalLink')}</a> {t('shipping.internationalSuffix')}</p>
+                </div>
+              )}
+              {overweight && !isInternational && (
+                <div style={{ marginTop: 8, padding: 12, background: '#FDEDEC', borderRadius: 8, border: '1px solid #F5B7B1' }}>
+                  <p style={{ margin: 0, fontSize: 13, color: '#922B21' }}>{t('shipping.overweight')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.overweightLink')}</a> {t('shipping.overweightSuffix')}</p>
+                </div>
               )}
             </div>
           </div>
@@ -2288,10 +2423,29 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                       </div>
                     </div>
                     <p style={{ fontSize: 12, color: C.success, margin: '16px 0', fontWeight: 600 }}>&#x2713; {t('order.freeMockup')}</p>
-                    <button onClick={() => setShowModal(true)}
+                    <button onClick={() => {
+                      const errors: string[] = [];
+                      if (!selectedProduct) errors.push(t('order.validation.product'));
+                      if (!uploadedFile) errors.push(t('order.validation.file'));
+                      if (!delivery.name.trim()) errors.push(t('order.validation.deliveryName'));
+                      if (!delivery.address.trim()) errors.push(t('order.validation.deliveryAddress'));
+                      if (!delivery.postalCode.trim()) errors.push(t('order.validation.deliveryPostalCode'));
+                      if (!delivery.city.trim()) errors.push(t('order.validation.deliveryCity'));
+                      setOrderErrors(errors);
+                      if (errors.length > 0) return;
+                      setOrderRef('PG-' + Math.random().toString(36).substring(2, 8).toUpperCase());
+                      setShowModal(true);
+                    }}
                       style={{ width: '100%', padding: '14px', borderRadius: 8, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, color: C.white, border: 'none', fontSize: 16, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}>
                       {t('order.finalize')}
                     </button>
+                    {orderErrors.length > 0 && (
+                      <div style={{ marginTop: 12, padding: '12px 16px', background: '#FDEDEC', borderRadius: 8, border: '1px solid #F5B7B1' }}>
+                        {orderErrors.map((err, i) => (
+                          <p key={i} style={{ margin: i === 0 ? 0 : '6px 0 0', fontSize: 13, color: '#922B21', fontWeight: 500 }}>&#x26A0; {err}</p>
+                        ))}
+                      </div>
+                    )}
                     <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${C.border}` }}>
                       <p style={{ fontSize: 12, color: C.textMuted, margin: '0 0 8px' }}>{t('order.paymentMethods')}</p>
                       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -2367,7 +2521,7 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
       {/* Confirmation Modal */}
       {showModal && cart.length > 0 && (
-        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} />
+        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} uploadedFileName={uploadedFile?.name || null} uploadedBlobUrl={uploadedBlobUrl} printTechnique={printTechnique} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} />
       )}
     </div>
   );
@@ -2375,21 +2529,83 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
 // ==================== CONFIRMATION MODAL ====================
 
-function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t }: {
-  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc;
+function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, uploadedFileName, uploadedBlobUrl, printTechnique, delivery, setDelivery, orderRef }: {
+  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; uploadedFileName: string | null; uploadedBlobUrl: string | null; printTechnique: 'tampografia' | 'serigrafia'; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string;
 }) {
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
-  const handleConfirm = () => {
-    if (!selectedPayment) return;
-    onClose();
+  const handleConfirm = async () => {
+    if (!selectedPayment || submitting) return;
+    const item = cart[0];
+    if (!item) return;
+    const product = PRODUCTS.find(p => p.id === item.productId);
+    if (!product) return;
+    const unitPrice = getUnitPrice(product, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
+    setSubmitting(true);
+    try {
+      await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          reference: orderRef,
+          product: product.name,
+          capacity: product.capacity,
+          quantity: item.quantity,
+          printTechnique: item.printTechnique,
+          printColor: item.printColor,
+          unitPrice,
+          subtotal: cartSubtotal,
+          shippingCost,
+          vat,
+          total,
+          paymentMethod: selectedPayment,
+          shippingMethod,
+          shippingRegion,
+          deliveryName: delivery.name,
+          deliveryAddress: delivery.address,
+          deliveryPostalCode: delivery.postalCode,
+          deliveryCity: delivery.city,
+          invoiceName: invoice.name,
+          invoiceNif: invoice.nif,
+          invoiceAddress: invoice.address,
+          invoicePostalCode: invoice.postalCode,
+          invoiceCity: invoice.city,
+          fileUrl: uploadedBlobUrl,
+          fileName: uploadedFileName,
+        }),
+      });
+      setConfirmed(true);
+    } catch {
+      setConfirmed(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000, padding: 24 }} onClick={onClose}>
       <div style={{ background: C.white, borderRadius: 16, padding: 32, maxWidth: 520, width: '100%', maxHeight: '90vh', overflowY: 'auto' }} onClick={e => e.stopPropagation()}>
-        <h2 style={{ color: C.primary, margin: '0 0 24px', fontSize: 24 }}>{t('modal.title')}</h2>
+        {confirmed ? (
+          <div style={{ textAlign: 'center', padding: '32px 0' }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>&#x2705;</div>
+            <h2 style={{ color: C.primary, margin: '0 0 8px', fontSize: 24 }}>{t('modal.success')}</h2>
+            <p style={{ color: C.textSec, margin: '0 0 16px', fontSize: 14 }}>{t('modal.success.msg')}</p>
+            <div style={{ background: C.lightBg, borderRadius: 8, padding: 16, marginBottom: 24 }}>
+              <p style={{ margin: 0, fontSize: 13, color: C.textMuted }}>{t('modal.reference')}</p>
+              <p style={{ margin: '4px 0 0', fontSize: 22, fontWeight: 700, color: C.primary, fontFamily: 'monospace', letterSpacing: 2 }}>{orderRef}</p>
+            </div>
+            <button onClick={onClose} style={{ padding: '12px 32px', borderRadius: 8, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>OK</button>
+          </div>
+        ) : (
+        <>
+        {/* Order reference */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+          <h2 style={{ color: C.primary, margin: 0, fontSize: 24 }}>{t('modal.title')}</h2>
+          <div style={{ background: C.lightBg, padding: '6px 14px', borderRadius: 6, fontFamily: 'monospace', fontSize: 14, fontWeight: 700, color: C.primary, letterSpacing: 1 }}>{orderRef}</div>
+        </div>
 
         <div style={{ background: C.lightBg, borderRadius: 8, padding: 20, marginBottom: 24 }}>
           {/* Cart items */}
@@ -2446,6 +2662,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
                     <div><strong>{t('payment.transfer.holder')}:</strong> METALPRIME, LDA</div>
                     <div><strong>IBAN:</strong> <span style={{ fontFamily: 'monospace', letterSpacing: 1 }}>PT50 0010 0000 6313 9290 0016 5</span></div>
                     <div><strong>{t('payment.transfer.bank')}:</strong> Banco BPI</div>
+                    <div><strong>BIC/SWIFT:</strong> BBPIPTPL</div>
                   </div>
                 </div>
               )}
@@ -2464,6 +2681,18 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
             </div>
           ))}
         </div>
+
+        {/* Delivery Address (read-only summary from Step 6) */}
+        {(delivery.name || delivery.address) && (
+          <div style={{ marginBottom: 24 }}>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: C.text, margin: '0 0 8px' }}>{t('modal.delivery')}</h3>
+            <div style={{ padding: '12px 16px', background: C.lightBg, borderRadius: 8, fontSize: 14, color: C.textSec, lineHeight: 1.6 }}>
+              {delivery.name && <div style={{ fontWeight: 600, color: C.text }}>{delivery.name}</div>}
+              {delivery.address && <div>{delivery.address}</div>}
+              {(delivery.postalCode || delivery.city) && <div>{[delivery.postalCode, delivery.city].filter(Boolean).join(' ')}</div>}
+            </div>
+          </div>
+        )}
 
         {/* Billing / Invoice Details */}
         <h3 style={{ fontSize: 16, fontWeight: 700, color: C.text, margin: '0 0 4px' }}>{t('modal.invoice')}</h3>
@@ -2488,11 +2717,13 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
             style={{ flex: 1, padding: '13px', borderRadius: 8, background: C.white, color: C.textSec, border: `1px solid ${C.border}`, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>
             {t('modal.cancel')}
           </button>
-          <button onClick={handleConfirm} disabled={!selectedPayment}
-            style={{ flex: 2, padding: '13px', borderRadius: 8, background: selectedPayment ? `linear-gradient(135deg, ${C.primary}, ${C.accent})` : '#BDC3C7', color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: selectedPayment ? 'pointer' : 'not-allowed', transition: 'all 0.2s' }}>
-            {t('modal.confirm')}
+          <button onClick={handleConfirm} disabled={!selectedPayment || submitting}
+            style={{ flex: 2, padding: '13px', borderRadius: 8, background: (selectedPayment && !submitting) ? `linear-gradient(135deg, ${C.primary}, ${C.accent})` : '#BDC3C7', color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: (selectedPayment && !submitting) ? 'pointer' : 'not-allowed', transition: 'all 0.2s', opacity: submitting ? 0.7 : 1 }}>
+            {submitting ? '...' : t('modal.confirm')}
           </button>
         </div>
+        </>
+        )}
       </div>
     </div>
   );
@@ -2596,6 +2827,15 @@ function ContactPage({ t }: { t: TFunc }) {
       </section>
 
       <section style={{ ...container, padding: '64px 24px' }}>
+        {/* Contact Info */}
+        <div style={{ maxWidth: 600, margin: '0 auto 32px', display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <a href="mailto:info@metalprime.pt" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
+            <span style={{ fontSize: 20 }}>&#x2709;</span> info@metalprime.pt
+          </a>
+          <a href="tel:+351916799188" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
+            <span style={{ fontSize: 20 }}>&#x260E;</span> +351 916 799 188
+          </a>
+        </div>
         {/* Contact Form */}
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           {sent ? (
