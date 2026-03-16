@@ -235,7 +235,7 @@ export async function generateMockupPDFBuffer(opts: MockupOptions): Promise<Buff
   // ====== FOOTER ======
   doc.setTextColor(160, 160, 160);
   doc.setFontSize(8);
-  doc.text('PrimeGift — info@primegift.pt', pageW / 2, pageH - 10, { align: 'center' });
+  doc.text('PrimeGift — geral@primegift.pt', pageW / 2, pageH - 10, { align: 'center' });
 
   const arrayBuffer = doc.output('arraybuffer');
   return Buffer.from(arrayBuffer);

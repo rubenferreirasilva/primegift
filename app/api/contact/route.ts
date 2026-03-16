@@ -15,7 +15,7 @@ async function sendEmail(data: { nome: string; email: string; empresa: string; t
 
   await transporter.sendMail({
     from: `"PrimeGift Website" <${process.env.SMTP_USER}>`,
-    to: 'info@primegift.pt',
+    to: 'geral@primegift.pt',
     replyTo: data.email,
     subject: `Novo contacto PrimeGift - ${data.nome}`,
     html: `

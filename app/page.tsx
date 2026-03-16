@@ -2923,8 +2923,8 @@ function ContactPage({ t }: { t: TFunc }) {
       <section style={{ ...container, padding: '64px 24px' }}>
         {/* Contact Info */}
         <div style={{ maxWidth: 600, margin: '0 auto 32px', display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
-          <a href="mailto:info@primegift.pt" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
-            <span style={{ fontSize: 20 }}>&#x2709;</span> info@primegift.pt
+          <a href="mailto:geral@primegift.pt" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
+            <span style={{ fontSize: 20 }}>&#x2709;</span> geral@primegift.pt
           </a>
           <a href="tel:+351916799188" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
             <span style={{ fontSize: 20 }}>&#x260E;</span> +351 916 799 188
@@ -2995,14 +2995,14 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
         { heading: 'Finalidade do Tratamento', text: 'Os dados pessoais são tratados com a finalidade de responder a pedidos de contacto, processar encomendas, enviar orçamentos e prestar apoio ao cliente.' },
         { heading: 'Base Legal', text: 'O tratamento dos dados baseia-se no consentimento do titular (ao submeter o formulário) e na execução de contrato ou diligências pré-contratuais.' },
         { heading: 'Conservação dos Dados', text: 'Os dados pessoais são conservados pelo período necessário ao cumprimento das finalidades para que foram recolhidos, ou pelo período exigido por lei.' },
-        { heading: 'Direitos do Titular', text: 'Nos termos do RGPD, tem direito de acesso, retificação, apagamento, limitação do tratamento, portabilidade e oposição ao tratamento dos seus dados. Para exercer estes direitos, contacte-nos através de info@primegift.pt.' },
+        { heading: 'Direitos do Titular', text: 'Nos termos do RGPD, tem direito de acesso, retificação, apagamento, limitação do tratamento, portabilidade e oposição ao tratamento dos seus dados. Para exercer estes direitos, contacte-nos através de geral@primegift.pt.' },
         { heading: 'Segurança', text: 'Implementamos medidas técnicas e organizativas adequadas para proteger os dados pessoais contra perda, uso indevido, acesso não autorizado ou divulgação.' },
       ]
     },
     terms: {
       title: t('legal.terms.title'),
       sections: [
-        { heading: 'Identificação', text: 'O presente website é propriedade e operado pela PrimeGift, com sede em Portugal. Email: info@primegift.pt.' },
+        { heading: 'Identificação', text: 'O presente website é propriedade e operado pela PrimeGift, com sede em Portugal. Email: geral@primegift.pt.' },
         { heading: 'Produtos e Serviços', text: 'A PrimeGift comercializa copos de plástico reutilizáveis personalizados com tampografia e serigrafia. Os produtos apresentados no website são meramente ilustrativos, podendo existir ligeiras variações de cor ou dimensão.' },
         { heading: 'Encomendas', text: 'A encomenda mínima é de 100 unidades. Todas as encomendas estão sujeitas a aprovação de maquete digital antes da produção. O prazo de produção é de 5 dias úteis após aprovação da maquete, acrescido do prazo de entrega.' },
         { heading: 'Preços', text: 'Os preços indicados no website não incluem IVA (23%). Os preços incluem impressão a 1 cor. O transporte é calculado com base no peso e destino da encomenda.' },
@@ -3025,7 +3025,7 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
       title: t('legal.returns.title'),
       sections: [
         { heading: 'Produtos Personalizados', text: 'Por se tratar de produtos personalizados feitos por encomenda, os copos com impressão personalizada não são elegíveis para devolução ou troca, exceto em caso de defeito de fabrico, conforme previsto no Decreto-Lei n.º 67/2003.' },
-        { heading: 'Defeitos de Fabrico', text: 'Em caso de defeito de fabrico (impressão com defeito, produto danificado, quantidade incorreta), o cliente deve reportar o problema no prazo de 48 horas após a receção da encomenda, enviando fotografias do defeito para info@primegift.pt.' },
+        { heading: 'Defeitos de Fabrico', text: 'Em caso de defeito de fabrico (impressão com defeito, produto danificado, quantidade incorreta), o cliente deve reportar o problema no prazo de 48 horas após a receção da encomenda, enviando fotografias do defeito para geral@primegift.pt.' },
         { heading: 'Processo de Reclamação', text: '1) Contacte-nos por email com fotografias do defeito; 2) Analisaremos a reclamação em 48 horas úteis; 3) Se o defeito for confirmado, procederemos à reposição ou reembolso total do valor.' },
         { heading: 'Aprovação de Maquete', text: 'Após aprovação da maquete digital pelo cliente, quaisquer erros presentes na maquete aprovada são da responsabilidade do cliente. Recomendamos uma revisão cuidadosa de todos os elementos antes da aprovação.' },
         { heading: 'Cancelamento', text: 'Encomendas podem ser canceladas sem custos antes do início da produção. Após o início da produção, não é possível cancelar a encomenda.' },

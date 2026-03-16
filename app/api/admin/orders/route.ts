@@ -230,7 +230,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
           </div>
 
           <p style="color:#555;font-size:13px;margin:0 0 8px">Obrigado pela sua confiança!</p>
-          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>info@primegift.pt</p>
+          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>geral@primegift.pt</p>
         </div>
       </div>
     `;
@@ -238,7 +238,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
     await transporter.sendMail({
       from: `"PrimeGift" <${process.env.SMTP_USER}>`,
       to: customerEmail,
-      replyTo: 'info@primegift.pt',
+      replyTo: 'geral@primegift.pt',
       subject: `Pagamento Confirmado — ${reference} — PrimeGift`,
       html,
     });
@@ -282,7 +282,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
           </div>
 
           <p style="color:#555;font-size:13px;margin:0 0 8px">Obrigado pela sua compra!</p>
-          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>info@primegift.pt</p>
+          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>geral@primegift.pt</p>
         </div>
       </div>
     `;
@@ -290,7 +290,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
     await transporter.sendMail({
       from: `"PrimeGift" <${process.env.SMTP_USER}>`,
       to: customerEmail,
-      replyTo: 'info@primegift.pt',
+      replyTo: 'geral@primegift.pt',
       subject: `Encomenda Enviada — ${reference} — PrimeGift`,
       html,
     });

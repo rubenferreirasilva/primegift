@@ -204,7 +204,7 @@ async function sendOrderEmails(data: OrderData) {
           <p style="margin:8px 0 0;font-size:13px;color:#2C3E50">Iremos analisar o seu pedido. Após confirmação, a produção inicia em 5 dias úteis.</p>
         </div>
 
-        <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>info@primegift.pt</p>
+        <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>geral@primegift.pt</p>
       </div>
     </div>
   `;
@@ -242,7 +242,7 @@ async function sendOrderEmails(data: OrderData) {
   await Promise.all([
     transporter.sendMail({
       from: `"PrimeGift Encomendas" <${process.env.SMTP_USER}>`,
-      to: 'info@primegift.pt',
+      to: 'geral@primegift.pt',
       subject: `Nova Encomenda ${data.reference} — ${itemsSummary} (${itemCount} un.)`,
       html: adminHtml,
       attachments,
@@ -250,7 +250,7 @@ async function sendOrderEmails(data: OrderData) {
     transporter.sendMail({
       from: `"PrimeGift" <${process.env.SMTP_USER}>`,
       to: data.customerEmail,
-      replyTo: 'info@primegift.pt',
+      replyTo: 'geral@primegift.pt',
       subject: `Confirmação de Encomenda ${data.reference} — PrimeGift`,
       html: customerHtml,
     }),
@@ -318,7 +318,7 @@ async function checkStockAndAlert() {
 
     await transporter.sendMail({
       from: `"PrimeGift Stock" <${process.env.SMTP_USER}>`,
-      to: 'info@primegift.pt',
+      to: 'geral@primegift.pt',
       subject: `Alerta Stock Baixo — ${lowStock.map(s => s.capacity).join(', ')} — PrimeGift`,
       html,
     });
