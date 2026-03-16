@@ -85,7 +85,7 @@ const TECHNIQUE_LABELS: Record<string, string> = {
 
 const CUP_SPECS: Record<string, { cupTopW: number; cupBotW: number; cupHeight: number }> = {
   '200ml': { cupHeight: 65, cupTopW: 50, cupBotW: 36 },
-  '300ml': { cupHeight: 80, cupTopW: 54, cupBotW: 38 },
+  '250ml': { cupHeight: 75, cupTopW: 52, cupBotW: 37 },
   '330ml': { cupHeight: 88, cupTopW: 56, cupBotW: 39 },
   '500ml': { cupHeight: 105, cupTopW: 62, cupBotW: 42 },
 };
@@ -408,7 +408,7 @@ export default function AdminPage() {
   const STOCK_INITIAL = 100000;
   const STOCK_CUPS = [
     { id: 'pg200', label: 'Copo 200ml', capacity: '200ml' },
-    { id: 'pg300', label: 'Copo 300ml', capacity: '300ml' },
+    { id: 'pg250', label: 'Copo 250ml', capacity: '250ml' },
     { id: 'pg330', label: 'Copo 330ml', capacity: '330ml' },
     { id: 'pg500', label: 'Copo 500ml', capacity: '500ml' },
   ];
@@ -583,7 +583,7 @@ export default function AdminPage() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: 0, borderRadius: 8, overflow: 'hidden', border: `2px solid ${C.accent}` }}>
-            {['all', '200ml', '300ml', '330ml', '500ml'].map(cap => (
+            {['all', '200ml', '250ml', '330ml', '500ml'].map(cap => (
               <button key={cap} onClick={() => setCapacityFilter(cap)}
                 style={{ padding: '8px 14px', fontWeight: 600, fontSize: 12, border: 'none', cursor: 'pointer', background: capacityFilter === cap ? C.accent : C.white, color: capacityFilter === cap ? C.white : C.accent, transition: 'all 0.2s' }}>
                 {cap === 'all' ? 'Todos' : cap}

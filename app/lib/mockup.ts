@@ -9,7 +9,7 @@ interface CupSpec {
 
 const CUP_SPECS: Record<string, CupSpec> = {
   '200ml': { capacity: '200ml', cupHeight: 65, cupTopW: 50, cupBotW: 36 },
-  '300ml': { capacity: '300ml', cupHeight: 80, cupTopW: 54, cupBotW: 38 },
+  '250ml': { capacity: '250ml', cupHeight: 75, cupTopW: 52, cupBotW: 37 },
   '330ml': { capacity: '330ml', cupHeight: 88, cupTopW: 56, cupBotW: 39 },
   '500ml': { capacity: '500ml', cupHeight: 105, cupTopW: 62, cupBotW: 42 },
 };

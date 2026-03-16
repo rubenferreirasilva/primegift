@@ -26,8 +26,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     // Products data
     'product.pg200.name': 'Copo de 200ml',
     'product.pg200.desc': 'Café e degustação',
-    'product.pg300.name': 'Copo de 300ml',
-    'product.pg300.desc': 'Sumos e refrigerantes',
+    'product.pg250.name': 'Copo de 250ml',
+    'product.pg250.desc': 'Sumos e refrigerantes',
     'product.pg330.name': 'Copo de 330ml',
     'product.pg330.desc': 'Cerveja e cocktails',
     'product.pg500.name': 'Copo de 500ml',
@@ -44,14 +44,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'region.eu-zone3': 'Europa (Zona 3)',
     'region.international': 'Internacional (fora da UE)',
     // Shipping methods
-    'method.next-day': 'Entrega Expresso',
-    'method.next-day.days': '~7 dias úteis (5 dias produção + 2 dias entrega)',
-    'method.2-days': 'Envio Standard',
-    'method.2-days.days': '~2 semanas (5 dias produção + 5 dias úteis entrega)',
-    'method.collect': 'Ponto Collectt',
-    'method.collect.days': '~2 semanas (5 dias produção + 5 dias úteis entrega)',
-    'method.standard': 'Envio Standard',
-    'method.standard.days': '~2 semanas (5 dias produção + 5 dias úteis entrega)',
+    'method.standard': 'Envio Standard (DPD)',
+    'method.standard.days': '~10 dias úteis (5 dias produção + 1-3 dias úteis entrega)',
     // Payment
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Transferência Bancária',
@@ -79,7 +73,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Até 4 cores',
     'trust.2': '10 dias úteis',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '4 formas de pagamento',
+    'trust.4': '3 formas de pagamento',
     // Home products
     'home.products.title': 'Os Nossos Produtos',
     'home.products.subtitle': 'Copos reutilizáveis de alta qualidade, prontos para a sua marca',
@@ -169,6 +163,10 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'cart.item': 'item',
     'cart.items': 'itens',
     'cart.remove': 'Remover',
+    'cart.empty': 'O carrinho está vazio',
+    'cart.addedToCart': 'Adicionado ao carrinho!',
+    'cart.continueShopping': 'Continuar a comprar',
+    'cart.yourCart': 'O seu carrinho',
     // Shipping
     'shipping.title': 'Entrega',
     'shipping.destination': 'Destino',
@@ -254,7 +252,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step3.title': 'Aprove a Maquete',
     'hiwPage.step3.desc': 'Receba gratuitamente uma maquete digital com a simulação do copo personalizado. Poderá solicitar ajustes até estar completamente satisfeito com o resultado. Só avançamos para produção após a sua aprovação final.',
     'hiwPage.step4.title': 'Receba a Sua Encomenda',
-    'hiwPage.step4.desc': 'A sua encomenda é produzida nas nossas instalações em 5 dias, seguida de 5 dias úteis para entrega — aproximadamente duas semanas até chegar às suas mãos. Enviamos para Portugal Continental, Ilhas, Espanha e toda a Europa através da CTT Expresso.',
+    'hiwPage.step4.desc': 'A sua encomenda é produzida nas nossas instalações em 5 dias, seguida de 1 a 3 dias úteis para entrega — aproximadamente uma semana até chegar às suas mãos. Enviamos para Portugal Continental, Ilhas, Espanha e toda a Europa através da DPD.',
     'hiwPage.fileReq': 'Requisitos do Ficheiro',
     'hiwPage.formats': 'Formatos aceites',
     'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vetorial preferido), PNG (mín. 300dpi)',
@@ -323,8 +321,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'nav.contact': 'Contacto',
     'product.pg200.name': 'Vaso de 200ml',
     'product.pg200.desc': 'Café y degustación',
-    'product.pg300.name': 'Vaso de 300ml',
-    'product.pg300.desc': 'Zumos y refrescos',
+    'product.pg250.name': 'Vaso de 250ml',
+    'product.pg250.desc': 'Zumos y refrescos',
     'product.pg330.name': 'Vaso de 330ml',
     'product.pg330.desc': 'Cerveza y cócteles',
     'product.pg500.name': 'Vaso de 500ml',
@@ -338,14 +336,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'region.eu-zone2': 'Europa (Zona 2)',
     'region.eu-zone3': 'Europa (Zona 3)',
     'region.international': 'Internacional (fuera de la UE)',
-    'method.next-day': 'Entrega Exprés',
-    'method.next-day.days': '~7 días hábiles (5 días producción + 2 días entrega)',
-    'method.2-days': 'Envío Estándar',
-    'method.2-days.days': '~2 semanas (5 días producción + 5 días hábiles entrega)',
-    'method.collect': 'Punto de Recogida',
-    'method.collect.days': '~2 semanas (5 días producción + 5 días hábiles entrega)',
-    'method.standard': 'Envío Estándar',
-    'method.standard.days': '~2 semanas (5 días producción + 5 días hábiles entrega)',
+    'method.standard': 'Envío Estándar (DPD)',
+    'method.standard.days': '~10 días hábiles (5 días producción + 1-3 días hábiles entrega)',
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Transferencia Bancaria',
     'payment.mbway': 'MB WAY',
@@ -370,7 +362,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Hasta 4 colores',
     'trust.2': '10 días hábiles',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '4 formas de pago',
+    'trust.4': '3 formas de pago',
     'home.products.title': 'Nuestros Productos',
     'home.products.subtitle': 'Vasos reutilizables de alta calidad, listos para tu marca',
     'home.products.from': 'desde',
@@ -452,6 +444,10 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'cart.item': 'artículo',
     'cart.items': 'artículos',
     'cart.remove': 'Eliminar',
+    'cart.empty': 'El carrito está vacío',
+    'cart.addedToCart': '¡Añadido al carrito!',
+    'cart.continueShopping': 'Seguir comprando',
+    'cart.yourCart': 'Su carrito',
     'shipping.title': 'Entrega',
     'shipping.destination': 'Destino',
     'shipping.method': 'Método de envío',
@@ -531,7 +527,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step3.title': 'Aprueba la Maqueta',
     'hiwPage.step3.desc': 'Recibe gratuitamente una maqueta digital con la simulación del vaso personalizado. Podrás solicitar ajustes hasta estar completamente satisfecho con el resultado. Solo avanzamos a producción tras tu aprobación final.',
     'hiwPage.step4.title': 'Recibe Tu Pedido',
-    'hiwPage.step4.desc': 'Tu pedido se produce en nuestras instalaciones en 5 días, seguido de 5 días hábiles para entrega — aproximadamente dos semanas hasta llegar a tus manos. Enviamos a Portugal Continental, Islas, España y toda Europa a través de CTT Expresso.',
+    'hiwPage.step4.desc': 'Tu pedido se produce en nuestras instalaciones en 5 días, seguido de 1 a 3 días hábiles para entrega — aproximadamente una semana hasta llegar a tus manos. Enviamos a Portugal Continental, Islas, España y toda Europa a través de DPD.',
     'hiwPage.fileReq': 'Requisitos del Fichero',
     'hiwPage.formats': 'Formatos aceptados',
     'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vectorial preferido), PNG (mín. 300dpi)',
@@ -598,8 +594,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'nav.contact': 'Contact',
     'product.pg200.name': '200ml Cup',
     'product.pg200.desc': 'Coffee & tasting',
-    'product.pg300.name': '300ml Cup',
-    'product.pg300.desc': 'Juices & soft drinks',
+    'product.pg250.name': '250ml Cup',
+    'product.pg250.desc': 'Juices & soft drinks',
     'product.pg330.name': '330ml Cup',
     'product.pg330.desc': 'Beer & cocktails',
     'product.pg500.name': '500ml Cup',
@@ -613,14 +609,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'region.eu-zone2': 'Europe (Zone 2)',
     'region.eu-zone3': 'Europe (Zone 3)',
     'region.international': 'International (outside EU)',
-    'method.next-day': 'Express Delivery',
-    'method.next-day.days': '~7 business days (5 days production + 2 days delivery)',
-    'method.2-days': 'Standard Shipping',
-    'method.2-days.days': '~2 weeks (5 days production + 5 business days delivery)',
-    'method.collect': 'Collection Point',
-    'method.collect.days': '~2 weeks (5 days production + 5 business days delivery)',
-    'method.standard': 'Standard Shipping',
-    'method.standard.days': '~2 weeks (5 days production + 5 business days delivery)',
+    'method.standard': 'Standard Shipping (DPD)',
+    'method.standard.days': '~10 business days (5 days production + 1-3 business days delivery)',
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Bank Transfer',
     'payment.mbway': 'MB WAY',
@@ -645,7 +635,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Up to 4 colours',
     'trust.2': '10 business days',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '4 payment methods',
+    'trust.4': '3 payment methods',
     'home.products.title': 'Our Products',
     'home.products.subtitle': 'High-quality reusable cups, ready for your brand',
     'home.products.from': 'from',
@@ -727,6 +717,10 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'cart.item': 'item',
     'cart.items': 'items',
     'cart.remove': 'Remove',
+    'cart.empty': 'Your cart is empty',
+    'cart.addedToCart': 'Added to cart!',
+    'cart.continueShopping': 'Continue shopping',
+    'cart.yourCart': 'Your cart',
     'shipping.title': 'Delivery',
     'shipping.destination': 'Destination',
     'shipping.method': 'Shipping method',
@@ -806,7 +800,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step3.title': 'Approve the Mockup',
     'hiwPage.step3.desc': 'Receive a free digital mockup with the simulation of your customised cup. You can request adjustments until you are completely satisfied with the result. We only proceed to production after your final approval.',
     'hiwPage.step4.title': 'Receive Your Order',
-    'hiwPage.step4.desc': 'Your order is produced in our facilities in 5 days, followed by 5 business days for delivery — approximately two weeks until it reaches you. We ship to Mainland Portugal, Islands, Spain and all of Europe via CTT Expresso.',
+    'hiwPage.step4.desc': 'Your order is produced in our facilities in 5 days, followed by 1-3 business days for delivery — approximately one week until it reaches you. We ship to Mainland Portugal, Islands, Spain and all of Europe via DPD.',
     'hiwPage.fileReq': 'File Requirements',
     'hiwPage.formats': 'Accepted formats',
     'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vector preferred), PNG (min. 300dpi)',
@@ -873,8 +867,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'nav.contact': 'Contact',
     'product.pg200.name': 'Gobelet 200ml',
     'product.pg200.desc': 'Café et dégustation',
-    'product.pg300.name': 'Gobelet 300ml',
-    'product.pg300.desc': 'Jus et boissons fraîches',
+    'product.pg250.name': 'Gobelet 250ml',
+    'product.pg250.desc': 'Jus et boissons fraîches',
     'product.pg330.name': 'Gobelet 330ml',
     'product.pg330.desc': 'Bière et cocktails',
     'product.pg500.name': 'Gobelet 500ml',
@@ -888,14 +882,8 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'region.eu-zone2': 'Europe (Zone 2)',
     'region.eu-zone3': 'Europe (Zone 3)',
     'region.international': 'International (hors UE)',
-    'method.next-day': 'Livraison Express',
-    'method.next-day.days': '~7 jours ouvrés (5 jours production + 2 jours livraison)',
-    'method.2-days': 'Envoi Standard',
-    'method.2-days.days': '~2 semaines (5 jours production + 5 jours ouvrés livraison)',
-    'method.collect': 'Point Relais',
-    'method.collect.days': '~2 semaines (5 jours production + 5 jours ouvrés livraison)',
-    'method.standard': 'Envoi Standard',
-    'method.standard.days': '~2 semaines (5 jours production + 5 jours ouvrés livraison)',
+    'method.standard': 'Envoi Standard (DPD)',
+    'method.standard.days': '~10 jours ouvrés (5 jours production + 1-3 jours ouvrés livraison)',
     'payment.paypal': 'PayPal',
     'payment.transfer': 'Virement Bancaire',
     'payment.mbway': 'MB WAY',
@@ -920,7 +908,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Jusqu\'à 4 couleurs',
     'trust.2': '10 jours ouvrés',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '4 modes de paiement',
+    'trust.4': '3 modes de paiement',
     'home.products.title': 'Nos Produits',
     'home.products.subtitle': 'Gobelets réutilisables de haute qualité, prêts pour votre marque',
     'home.products.from': 'à partir de',
@@ -1002,6 +990,10 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'cart.item': 'article',
     'cart.items': 'articles',
     'cart.remove': 'Supprimer',
+    'cart.empty': 'Votre panier est vide',
+    'cart.addedToCart': 'Ajouté au panier !',
+    'cart.continueShopping': 'Continuer vos achats',
+    'cart.yourCart': 'Votre panier',
     'shipping.title': 'Livraison',
     'shipping.destination': 'Destination',
     'shipping.method': 'Mode d\'expédition',
@@ -1081,7 +1073,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step3.title': 'Approuvez la Maquette',
     'hiwPage.step3.desc': 'Recevez gratuitement une maquette numérique avec la simulation de votre gobelet personnalisé. Vous pourrez demander des ajustements jusqu\'à être entièrement satisfait du résultat. Nous ne passons en production qu\'après votre approbation finale.',
     'hiwPage.step4.title': 'Recevez Votre Commande',
-    'hiwPage.step4.desc': 'Votre commande est produite dans nos installations en 5 jours, suivie de 5 jours ouvrés de livraison — environ deux semaines jusqu\'à réception. Nous expédions vers le Portugal Continental, les Îles, l\'Espagne et toute l\'Europe via CTT Expresso.',
+    'hiwPage.step4.desc': 'Votre commande est produite dans nos installations en 5 jours, suivie de 1 à 3 jours ouvrés de livraison — environ une semaine jusqu\'à réception. Nous expédions vers le Portugal Continental, les Îles, l\'Espagne et toute l\'Europe via DPD.',
     'hiwPage.fileReq': 'Exigences du Fichier',
     'hiwPage.formats': 'Formats acceptés',
     'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vectoriel préféré), PNG (min. 300dpi)',
@@ -1164,19 +1156,21 @@ type CartItem = {
   quantity: number;
   printColor: string;
   printTechnique: 'tampografia' | 'serigrafia';
+  uploadedFileName: string | null;
+  uploadedBlobUrl: string | null;
 };
 
 const PRODUCTS: Product[] = [
-  { id: 'pg200', name: 'Copo de 200ml', capacity: '200ml', description: 'Café e degustação', weight: 15, cupHeight: 65, cupTopW: 50, cupBotW: 36,
+  { id: 'pg200', name: 'Copo de 200ml', capacity: '200ml', description: 'Café e degustação', weight: 12, cupHeight: 65, cupTopW: 50, cupBotW: 36,
     prices: { 100: 0.30, 250: 0.25, 500: 0.20, 1000: 0.16, 2000: 0.14, 5000: 0.12 },
     serigrafiasPrices: { 100: 0.45, 250: 0.38, 500: 0.30, 1000: 0.24, 2000: 0.21, 5000: 0.18 } },
-  { id: 'pg300', name: 'Copo de 300ml', capacity: '300ml', description: 'Sumos e refrigerantes', weight: 20, cupHeight: 80, cupTopW: 54, cupBotW: 38,
+  { id: 'pg250', name: 'Copo de 250ml', capacity: '250ml', description: 'Sumos e refrigerantes', weight: 14, cupHeight: 75, cupTopW: 52, cupBotW: 37,
     prices: { 100: 0.33, 250: 0.28, 500: 0.23, 1000: 0.18, 2000: 0.16, 5000: 0.14 },
     serigrafiasPrices: { 100: 0.50, 250: 0.42, 500: 0.35, 1000: 0.27, 2000: 0.24, 5000: 0.21 } },
-  { id: 'pg330', name: 'Copo de 330ml', capacity: '330ml', description: 'Cerveja e cocktails', weight: 22, cupHeight: 88, cupTopW: 56, cupBotW: 39,
+  { id: 'pg330', name: 'Copo de 330ml', capacity: '330ml', description: 'Cerveja e cocktails', weight: 18, cupHeight: 88, cupTopW: 56, cupBotW: 39,
     prices: { 100: 0.35, 250: 0.30, 500: 0.25, 1000: 0.20, 2000: 0.17, 5000: 0.15 },
     serigrafiasPrices: { 100: 0.53, 250: 0.45, 500: 0.38, 1000: 0.30, 2000: 0.26, 5000: 0.23 } },
-  { id: 'pg500', name: 'Copo de 500ml', capacity: '500ml', description: 'Festivais e eventos', weight: 30, cupHeight: 105, cupTopW: 62, cupBotW: 42,
+  { id: 'pg500', name: 'Copo de 500ml', capacity: '500ml', description: 'Festivais e eventos', weight: 28, cupHeight: 105, cupTopW: 62, cupBotW: 42,
     prices: { 100: 0.42, 250: 0.36, 500: 0.30, 1000: 0.24, 2000: 0.21, 5000: 0.18 },
     serigrafiasPrices: { 100: 0.63, 250: 0.54, 500: 0.45, 1000: 0.36, 2000: 0.32, 5000: 0.27 } },
 ];
@@ -1198,23 +1192,18 @@ const SHIPPING_REGIONS = [
   { value: 'international', label: 'Internacional (fora da UE)' },
 ];
 
+// DPD rates (base + 5.95% taxa de energia — taxa publicada 11.95% com desconto de 6%)
 type ShippingMethodRates = Record<number, number>;
 type ShippingRegionRates = Record<string, ShippingMethodRates>;
 const SHIPPING_RATES: Record<string, ShippingRegionRates> = {
   'pt-continental': {
-    'next-day': { 1: 3.68, 2: 3.80, 5: 4.02, 10: 4.19, 15: 5.00, 20: 5.26, 30: 6.71 },
-    '2-days': { 1: 3.43, 2: 3.60, 5: 3.82, 10: 4.15, 15: 4.60, 20: 5.20, 30: 6.58 },
-    'collect': { 1: 3.19, 2: 3.36, 5: 3.58, 10: 3.91, 15: 4.36, 20: 4.96, 30: 6.34 },
+    'standard': { 1: 3.53, 5: 4.01, 10: 4.55, 20: 5.31, 30: 7.46 },
   },
   'pt-islands': {
-    'next-day': { 1: 10.92, 5: 18.61, 10: 29.64, 20: 47.86, 30: 70.16 },
-    '2-days': { 1: 6.83, 5: 8.36, 10: 11.00, 20: 17.83, 30: 24.22 },
-    'collect': { 1: 6.59, 5: 8.12, 10: 10.76, 20: 17.59, 30: 23.98 },
+    'standard': { 1: 6.83, 5: 8.36, 10: 11.00, 20: 17.83, 30: 24.22 },
   },
   'es-peninsular': {
-    'next-day': { 1: 4.58, 2: 4.67, 5: 5.30, 10: 6.66, 20: 10.09, 30: 14.52 },
-    '2-days': { 1: 4.37, 2: 4.55, 5: 5.06, 10: 6.37, 20: 9.89, 30: 13.90 },
-    'collect': { 1: 4.13, 2: 4.31, 5: 4.82, 10: 6.13, 20: 9.65, 30: 13.66 },
+    'standard': { 1: 4.90, 2: 5.67, 5: 6.40, 10: 11.18, 20: 18.15, 30: 25.46 },
   },
   'eu-zone2': {
     'standard': { 0.5: 13.72, 1: 14.70, 2: 17.29, 5: 25.06, 10: 38.04, 20: 63.96, 30: 89.87 },
@@ -1225,17 +1214,13 @@ const SHIPPING_RATES: Record<string, ShippingRegionRates> = {
 };
 
 const SHIPPING_METHOD_LABELS: Record<string, { label: string; days: string }> = {
-  'next-day': { label: 'Entrega Expresso', days: '~7 dias úteis (5 dias produção + 2 dias entrega)' },
-  '2-days': { label: 'Envio Standard', days: '~2 semanas (5 dias produção + 5 dias úteis entrega)' },
-  'collect': { label: 'Ponto Collectt', days: '~2 semanas (5 dias produção + 5 dias úteis entrega)' },
-  'standard': { label: 'Envio Standard', days: '~2 semanas (5 dias produção + 5 dias úteis entrega)' },
+  'standard': { label: 'Envio Standard (DPD)', days: '~10 dias úteis (5 dias produção + 1-3 dias úteis entrega)' },
 };
 
 const PAYMENT_METHODS = [
   { id: 'paypal', label: 'PayPal' },
   { id: 'transfer', label: 'Transferência Bancária' },
   { id: 'mbway', label: 'MB WAY' },
-  { id: 'revolut', label: 'Revolut' },
 ];
 
 // ==================== HELPERS ====================
@@ -1522,7 +1507,7 @@ function PaymentIcon({ method }: { method: string }) {
 
 // ==================== HEADER ====================
 
-function Header({ page, setPage, t, lang, setLang }: { page: string; setPage: (p: string) => void; t: TFunc; lang: Lang; setLang: (l: Lang) => void }) {
+function Header({ page, setPage, t, lang, setLang, cartCount, onCartClick }: { page: string; setPage: (p: string) => void; t: TFunc; lang: Lang; setLang: (l: Lang) => void; cartCount: number; onCartClick: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navItems = [
     { id: 'home', label: t('nav.home') },
@@ -1565,9 +1550,17 @@ function Header({ page, setPage, t, lang, setLang }: { page: string; setPage: (p
               ))}
             </div>
           </nav>
-          <button className="pg-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? '\u2715' : '\u2630'}
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <button onClick={onCartClick} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', position: 'relative', padding: '4px 8px', fontSize: 22 }}>
+              &#x1F6D2;
+              {cartCount > 0 && (
+                <span style={{ position: 'absolute', top: -2, right: 0, background: '#E74C3C', color: '#fff', borderRadius: '50%', width: 18, height: 18, fontSize: 11, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>
+              )}
+            </button>
+            <button className="pg-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? '\u2715' : '\u2630'}
+            </button>
+          </div>
         </div>
         {/* Mobile drawer */}
         {menuOpen && (
@@ -1749,13 +1742,35 @@ function HeroCup() {
 function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => void; onSelectProduct: (id: string) => void; t: TFunc }) {
   return (
     <div>
+      <style>{`
+        .pg-hero { position: relative; width: 100%; min-height: 540px; overflow: hidden; display: flex; }
+        .pg-hero-left { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(0 0, 62% 0, 48% 100%, 0 100%); }
+        .pg-hero-right { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(62% 0, 100% 0, 100% 100%, 48% 100%); }
+        .pg-hero-text { position: relative; z-index: 2; width: 50%; min-height: 540px; display: flex; align-items: center; padding: 60px 48px 60px 5%; }
+        .pg-hero-title { color: white; font-size: 44px; font-weight: 800; margin: 0; line-height: 1.1; text-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+        .pg-hero-desc { font-size: 18px; margin-top: 16px; line-height: 1.6; max-width: 420px; }
+        .pg-hero-cup-wrap { position: absolute; right: 0; top: 0; bottom: 0; width: 52%; display: flex; align-items: center; justify-content: center; }
+        .pg-products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .pg-section-title { font-size: 32px; }
+        .pg-section-padding { padding: 96px 24px; }
+        @media (max-width: 768px) {
+          .pg-hero { min-height: auto; flex-direction: column; }
+          .pg-hero-left { clip-path: none; position: relative; height: 320px; }
+          .pg-hero-right { display: none; }
+          .pg-hero-text { width: 100%; min-height: auto; padding: 32px 20px; position: absolute; top: 0; left: 0; right: 0; bottom: 0; align-items: flex-end; }
+          .pg-hero-title { font-size: 28px; }
+          .pg-hero-desc { font-size: 15px; margin-top: 12px; }
+          .pg-hero-cup-wrap { display: none; }
+          .pg-products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+          .pg-section-title { font-size: 24px; }
+          .pg-section-padding { padding: 48px 16px; }
+        }
+      `}</style>
+
       {/* Hero Banner — Split diagonal: Festival + Copo personalizado */}
-      <section style={{ position: 'relative', width: '100%', minHeight: 540, overflow: 'hidden', display: 'flex' }}>
+      <section className="pg-hero">
         {/* Lado esquerdo — Festival */}
-        <div style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          clipPath: 'polygon(0 0, 62% 0, 48% 100%, 0 100%)',
-        }}>
+        <div className="pg-hero-left">
           <img
             src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1200&h=800&fit=crop"
             alt={t('hero.imgAlt')}
@@ -1765,12 +1780,8 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
         </div>
 
         {/* Lado direito — Copo personalizado */}
-        <div style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          clipPath: 'polygon(62% 0, 100% 0, 100% 100%, 48% 100%)',
-          background: `linear-gradient(160deg, ${C.lightBg} 0%, #F0F7FC 100%)`,
-        }}>
-          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '52%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="pg-hero-right" style={{ background: `linear-gradient(160deg, ${C.lightBg} 0%, #F0F7FC 100%)` }}>
+          <div className="pg-hero-cup-wrap">
             <div style={{ position: 'relative', textAlign: 'center', display: 'inline-block' }}>
               <HeroCup />
             </div>
@@ -1778,16 +1789,16 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
         </div>
 
         {/* Conteúdo texto — lado esquerdo */}
-        <div style={{ position: 'relative', zIndex: 2, width: '50%', minHeight: 540, display: 'flex', alignItems: 'center', padding: '60px 48px 60px 5%' }}>
+        <div className="pg-hero-text">
           <div>
             <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', margin: '0 0 12px', fontWeight: 500, letterSpacing: 0.5, textTransform: 'uppercase' }}>{t('hero.brand')}</p>
             <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: '6px 16px', marginBottom: 16, backdropFilter: 'blur(8px)' }}>
               <span style={{ fontSize: 13, fontWeight: 600, color: C.white, letterSpacing: 0.5 }}>{t('hero.tag')}</span>
             </div>
-            <h1 style={{ color: C.white, fontSize: 44, fontWeight: 800, margin: 0, lineHeight: 1.1, textShadow: '0 2px 16px rgba(0,0,0,0.25)' }}>
+            <h1 className="pg-hero-title">
               {t('hero.title1')}<br />{t('hero.title2')}
             </h1>
-            <p style={{ color: 'rgba(255,255,255,0.92)', fontSize: 18, marginTop: 16, lineHeight: 1.6, maxWidth: 420, textShadow: '0 1px 6px rgba(0,0,0,0.15)' }}>
+            <p className="pg-hero-desc" style={{ color: 'rgba(255,255,255,0.92)', textShadow: '0 1px 6px rgba(0,0,0,0.15)' }}>
               {t('hero.desc')}
             </p>
             <div style={{ display: 'flex', gap: 14, marginTop: 32, flexWrap: 'wrap' }}>
@@ -1809,7 +1820,6 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
         <div style={{ ...container, display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap' }}>
           {[
             { icon: '📦', text: t('trust.0') },
-            { icon: '🎨', text: t('trust.1') },
             { icon: '⚡', text: t('trust.2') },
             { icon: '🌍', text: t('trust.3') },
             { icon: '💳', text: t('trust.4') },
@@ -1823,11 +1833,11 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
       </section>
 
       {/* Products Grid */}
-      <section style={{ padding: '96px 24px', background: C.lightBg }}>
+      <section className="pg-section-padding" style={{ background: C.lightBg }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('home.products.title')}</h2>
+          <h2 className="pg-section-title" style={{ textAlign: 'center', fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('home.products.title')}</h2>
           <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>{t('home.products.subtitle')}</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+          <div className="pg-products-grid">
             {PRODUCTS.map(product => (
               <div key={product.id} onClick={() => { onSelectProduct(product.id); window.scrollTo(0, 0); }}
                 style={{ background: C.white, borderRadius: 12, padding: 28, cursor: 'pointer', boxShadow: C.cardShadow, transition: 'all 0.3s', textAlign: 'center', border: `1px solid transparent` }}
@@ -1847,11 +1857,11 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
       </section>
 
       {/* Gallery: Copos em Acção */}
-      <section style={{ padding: '96px 24px' }}>
+      <section className="pg-section-padding">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('gallery.title')}</h2>
+          <h2 className="pg-section-title" style={{ textAlign: 'center', fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('gallery.title')}</h2>
           <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>{t('gallery.subtitle')}</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))', gap: 20 }}>
             {[
               { img: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop', label: t('gallery.0.label'), desc: t('gallery.0.desc') },
               { img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop', label: t('gallery.1.label'), desc: t('gallery.1.desc') },
@@ -1873,9 +1883,9 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
       </section>
 
       {/* USPs: Porquê a PrimeGift? */}
-      <section style={{ padding: '96px 24px', background: C.lightBg }}>
+      <section className="pg-section-padding" style={{ background: C.lightBg }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('usp.title')}</h2>
+          <h2 className="pg-section-title" style={{ textAlign: 'center', fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('usp.title')}</h2>
           <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>{t('usp.subtitle')}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 24 }}>
             {[
@@ -1897,9 +1907,9 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
       </section>
 
       {/* Testimonials */}
-      <section style={{ padding: '96px 24px' }}>
+      <section className="pg-section-padding">
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('testimonials.title')}</h2>
+          <h2 className="pg-section-title" style={{ textAlign: 'center', fontWeight: 700, color: C.primary, margin: '0 0 12px' }}>{t('testimonials.title')}</h2>
           <p style={{ textAlign: 'center', color: C.textSec, fontSize: 16, margin: '0 0 48px' }}>{t('testimonials.subtitle')}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
             {[
@@ -1924,9 +1934,9 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
       </section>
 
       {/* CTA Final */}
-      <section style={{ background: `linear-gradient(135deg, ${C.primary} 0%, ${C.accent} 100%)`, padding: '96px 24px', textAlign: 'center' }}>
+      <section className="pg-section-padding" style={{ background: `linear-gradient(135deg, ${C.primary} 0%, ${C.accent} 100%)`, textAlign: 'center' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
-          <h2 style={{ color: C.white, fontSize: 32, fontWeight: 700, margin: '0 0 16px' }}>{t('home.cta.title')}</h2>
+          <h2 className="pg-section-title" style={{ color: C.white, fontWeight: 700, margin: '0 0 16px' }}>{t('home.cta.title')}</h2>
           <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 16, margin: '0 0 32px', lineHeight: 1.6 }}>
             {t('home.cta.subtitle')}
           </p>
@@ -1938,9 +1948,9 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
       </section>
 
       {/* How It Works Preview */}
-      <section style={{ padding: '96px 24px' }}>
+      <section className="pg-section-padding">
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 32, fontWeight: 700, color: C.primary, margin: '0 0 48px' }}>{t('hiw.title')}</h2>
+          <h2 className="pg-section-title" style={{ textAlign: 'center', fontWeight: 700, color: C.primary, margin: '0 0 48px' }}>{t('hiw.title')}</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'center' }}>
             {[
               { n: '1', title: t('hiw.step1.title'), desc: t('hiw.step1.desc') },
@@ -1965,7 +1975,7 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
 
 // ==================== PRODUCTS PAGE ====================
 
-function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => void; initialProduct: string | null; t: TFunc }) {
+function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToContact: () => void; initialProduct: string | null; t: TFunc; cart: CartItem[]; setCart: React.Dispatch<React.SetStateAction<CartItem[]>> }) {
   const [selectedProduct, setSelectedProduct] = useState<string | null>(initialProduct || PRODUCTS[0].id);
   const [printTechnique, setPrintTechnique] = useState<'tampografia' | 'serigrafia'>('tampografia');
   const [quantity, setQuantity] = useState(100);
@@ -1975,17 +1985,18 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
   const [logoPreviewUrl, setLogoPreviewUrl] = useState<string | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [shippingRegion, setShippingRegion] = useState('pt-continental');
-  const [shippingMethod, setShippingMethod] = useState('2-days');
+  const [shippingMethod, setShippingMethod] = useState('standard');
   const [showModal, setShowModal] = useState(false);
   const [orderErrors, setOrderErrors] = useState<string[]>([]);
   const [delivery, setDelivery] = useState({ name: '', address: '', postalCode: '', city: '', country: 'PT' });
   const [customer, setCustomer] = useState({ name: '', email: '', phone: '' });
   const [orderRef, setOrderRef] = useState('');
+  const [itemRefs, setItemRefs] = useState<string[]>([]);
   const [removingBg, setRemovingBg] = useState(false);
   const [autoRemoveBg, setAutoRemoveBg] = useState(true);
   const [logoYOffset, setLogoYOffset] = useState(0);
   const [logoScale, setLogoScale] = useState(100);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [addedToCartMsg, setAddedToCartMsg] = useState(false);
 
   const ALLOWED_EXTS = ['pdf', 'ai', 'eps', 'png', 'svg', 'jpg', 'jpeg'];
   const validateFile = (file: File): boolean => {
@@ -2106,21 +2117,6 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
       setShippingMethod(methods[0]);
     }
   }, [delivery.country, delivery.postalCode]);
-
-  // Auto-sync cart with current configuration (single item)
-  useEffect(() => {
-    if (!selectedProduct) {
-      setCart([]);
-      return;
-    }
-    setCart([{
-      itemId: 'main',
-      productId: selectedProduct,
-      quantity,
-      printColor,
-      printTechnique,
-    }]);
-  }, [selectedProduct, quantity, printColor, printTechnique]);
 
   const sectionStyle: CSSProperties = { marginBottom: 32 };
   const stepTitleStyle: CSSProperties = { fontSize: 16, fontWeight: 700, color: C.primary, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 10 };
@@ -2286,8 +2282,6 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
             <div style={sectionStyle}>
               <h3 style={stepTitleStyle}><span style={stepNumStyle}>5</span> {t('modal.delivery')}</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <input value={delivery.name} onChange={e => setDelivery(prev => ({ ...prev, name: e.target.value }))} placeholder={t('modal.delivery.name')}
-                  style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
                 <input value={delivery.address} onChange={e => setDelivery(prev => ({ ...prev, address: e.target.value }))} placeholder={t('modal.delivery.address')}
                   style={{ padding: '10px 12px', borderRadius: 8, border: `1px solid ${C.border}`, fontSize: 14, color: C.text, background: C.white }} />
                 <div style={{ display: 'flex', gap: 10 }}>
@@ -2457,8 +2451,8 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
               <div style={{ padding: 24 }}>
                 {product ? (
                   <>
-                    {/* Current item summary */}
-                    <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: `1px solid ${C.border}` }}>
+                    {/* Current configuration preview */}
+                    <div style={{ marginBottom: 16, paddingBottom: 16, borderBottom: `1px solid ${C.border}` }}>
                       <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                         <CupImage product={product} size={32} />
                         <div style={{ flex: 1, minWidth: 0 }}>
@@ -2470,54 +2464,186 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
                         <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, whiteSpace: 'nowrap' }}>{fmt(stagingSubtotal)}</div>
                       </div>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: C.textSec }}>{t('order.subtotal')}</span>
-                        <span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span>
-                      </div>
-                      {!isInternational && !overweight && (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: C.textSec }}>{t('order.shipping')}</span>
-                          <span style={{ fontWeight: 700, color: freeShipping ? C.success : undefined }}>{freeShipping ? t('order.shippingFree') : fmt(shippingCost)}</span>
+
+                    {/* Shipping estimate — always visible */}
+                    {(() => {
+                      const estimateWeight = cart.length > 0 ? cartWeightKg : calculateWeightKg(product, quantity);
+                      const estimateSubtotal = cart.length > 0 ? cartSubtotal : stagingSubtotal;
+                      const estimateFree = estimateSubtotal > 250;
+                      const estimateCost = estimateFree ? 0 : (getShippingCost(estimateWeight, shippingRegion, shippingMethod) ?? 0);
+                      const estimateOverweight = estimateWeight > 30;
+                      return (
+                        <div style={{ marginBottom: 16, padding: '12px', background: C.lightBg, borderRadius: 8, border: `1px solid ${C.border}` }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div>
+                              <div style={{ fontSize: 13, fontWeight: 600, color: C.text }}>{t('order.shipping')}</div>
+                              <div style={{ fontSize: 11, color: C.textMuted, marginTop: 2 }}>
+                                DPD {shippingRegion === 'es-peninsular' ? '(SEUR)' : 'Business'} · {t('region.' + shippingRegion)}
+                              </div>
+                              <div style={{ fontSize: 11, color: C.textMuted }}>{t('shipping.estimatedWeight')} {estimateWeight.toFixed(1)}kg · {t('method.standard.days')}</div>
+                            </div>
+                            <div style={{ textAlign: 'right' }}>
+                              {!isInternational && !estimateOverweight ? (
+                                <div style={{ fontWeight: 700, fontSize: 15, color: estimateFree ? C.success : C.primary }}>
+                                  {estimateFree ? t('order.shippingFree') : fmt(estimateCost)}
+                                </div>
+                              ) : estimateOverweight ? (
+                                <div style={{ fontSize: 11, color: '#922B21', fontWeight: 600 }}>Contacte-nos</div>
+                              ) : (
+                                <div style={{ fontSize: 11, color: '#7D6608', fontWeight: 600 }}>Sob consulta</div>
+                              )}
+                            </div>
+                          </div>
+                          {estimateFree && (
+                            <div style={{ fontSize: 11, color: C.success, marginTop: 6, fontWeight: 600 }}>{t('shipping.freeShipping')}</div>
+                          )}
+                          {!estimateFree && !isInternational && !estimateOverweight && (
+                            <div style={{ fontSize: 11, color: C.textMuted, marginTop: 6 }}>{t('shipping.freeShipping')}</div>
+                          )}
                         </div>
-                      )}
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: C.textSec }}>{t('order.vat')}</span>
-                        <span style={{ fontWeight: 600 }}>{fmt(vat)}</span>
-                      </div>
-                      <div style={{ height: 1, background: C.border, margin: '4px 0' }} />
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 18 }}>
-                        <span style={{ fontWeight: 700, color: C.primary }}>{t('order.total')}</span>
-                        <span style={{ fontWeight: 700, color: C.primary }}>{fmt(total)}</span>
-                      </div>
-                    </div>
-                    <p style={{ fontSize: 12, color: C.success, margin: '16px 0', fontWeight: 600 }}>&#x2713; {t('order.freeMockup')}</p>
+                      );
+                    })()}
+
+                    {/* Add to Cart button */}
                     <button onClick={() => {
-                      const errors: string[] = [];
-                      if (!selectedProduct) errors.push(t('order.validation.product'));
-                      if (!uploadedFile) errors.push(t('order.validation.file'));
-                      if (!delivery.name.trim()) errors.push(t('order.validation.deliveryName'));
-                      if (!delivery.address.trim()) errors.push(t('order.validation.deliveryAddress'));
-                      if (!delivery.postalCode.trim()) errors.push(t('order.validation.deliveryPostalCode'));
-                      if (!delivery.city.trim()) errors.push(t('order.validation.deliveryCity'));
-                      if (!customer.name.trim()) errors.push(t('order.validation.customerName'));
-                      if (!customer.email.trim()) errors.push(t('order.validation.deliveryEmail'));
-                      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email.trim())) errors.push(t('order.validation.deliveryEmailInvalid'));
-                      setOrderErrors(errors);
-                      if (errors.length > 0) return;
-                      setOrderRef('PG-' + Math.random().toString(36).substring(2, 8).toUpperCase());
-                      setShowModal(true);
+                      if (!selectedProduct || !uploadedFile) {
+                        const errors: string[] = [];
+                        if (!selectedProduct) errors.push(t('order.validation.product'));
+                        if (!uploadedFile) errors.push(t('order.validation.file'));
+                        setOrderErrors(errors);
+                        return;
+                      }
+                      setOrderErrors([]);
+                      const newItem: CartItem = {
+                        itemId: Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
+                        productId: selectedProduct,
+                        quantity,
+                        printColor,
+                        printTechnique,
+                        uploadedFileName: uploadedFile?.name || null,
+                        uploadedBlobUrl: uploadedBlobUrl,
+                      };
+                      setCart(prev => [...prev, newItem]);
+                      setAddedToCartMsg(true);
+                      setTimeout(() => setAddedToCartMsg(false), 3000);
+                      // Reset configurator for next item
+                      setUploadedFile(null);
+                      setUploadedBlobUrl(null);
+                      setLogoPreviewUrl(null);
                     }}
-                      style={{ width: '100%', padding: '14px', borderRadius: 8, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, color: C.white, border: 'none', fontSize: 16, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}>
-                      {t('order.finalize')}
+                      style={{ width: '100%', padding: '12px', borderRadius: 8, background: C.accent, color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', marginBottom: 8 }}>
+                      {t('products.step3.addToCart')}
                     </button>
+
+                    {/* Added to cart confirmation */}
+                    {addedToCartMsg && (
+                      <div style={{ background: '#D5F5E3', borderRadius: 8, padding: '10px 16px', marginBottom: 12, textAlign: 'center' }}>
+                        <p style={{ margin: 0, fontSize: 13, color: '#1E8449', fontWeight: 600 }}>&#x2713; {t('cart.addedToCart')}</p>
+                      </div>
+                    )}
+
                     {orderErrors.length > 0 && (
-                      <div style={{ marginTop: 12, padding: '12px 16px', background: '#FDEDEC', borderRadius: 8, border: '1px solid #F5B7B1' }}>
+                      <div style={{ marginTop: 4, marginBottom: 12, padding: '12px 16px', background: '#FDEDEC', borderRadius: 8, border: '1px solid #F5B7B1' }}>
                         {orderErrors.map((err, i) => (
                           <p key={i} style={{ margin: i === 0 ? 0 : '6px 0 0', fontSize: 13, color: '#922B21', fontWeight: 500 }}>&#x26A0; {err}</p>
                         ))}
                       </div>
                     )}
+
+                    {/* Cart items */}
+                    {cart.length > 0 && (
+                      <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16, marginTop: 8 }}>
+                        <h4 style={{ margin: '0 0 12px', fontSize: 14, fontWeight: 700, color: C.primary }}>{t('cart.yourCart')} ({cart.length} {cart.length === 1 ? t('cart.item') : t('cart.items')})</h4>
+                        {cart.map(item => {
+                          const p = PRODUCTS.find(pr => pr.id === item.productId);
+                          if (!p) return null;
+                          const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
+                          return (
+                            <div key={item.itemId} style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 10, padding: '8px 10px', background: C.lightBg, borderRadius: 8 }}>
+                              <CupImage product={p} size={24} />
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ fontWeight: 600, fontSize: 12, color: C.text }}>{t(`product.${p.id}.name`)} — {p.capacity}</div>
+                                <div style={{ fontSize: 10, color: C.textSec }}>{item.quantity.toLocaleString('pt-PT')} un. · {t(`color.${item.printColor}`)}</div>
+                              </div>
+                              <div style={{ fontWeight: 700, fontSize: 12, color: C.primary, whiteSpace: 'nowrap' }}>{fmt(up * item.quantity)}</div>
+                              <button onClick={() => setCart(prev => prev.filter(c => c.itemId !== item.itemId))} style={{ background: 'none', border: 'none', color: '#E74C3C', cursor: 'pointer', fontSize: 14, padding: '2px 4px' }} title={t('cart.remove')}>&#x2715;</button>
+                            </div>
+                          );
+                        })}
+
+                        {/* Totals */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, marginTop: 16 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: C.textSec }}>{t('order.subtotal')}</span>
+                            <span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span>
+                          </div>
+                          {/* Transport section */}
+                          {!isInternational && !overweight && cart.length > 0 && (
+                            <div style={{ background: C.lightBg, borderRadius: 8, padding: '10px 12px', margin: '4px 0' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div>
+                                  <span style={{ color: C.textSec, fontSize: 13 }}>{t('order.shipping')}</span>
+                                  <div style={{ fontSize: 11, color: C.textMuted, marginTop: 2 }}>
+                                    DPD {shippingRegion === 'es-peninsular' ? '(SEUR)' : 'Business'} · {t('region.' + shippingRegion)} · {t('shipping.estimatedWeight')} {cartWeightKg.toFixed(1)}kg
+                                  </div>
+                                </div>
+                                <span style={{ fontWeight: 700, fontSize: 14, color: freeShipping ? C.success : C.primary }}>{freeShipping ? t('order.shippingFree') : fmt(shippingCost)}</span>
+                              </div>
+                              {freeShipping && (
+                                <div style={{ fontSize: 11, color: C.success, marginTop: 4, fontWeight: 600 }}>{t('shipping.freeShipping')}</div>
+                              )}
+                              {!freeShipping && cartSubtotal > 0 && (
+                                <div style={{ fontSize: 11, color: C.textMuted, marginTop: 4 }}>
+                                  {t('shipping.freeShipping')} ({t('order.subtotal')} &gt; 250€)
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          {isInternational && cart.length > 0 && (
+                            <div style={{ background: '#FEF9E7', borderRadius: 8, padding: '10px 12px', margin: '4px 0' }}>
+                              <div style={{ fontSize: 12, color: '#7D6608' }}>{t('shipping.international')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.internationalLink')}</a></div>
+                            </div>
+                          )}
+                          {overweight && !isInternational && cart.length > 0 && (
+                            <div style={{ background: '#FDEDEC', borderRadius: 8, padding: '10px 12px', margin: '4px 0' }}>
+                              <div style={{ fontSize: 12, color: '#922B21' }}>{t('shipping.estimatedWeight')} {cartWeightKg.toFixed(1)}kg — {t('shipping.overweight')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.overweightLink')}</a></div>
+                            </div>
+                          )}
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: C.textSec }}>{t('order.vat')}</span>
+                            <span style={{ fontWeight: 600 }}>{fmt(vat)}</span>
+                          </div>
+                          <div style={{ height: 1, background: C.border, margin: '4px 0' }} />
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 18 }}>
+                            <span style={{ fontWeight: 700, color: C.primary }}>{t('order.total')}</span>
+                            <span style={{ fontWeight: 700, color: C.primary }}>{fmt(total)}</span>
+                          </div>
+                        </div>
+
+                        <p style={{ fontSize: 12, color: C.success, margin: '16px 0 12px', fontWeight: 600 }}>&#x2713; {t('order.freeMockup')}</p>
+
+                        {/* Finalize Order button */}
+                        <button onClick={() => {
+                          const errors: string[] = [];
+                          if (!delivery.address.trim()) errors.push(t('order.validation.deliveryAddress'));
+                          if (!delivery.postalCode.trim()) errors.push(t('order.validation.deliveryPostalCode'));
+                          if (!delivery.city.trim()) errors.push(t('order.validation.deliveryCity'));
+                          if (!customer.name.trim()) errors.push(t('order.validation.customerName'));
+                          if (!customer.email.trim()) errors.push(t('order.validation.deliveryEmail'));
+                          else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email.trim())) errors.push(t('order.validation.deliveryEmailInvalid'));
+                          setOrderErrors(errors);
+                          if (errors.length > 0) return;
+                          const genRef = () => 'PG' + Array.from({ length: 6 }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 36)]).join('');
+                          setOrderRef(genRef());
+                          setItemRefs(cart.map(() => genRef()));
+                          setShowModal(true);
+                        }}
+                          style={{ width: '100%', padding: '14px', borderRadius: 8, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, color: C.white, border: 'none', fontSize: 16, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}>
+                          {t('order.finalize')}
+                        </button>
+                      </div>
+                    )}
+
                     <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${C.border}` }}>
                       <p style={{ fontSize: 12, color: C.textMuted, margin: '0 0 8px' }}>{t('order.paymentMethods')}</p>
                       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -2593,16 +2719,82 @@ function ProductsPage({ goToContact, initialProduct, t }: { goToContact: () => v
 
       {/* Confirmation Modal */}
       {showModal && cart.length > 0 && (
-        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} uploadedFileName={uploadedFile?.name || null} uploadedBlobUrl={uploadedBlobUrl} printTechnique={printTechnique} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} customer={customer} />
+        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} itemRefs={itemRefs} customer={customer} />
       )}
+    </div>
+  );
+}
+
+// ==================== CART DRAWER ====================
+
+function CartDrawer({ cart, setCart, onClose, t }: { cart: CartItem[]; setCart: React.Dispatch<React.SetStateAction<CartItem[]>>; onClose: () => void; t: TFunc }) {
+  return (
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1500 }} onClick={onClose}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.4)' }} />
+      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '100%', maxWidth: 400, background: C.white, boxShadow: '-4px 0 20px rgba(0,0,0,0.15)', display: 'flex', flexDirection: 'column' }} onClick={e => e.stopPropagation()}>
+        <div style={{ padding: '20px 24px', borderBottom: `1px solid ${C.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: C.primary }}>{t('cart.yourCart')} ({cart.length})</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 24, cursor: 'pointer', color: C.textSec, padding: '4px 8px' }}>&#x2715;</button>
+        </div>
+        <div style={{ flex: 1, overflowY: 'auto', padding: 24 }}>
+          {cart.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '48px 0', color: C.textMuted }}>
+              <div style={{ fontSize: 48, marginBottom: 16 }}>&#x1F6D2;</div>
+              <p style={{ margin: 0, fontSize: 15 }}>{t('cart.empty')}</p>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {cart.map(item => {
+                const p = PRODUCTS.find(pr => pr.id === item.productId);
+                if (!p) return null;
+                const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
+                return (
+                  <div key={item.itemId} style={{ padding: 16, background: C.lightBg, borderRadius: 10, border: `1px solid ${C.border}` }}>
+                    <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                      <CupImage product={p} size={36} />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: C.text }}>{t(`product.${p.id}.name`)} — {p.capacity}</div>
+                        <div style={{ fontSize: 12, color: C.textSec, marginTop: 4 }}>
+                          {item.quantity.toLocaleString('pt-PT')} un. × {fmt(up)}
+                        </div>
+                        <div style={{ fontSize: 11, color: C.textMuted, marginTop: 2 }}>
+                          {t(`products.step2.${item.printTechnique}`)} · {t(`color.${item.printColor}`)}
+                        </div>
+                        {item.uploadedFileName && (
+                          <div style={{ fontSize: 11, color: C.textMuted, marginTop: 2 }}>&#x1F4CE; {item.uploadedFileName}</div>
+                        )}
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+                        <div style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>{fmt(up * item.quantity)}</div>
+                        <button onClick={() => setCart(prev => prev.filter(c => c.itemId !== item.itemId))} style={{ background: 'none', border: 'none', color: '#E74C3C', cursor: 'pointer', fontSize: 12, padding: 0, fontWeight: 600 }}>{t('cart.remove')}</button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+        {cart.length > 0 && (
+          <div style={{ padding: '16px 24px', borderTop: `1px solid ${C.border}`, background: C.lightBg }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 18, fontWeight: 700, color: C.primary, marginBottom: 12 }}>
+              <span>{t('order.subtotal')}</span>
+              <span>{fmt(getCartSubtotal(cart))}</span>
+            </div>
+            <button onClick={onClose} style={{ width: '100%', padding: '12px', borderRadius: 8, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>
+              {t('cart.continueShopping')}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
 // ==================== CONFIRMATION MODAL ====================
 
-function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, uploadedFileName, uploadedBlobUrl, printTechnique, delivery, setDelivery, orderRef, customer }: {
-  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; uploadedFileName: string | null; uploadedBlobUrl: string | null; printTechnique: 'tampografia' | 'serigrafia'; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; customer: { name: string; email: string; phone: string };
+function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, delivery, setDelivery, orderRef, itemRefs, customer }: {
+  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; itemRefs: string[]; customer: { name: string; email: string; phone: string };
 }) {
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
@@ -2611,24 +2803,31 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
 
   const handleConfirm = async () => {
     if (!selectedPayment || submitting) return;
-    const item = cart[0];
-    if (!item) return;
-    const product = PRODUCTS.find(p => p.id === item.productId);
-    if (!product) return;
-    const unitPrice = getUnitPrice(product, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
+    if (cart.length === 0) return;
     setSubmitting(true);
     try {
+      const items = cart.map((item, idx) => {
+        const p = PRODUCTS.find(pr => pr.id === item.productId);
+        const up = p ? getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor) : 0;
+        return {
+          reference: itemRefs[idx] || orderRef,
+          product: p?.name || '',
+          capacity: p?.capacity || '',
+          quantity: item.quantity,
+          printTechnique: item.printTechnique,
+          printColor: item.printColor,
+          unitPrice: up,
+          itemTotal: up * item.quantity,
+          fileUrl: item.uploadedBlobUrl,
+          fileName: item.uploadedFileName,
+        };
+      });
       await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           reference: orderRef,
-          product: product.name,
-          capacity: product.capacity,
-          quantity: item.quantity,
-          printTechnique: item.printTechnique,
-          printColor: item.printColor,
-          unitPrice,
+          items,
           subtotal: cartSubtotal,
           shippingCost,
           vat,
@@ -2648,8 +2847,6 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
           invoiceAddress: invoice.address,
           invoicePostalCode: invoice.postalCode,
           invoiceCity: invoice.city,
-          fileUrl: uploadedBlobUrl,
-          fileName: uploadedFileName,
         }),
       });
       setConfirmed(true);
@@ -2668,10 +2865,24 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
             <div style={{ fontSize: 48, marginBottom: 16 }}>&#x2705;</div>
             <h2 style={{ color: C.primary, margin: '0 0 8px', fontSize: 24 }}>{t('modal.success')}</h2>
             <p style={{ color: C.textSec, margin: '0 0 16px', fontSize: 14 }}>{t('modal.success.msg')}</p>
-            <div style={{ background: C.lightBg, borderRadius: 8, padding: 16, marginBottom: 24 }}>
+            <div style={{ background: C.lightBg, borderRadius: 8, padding: 16, marginBottom: 16 }}>
               <p style={{ margin: 0, fontSize: 13, color: C.textMuted }}>{t('modal.reference')}</p>
               <p style={{ margin: '4px 0 0', fontSize: 22, fontWeight: 700, color: C.primary, fontFamily: 'monospace', letterSpacing: 2 }}>{orderRef}</p>
             </div>
+            {itemRefs.length > 1 && (
+              <div style={{ background: C.lightBg, borderRadius: 8, padding: 16, marginBottom: 24, textAlign: 'left' }}>
+                <p style={{ margin: '0 0 8px', fontSize: 12, color: C.textMuted, textAlign: 'center' }}>Referências por produto:</p>
+                {cart.map((item, idx) => {
+                  const p = PRODUCTS.find(pr => pr.id === item.productId);
+                  return (
+                    <div key={item.itemId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0', borderBottom: idx < cart.length - 1 ? `1px solid ${C.border}` : 'none' }}>
+                      <span style={{ fontSize: 13, color: C.textSec }}>{p?.capacity || ''}</span>
+                      <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: 14, color: C.primary, letterSpacing: 1 }}>{itemRefs[idx]}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
             <button onClick={onClose} style={{ padding: '12px 32px', borderRadius: 8, background: `linear-gradient(135deg, ${C.primary}, ${C.accent})`, color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>OK</button>
           </div>
         ) : (
@@ -2684,7 +2895,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
 
         <div style={{ background: C.lightBg, borderRadius: 8, padding: 20, marginBottom: 24 }}>
           {/* Cart items */}
-          {cart.map(item => {
+          {cart.map((item, idx) => {
             const p = PRODUCTS.find(pr => pr.id === item.productId);
             if (!p) return null;
             const up = getUnitPrice(p, item.quantity, item.printTechnique) + getColorSurcharge(item.printColor);
@@ -2697,6 +2908,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
                   <div style={{ fontSize: 12, color: C.textSec }}>
                     {item.quantity.toLocaleString('pt-PT')} un. · {t(`color.${item.printColor}`)} · {fmt(up)}/un.
                   </div>
+                  {itemRefs[idx] && <div style={{ fontSize: 11, color: C.accent, fontFamily: 'monospace', fontWeight: 600, marginTop: 2 }}>Ref: {itemRefs[idx]}</div>}
                 </div>
                 <div style={{ fontWeight: 700, fontSize: 14, color: C.primary }}>{fmt(itemTotal)}</div>
               </div>
@@ -2764,11 +2976,10 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
         </div>
 
         {/* Delivery Address (read-only summary from Step 6) */}
-        {(delivery.name || delivery.address) && (
+        {delivery.address && (
           <div style={{ marginBottom: 24 }}>
             <h3 style={{ fontSize: 16, fontWeight: 700, color: C.text, margin: '0 0 8px' }}>{t('modal.delivery')}</h3>
             <div style={{ padding: '12px 16px', background: C.lightBg, borderRadius: 8, fontSize: 14, color: C.textSec, lineHeight: 1.6 }}>
-              {delivery.name && <div style={{ fontWeight: 600, color: C.text }}>{delivery.name}</div>}
               {delivery.address && <div>{delivery.address}</div>}
               {(delivery.postalCode || delivery.city) && <div>{[delivery.postalCode, delivery.city].filter(Boolean).join(' ')}</div>}
             </div>
@@ -3021,10 +3232,10 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
     shipping: {
       title: t('legal.shipping.title'),
       sections: [
-        { heading: 'Prazos de Entrega', text: 'Produção: 5 dias úteis após aprovação da maquete. Entrega Expresso: 2 dias úteis adicionais. Envio Standard: 5 dias úteis adicionais. Total estimado: 7 a 10 dias úteis.' },
+        { heading: 'Prazos de Entrega', text: 'Produção: 5 dias úteis após aprovação da maquete. Entrega DPD: 1-3 dias úteis adicionais (Portugal Continental e Espanha). Total estimado: 6 a 8 dias úteis.' },
         { heading: 'Zonas de Entrega', text: 'Portugal Continental, Ilhas (Açores e Madeira), Espanha Peninsular, Europa (Zona 2 e 3). Para envios internacionais fora da UE, contacte-nos para orçamento personalizado.' },
         { heading: 'Custos de Envio', text: 'Os custos de envio são calculados com base no peso total da encomenda e na zona de destino. Portes grátis para encomendas com subtotal superior a 250€ (antes de IVA). Para encomendas acima de 30kg, contacte-nos para o melhor preço.' },
-        { heading: 'Transportadora', text: 'Os envios são realizados através da CTT Expresso para Portugal e Espanha, e através de transportadoras internacionais para a restante Europa.' },
+        { heading: 'Transportadora', text: 'Os envios são realizados através da DPD Portugal para Portugal Continental, Ilhas e Espanha (via SEUR), e através da rede DPD internacional para a restante Europa.' },
         { heading: 'Rastreamento', text: 'Após o envio, receberá um email com o número de rastreamento para acompanhar a sua encomenda em tempo real.' },
         { heading: 'Receção da Encomenda', text: 'Na receção, verifique o estado da embalagem e dos produtos. Em caso de danos visíveis, recuse a entrega ou assinale os danos no comprovativo de entrega e contacte-nos imediatamente.' },
       ]
@@ -3141,6 +3352,8 @@ export default function PrimeGiftApp() {
   const [page, setPage] = useState('home');
   const [initialProduct, setInitialProduct] = useState<string | null>(null);
   const [lang, setLang] = useState<Lang>('pt');
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('primegift-lang') as Lang | null;
@@ -3161,10 +3374,10 @@ export default function PrimeGiftApp() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Header page={page} setPage={setPage} t={t} lang={lang} setLang={setLang} />
+      <Header page={page} setPage={setPage} t={t} lang={lang} setLang={setLang} cartCount={cart.length} onCartClick={() => setCartDrawerOpen(true)} />
       <main style={{ flex: 1 }}>
         {page === 'home' && <HomePage setPage={setPage} onSelectProduct={handleSelectProduct} t={t} />}
-        {page === 'products' && <ProductsPage key={initialProduct ?? 'default'} goToContact={() => { setPage('contact'); window.scrollTo(0, 0); }} initialProduct={initialProduct} t={t} />}
+        {page === 'products' && <ProductsPage key={initialProduct ?? 'default'} goToContact={() => { setPage('contact'); window.scrollTo(0, 0); }} initialProduct={initialProduct} t={t} cart={cart} setCart={setCart} />}
         {page === 'how-it-works' && <HowItWorksPage t={t} />}
         {page === 'contact' && <ContactPage t={t} />}
         {page === 'privacy' && <LegalPage type="privacy" t={t} />}
@@ -3174,6 +3387,7 @@ export default function PrimeGiftApp() {
         {page === 'shipping-policy' && <LegalPage type="shipping" t={t} />}
       </main>
       <Footer setPage={setPage} t={t} />
+      {cartDrawerOpen && <CartDrawer cart={cart} setCart={setCart} onClose={() => setCartDrawerOpen(false)} t={t} />}
     </div>
   );
 }
