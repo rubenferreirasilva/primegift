@@ -205,7 +205,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
       <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto">
         <div style="background:linear-gradient(135deg,#1B2A4A,#2E86AB);padding:24px 32px;border-radius:12px 12px 0 0">
           <h1 style="color:white;margin:0;font-size:22px">Pagamento Confirmado &#x2705;</h1>
-          <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px">PrimeGift — Uma marca do Grupo MetalPrime</p>
+          <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px">PrimeGift</p>
         </div>
         <div style="background:#f8f9fa;padding:24px 32px;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 12px 12px">
           <p style="color:#333;font-size:15px;margin:0 0 20px">Olá <strong>${customerName}</strong>,</p>
@@ -230,7 +230,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
           </div>
 
           <p style="color:#555;font-size:13px;margin:0 0 8px">Obrigado pela sua confiança!</p>
-          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift — Uma marca do Grupo MetalPrime<br>info@metalprime.pt</p>
+          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>info@primegift.pt</p>
         </div>
       </div>
     `;
@@ -238,7 +238,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
     await transporter.sendMail({
       from: `"PrimeGift" <${process.env.SMTP_USER}>`,
       to: customerEmail,
-      replyTo: 'info@metalprime.pt',
+      replyTo: 'info@primegift.pt',
       subject: `Pagamento Confirmado — ${reference} — PrimeGift`,
       html,
     });
@@ -249,7 +249,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
       <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto">
         <div style="background:linear-gradient(135deg,#1B2A4A,#2E86AB);padding:24px 32px;border-radius:12px 12px 0 0">
           <h1 style="color:white;margin:0;font-size:22px">Encomenda Enviada &#x1F4E6;</h1>
-          <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px">PrimeGift — Uma marca do Grupo MetalPrime</p>
+          <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px">PrimeGift</p>
         </div>
         <div style="background:#f8f9fa;padding:24px 32px;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 12px 12px">
           <p style="color:#333;font-size:15px;margin:0 0 20px">Olá <strong>${customerName}</strong>,</p>
@@ -282,7 +282,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
           </div>
 
           <p style="color:#555;font-size:13px;margin:0 0 8px">Obrigado pela sua compra!</p>
-          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift — Uma marca do Grupo MetalPrime<br>info@metalprime.pt</p>
+          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>info@primegift.pt</p>
         </div>
       </div>
     `;
@@ -290,7 +290,7 @@ async function sendStatusEmail(data: Record<string, unknown>, reference: string,
     await transporter.sendMail({
       from: `"PrimeGift" <${process.env.SMTP_USER}>`,
       to: customerEmail,
-      replyTo: 'info@metalprime.pt',
+      replyTo: 'info@primegift.pt',
       subject: `Encomenda Enviada — ${reference} — PrimeGift`,
       html,
     });

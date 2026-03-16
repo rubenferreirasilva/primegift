@@ -46,19 +46,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     // Shipping methods
     'method.standard': 'Envio Standard (DPD)',
     'method.standard.days': '~10 dias úteis (5 dias produção + 1-3 dias úteis entrega)',
-    // Payment
-    'payment.paypal': 'PayPal',
-    'payment.transfer': 'Transferência Bancária',
-    'payment.mbway': 'MB WAY',
-    'payment.transfer.info': 'Dados para transferência:',
-    'payment.transfer.holder': 'Titular',
-    'payment.transfer.bank': 'Banco',
-    'payment.paypal.info': 'Envie o pagamento para:',
-    'payment.mbway.info': 'Envie o pagamento para o número:',
-    'payment.revolut': 'Revolut',
-    'payment.revolut.info': 'Envie o pagamento para:',
     // Hero
-    'hero.brand': 'Uma marca do Grupo MetalPrime',
     'hero.tag': 'Festivais · Festas · Restaurantes',
     'hero.title1': 'A Sua Marca',
     'hero.title2': 'em Cada Copo',
@@ -73,7 +61,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Até 4 cores',
     'trust.2': '10 dias úteis',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '3 formas de pagamento',
     // Home products
     'home.products.title': 'Os Nossos Produtos',
     'home.products.subtitle': 'Copos reutilizáveis de alta qualidade, prontos para a sua marca',
@@ -193,7 +180,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.total': 'Total',
     'order.freeMockup': 'Maquete digital gratuita incluída',
     'order.finalize': 'Finalizar Encomenda',
-    'order.paymentMethods': 'Métodos de pagamento:',
     'order.emptyCart': 'Adicione produtos ao carrinho para ver o orçamento',
     'order.validation.product': 'Selecione um copo',
     'order.validation.file': 'Carregue o ficheiro com o logótipo',
@@ -212,7 +198,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.vatNote': 'IVA não incluído (23%)',
     // Modal
     'modal.title': 'Confirmar Encomenda',
-    'modal.paymentMethod': 'Método de Pagamento',
     'modal.invoice': 'Dados de Faturação',
     'modal.invoice.hint': 'Preencha para receber fatura',
     'modal.invoice.name': 'Nome / Empresa',
@@ -283,7 +268,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.desc': 'Especialistas em personalização de copos de plástico reutilizáveis. Tampografia e serigrafia de alta qualidade.',
     'footer.tagline': 'A SUA MARCA EM CADA DETALHE',
     'footer.nav': 'Navegação',
-    'footer.payment': 'Pagamento',
     'footer.copyright': '© 2026 PrimeGift. Todos os direitos reservados.',
     'products.step4.vectorNotice': 'Ficheiros PDF, AI e EPS não podem ser pré-visualizados no mockup. O seu ficheiro será usado na maquete final enviada para aprovação.',
     'testimonial.3.quote': 'Usámos os copos da PrimeGift no nosso casamento e foi um sucesso. Os convidados ficaram encantados com a personalização e muitos levaram como lembrança.',
@@ -330,17 +314,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'region.international': 'Internacional (fuera de la UE)',
     'method.standard': 'Envío Estándar (DPD)',
     'method.standard.days': '~10 días hábiles (5 días producción + 1-3 días hábiles entrega)',
-    'payment.paypal': 'PayPal',
-    'payment.transfer': 'Transferencia Bancaria',
-    'payment.mbway': 'MB WAY',
-    'payment.transfer.info': 'Datos para transferencia:',
-    'payment.transfer.holder': 'Titular',
-    'payment.transfer.bank': 'Banco',
-    'payment.paypal.info': 'Envíe el pago a:',
-    'payment.mbway.info': 'Envíe el pago al número:',
-    'payment.revolut': 'Revolut',
-    'payment.revolut.info': 'Envíe el pago a:',
-    'hero.brand': 'Una marca del Grupo MetalPrime',
     'hero.tag': 'Festivales · Fiestas · Restaurantes',
     'hero.title1': 'Tu Marca',
     'hero.title2': 'en Cada Vaso',
@@ -354,7 +327,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Hasta 4 colores',
     'trust.2': '10 días hábiles',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '3 formas de pago',
     'home.products.title': 'Nuestros Productos',
     'home.products.subtitle': 'Vasos reutilizables de alta calidad, listos para tu marca',
     'home.products.from': 'desde',
@@ -463,7 +435,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.total': 'Total',
     'order.freeMockup': 'Maqueta digital gratuita incluida',
     'order.finalize': 'Finalizar Pedido',
-    'order.paymentMethods': 'Métodos de pago:',
     'order.emptyCart': 'Añade productos al carrito para ver el presupuesto',
     'order.validation.product': 'Selecciona un vaso',
     'order.validation.file': 'Sube el archivo con el logotipo',
@@ -480,7 +451,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.printColors': 'Impresión: Negro, Blanco o Gris',
     'priceTable.vatNote': 'IVA no incluido (23%)',
     'modal.title': 'Confirmar Pedido',
-    'modal.paymentMethod': 'Método de Pago',
     'modal.invoice': 'Datos de Facturación',
     'modal.invoice.hint': 'Complete para recibir factura',
     'modal.invoice.name': 'Nombre / Empresa',
@@ -548,7 +518,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.desc': 'Especialistas en personalización de vasos de plástico reutilizables. Tampografía y serigrafía de alta calidad.',
     'footer.tagline': 'TU MARCA EN CADA DETALLE',
     'footer.nav': 'Navegación',
-    'footer.payment': 'Pago',
     'footer.copyright': '© 2026 PrimeGift. Todos los derechos reservados.',
     'products.step4.vectorNotice': 'Los archivos PDF, AI y EPS no pueden previsualizarse en la maqueta. Tu archivo será utilizado en la maqueta final enviada para aprobación.',
     'testimonial.3.quote': 'Usamos los vasos de PrimeGift en nuestra boda y fue un éxito. Los invitados quedaron encantados con la personalización y muchos se los llevaron de recuerdo.',
@@ -595,17 +564,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'region.international': 'International (outside EU)',
     'method.standard': 'Standard Shipping (DPD)',
     'method.standard.days': '~10 business days (5 days production + 1-3 business days delivery)',
-    'payment.paypal': 'PayPal',
-    'payment.transfer': 'Bank Transfer',
-    'payment.mbway': 'MB WAY',
-    'payment.transfer.info': 'Bank transfer details:',
-    'payment.transfer.holder': 'Account holder',
-    'payment.transfer.bank': 'Bank',
-    'payment.paypal.info': 'Send payment to:',
-    'payment.mbway.info': 'Send payment to number:',
-    'payment.revolut': 'Revolut',
-    'payment.revolut.info': 'Send payment to:',
-    'hero.brand': 'A MetalPrime Group brand',
     'hero.tag': 'Festivals · Parties · Restaurants',
     'hero.title1': 'Your Brand',
     'hero.title2': 'on Every Cup',
@@ -619,7 +577,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Up to 4 colours',
     'trust.2': '10 business days',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '3 payment methods',
     'home.products.title': 'Our Products',
     'home.products.subtitle': 'High-quality reusable cups, ready for your brand',
     'home.products.from': 'from',
@@ -728,7 +685,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.total': 'Total',
     'order.freeMockup': 'Free digital mockup included',
     'order.finalize': 'Finalise Order',
-    'order.paymentMethods': 'Payment methods:',
     'order.emptyCart': 'Add products to cart to see the quote',
     'order.validation.product': 'Select a cup',
     'order.validation.file': 'Upload your logo file',
@@ -745,7 +701,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.printColors': 'Print: Black, White or Grey',
     'priceTable.vatNote': 'VAT not included (23%)',
     'modal.title': 'Confirm Order',
-    'modal.paymentMethod': 'Payment Method',
     'modal.invoice': 'Billing Details',
     'modal.invoice.hint': 'Fill in to receive an invoice',
     'modal.invoice.name': 'Name / Company',
@@ -813,7 +768,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.desc': 'Specialists in customisation of reusable plastic cups. High-quality pad printing and screen printing.',
     'footer.tagline': 'YOUR BRAND IN EVERY DETAIL',
     'footer.nav': 'Navigation',
-    'footer.payment': 'Payment',
     'footer.copyright': '© 2026 PrimeGift. All rights reserved.',
     'products.step4.vectorNotice': 'PDF, AI and EPS files cannot be previewed on the mockup. Your file will be used in the final mockup sent for approval.',
     'testimonial.3.quote': 'We used PrimeGift cups at our wedding and it was a huge success. Guests loved the personalisation and many took them home as souvenirs.',
@@ -860,17 +814,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'region.international': 'International (hors UE)',
     'method.standard': 'Envoi Standard (DPD)',
     'method.standard.days': '~10 jours ouvrés (5 jours production + 1-3 jours ouvrés livraison)',
-    'payment.paypal': 'PayPal',
-    'payment.transfer': 'Virement Bancaire',
-    'payment.mbway': 'MB WAY',
-    'payment.transfer.info': 'Coordonnées bancaires :',
-    'payment.transfer.holder': 'Titulaire',
-    'payment.transfer.bank': 'Banque',
-    'payment.paypal.info': 'Envoyez le paiement à :',
-    'payment.mbway.info': 'Envoyez le paiement au numéro :',
-    'payment.revolut': 'Revolut',
-    'payment.revolut.info': 'Envoyez le paiement à :',
-    'hero.brand': 'Une marque du Groupe MetalPrime',
     'hero.tag': 'Festivals · Fêtes · Restaurants',
     'hero.title1': 'Votre Marque',
     'hero.title2': 'sur Chaque Gobelet',
@@ -884,7 +827,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'trust.1': 'Jusqu\'à 4 couleurs',
     'trust.2': '10 jours ouvrés',
     'trust.3': 'PT + ES + Int.',
-    'trust.4': '3 modes de paiement',
     'home.products.title': 'Nos Produits',
     'home.products.subtitle': 'Gobelets réutilisables de haute qualité, prêts pour votre marque',
     'home.products.from': 'à partir de',
@@ -993,7 +935,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.total': 'Total',
     'order.freeMockup': 'Maquette numérique gratuite incluse',
     'order.finalize': 'Finaliser la Commande',
-    'order.paymentMethods': 'Modes de paiement :',
     'order.emptyCart': 'Ajoutez des produits au panier pour voir le devis',
     'order.validation.product': 'Sélectionnez un gobelet',
     'order.validation.file': 'Téléchargez votre fichier logo',
@@ -1010,7 +951,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.printColors': 'Impression : Noir, Blanc ou Gris',
     'priceTable.vatNote': 'TVA non incluse (23%)',
     'modal.title': 'Confirmer la Commande',
-    'modal.paymentMethod': 'Mode de Paiement',
     'modal.invoice': 'Données de Facturation',
     'modal.invoice.hint': 'Remplissez pour recevoir une facture',
     'modal.invoice.name': 'Nom / Entreprise',
@@ -1078,7 +1018,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.desc': 'Spécialistes en personnalisation de gobelets en plastique réutilisables. Tampographie et sérigraphie de haute qualité.',
     'footer.tagline': 'VOTRE MARQUE DANS CHAQUE DÉTAIL',
     'footer.nav': 'Navigation',
-    'footer.payment': 'Paiement',
     'footer.copyright': '© 2026 PrimeGift. Tous droits réservés.',
     'products.step4.vectorNotice': 'Les fichiers PDF, AI et EPS ne peuvent pas être prévisualisés sur la maquette. Votre fichier sera utilisé dans la maquette finale envoyée pour approbation.',
     'testimonial.3.quote': 'Nous avons utilisé les gobelets PrimeGift pour notre mariage et ce fut un succès. Les invités ont adoré la personnalisation et beaucoup les ont gardés en souvenir.',
@@ -1186,11 +1125,6 @@ const SHIPPING_METHOD_LABELS: Record<string, { label: string; days: string }> = 
   'standard': { label: 'Envio Standard (DPD)', days: '~10 dias úteis (5 dias produção + 1-3 dias úteis entrega)' },
 };
 
-const PAYMENT_METHODS = [
-  { id: 'paypal', label: 'PayPal' },
-  { id: 'transfer', label: 'Transferência Bancária' },
-  { id: 'mbway', label: 'MB WAY' },
-];
 
 // ==================== HELPERS ====================
 
@@ -1464,24 +1398,6 @@ function CupImage({ product, size = 120 }: { product: Product; size?: number }) 
 
 
 
-function PaymentIcon({ method }: { method: string }) {
-  const s = 20;
-  if (method === 'paypal') return (
-    <svg width={s} height={s} viewBox="0 0 24 24"><path d="M7.5,21L8.5,15H5.5L9.5,3H16C18.5,3 20,5 19.5,7.5C19,10 16.5,12 14,12H11.5L10.5,18H7.5Z" fill="#003087" /><path d="M9.5,19L10.5,13H7.5L11.5,3H16C18,3 19,4.5 18.5,6.5C18,9 16,10.5 14,10.5H12L11,16.5H8L9.5,19Z" fill="#009cde" /></svg>
-  );
-  if (method === 'transfer') return (
-    <svg width={s} height={s} viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke={C.primary} strokeWidth="2" /><line x1="3" y1="10" x2="21" y2="10" stroke={C.primary} strokeWidth="2" /><rect x="5" y="14" width="6" height="2" rx="1" fill={C.primary} /></svg>
-  );
-  if (method === 'mbway') return (
-    <svg width={s} height={s} viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2" fill="none" stroke="#E4002B" strokeWidth="2" /><circle cx="12" cy="18" r="1.5" fill="#E4002B" /><text x="12" y="13" textAnchor="middle" fontSize="6" fontWeight="bold" fill="#E4002B">MB</text></svg>
-  );
-  if (method === 'revolut') return (
-    <svg width={s} height={s} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#0075EB" strokeWidth="2" /><text x="12" y="16" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#0075EB">R</text></svg>
-  );
-  return (
-    <svg width={s} height={s} viewBox="0 0 24 24"><path d="M17,3H7A4,4 0 003,7v10a4,4 0 004,4h10a4,4 0 004-4V7A4,4 0 0017,3Z" fill="none" stroke="#000" strokeWidth="1.5" /><path d="M12,7.5A3,3 0 009,10.5c0,3 3,5 3,5s3-2 3-5A3,3 0 0012,7.5Z" fill="#000" /></svg>
-  );
-}
 
 // ==================== HEADER ====================
 
@@ -1769,7 +1685,6 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
         {/* Conteúdo texto — lado esquerdo */}
         <div className="pg-hero-text">
           <div>
-            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', margin: '0 0 12px', fontWeight: 500, letterSpacing: 0.5, textTransform: 'uppercase' }}>{t('hero.brand')}</p>
             <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: '6px 16px', marginBottom: 16, backdropFilter: 'blur(8px)' }}>
               <span style={{ fontSize: 13, fontWeight: 600, color: C.white, letterSpacing: 0.5 }}>{t('hero.tag')}</span>
             </div>
@@ -1800,7 +1715,6 @@ function HomePage({ setPage, onSelectProduct, t }: { setPage: (p: string) => voi
             { icon: '📦', text: t('trust.0') },
             { icon: '⚡', text: t('trust.2') },
             { icon: '🌍', text: t('trust.3') },
-            { icon: '💳', text: t('trust.4') },
           ].map((item, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontSize: 22 }}>{item.icon}</span>
@@ -2572,17 +2486,6 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                       </div>
                     )}
 
-                    <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${C.border}` }}>
-                      <p style={{ fontSize: 12, color: C.textMuted, margin: '0 0 8px' }}>{t('order.paymentMethods')}</p>
-                      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                        {PAYMENT_METHODS.map(pm => (
-                          <div key={pm.id} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <PaymentIcon method={pm.id} />
-                            <span style={{ fontSize: 11, color: C.textSec }}>{t('payment.' + pm.id)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
                   </>
                 ) : (
                   <div style={{ textAlign: 'center', padding: '32px 0', color: C.textMuted }}>
@@ -2723,13 +2626,12 @@ function CartDrawer({ cart, setCart, onClose, t }: { cart: CartItem[]; setCart: 
 function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shippingRegion, shippingMethod, onClose, t, delivery, setDelivery, orderRef, itemRefs, customer }: {
   cart: CartItem[]; cartSubtotal: number; shippingCost: number; vat: number; total: number; shippingRegion: string; shippingMethod: string; onClose: () => void; t: TFunc; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; itemRefs: string[]; customer: { name: string; email: string; phone: string };
 }) {
-  const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
 
   const handleConfirm = async () => {
-    if (!selectedPayment || submitting) return;
+    if (submitting) return;
     if (cart.length === 0) return;
     setSubmitting(true);
     try {
@@ -2759,7 +2661,6 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shipp
           shippingCost,
           vat,
           total,
-          paymentMethod: selectedPayment,
           shippingMethod,
           shippingRegion,
           customerName: customer.name,
@@ -2854,52 +2755,6 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shipp
           </div>
         </div>
 
-        <h3 style={{ fontSize: 16, fontWeight: 700, color: C.text, margin: '0 0 12px' }}>{t('modal.paymentMethod')}</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
-          {PAYMENT_METHODS.map(pm => (
-            <div key={pm.id}>
-              <label onClick={() => setSelectedPayment(pm.id)}
-                style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderRadius: selectedPayment === pm.id ? '8px 8px 0 0' : 8, border: `2px solid ${selectedPayment === pm.id ? C.accent : C.border}`, borderBottom: selectedPayment === pm.id ? 'none' : undefined, background: selectedPayment === pm.id ? C.lightBg : C.white, cursor: 'pointer', transition: 'all 0.2s' }}>
-                <div style={{ width: 20, height: 20, borderRadius: '50%', border: `2px solid ${selectedPayment === pm.id ? C.accent : C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {selectedPayment === pm.id && <div style={{ width: 10, height: 10, borderRadius: '50%', background: C.accent }} />}
-                </div>
-                <PaymentIcon method={pm.id} />
-                <span style={{ fontWeight: 600, fontSize: 14 }}>{t('payment.' + pm.id)}</span>
-              </label>
-              {/* Payment details when selected */}
-              {selectedPayment === 'transfer' && pm.id === 'transfer' && (
-                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
-                  <p style={{ margin: '0 0 8px', fontWeight: 600, color: C.text }}>{t('payment.transfer.info')}</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4, color: C.textSec }}>
-                    <div><strong>{t('payment.transfer.holder')}:</strong> METALPRIME, LDA</div>
-                    <div><strong>IBAN:</strong> <span style={{ fontFamily: 'monospace', letterSpacing: 1 }}>PT50 0010 0000 6313 9290 0016 5</span></div>
-                    <div><strong>{t('payment.transfer.bank')}:</strong> Banco BPI</div>
-                    <div><strong>BIC/SWIFT:</strong> BBPIPTPL</div>
-                  </div>
-                </div>
-              )}
-              {selectedPayment === 'paypal' && pm.id === 'paypal' && (
-                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
-                  <p style={{ margin: '0 0 4px', fontWeight: 600, color: C.text }}>{t('payment.paypal.info')}</p>
-                  <div style={{ color: C.textSec }}><strong>info@metalprime.pt</strong></div>
-                </div>
-              )}
-              {selectedPayment === 'mbway' && pm.id === 'mbway' && (
-                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
-                  <p style={{ margin: '0 0 4px', fontWeight: 600, color: C.text }}>{t('payment.mbway.info')}</p>
-                  <div style={{ color: C.textSec, fontFamily: 'monospace', fontSize: 15, fontWeight: 700 }}>916 799 188</div>
-                </div>
-              )}
-              {selectedPayment === 'revolut' && pm.id === 'revolut' && (
-                <div style={{ padding: '14px 16px', background: '#F0F7FF', border: `2px solid ${C.accent}`, borderTop: `1px solid ${C.border}`, borderRadius: '0 0 8px 8px', fontSize: 13 }}>
-                  <p style={{ margin: '0 0 4px', fontWeight: 600, color: C.text }}>{t('payment.revolut.info')}</p>
-                  <div style={{ color: C.textSec }}><strong>@metalprime</strong></div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
         {/* Delivery Address (read-only summary from Step 6) */}
         {delivery.address && (
           <div style={{ marginBottom: 24 }}>
@@ -2934,8 +2789,8 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shipp
             style={{ flex: 1, padding: '13px', borderRadius: 8, background: C.white, color: C.textSec, border: `1px solid ${C.border}`, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>
             {t('modal.cancel')}
           </button>
-          <button onClick={handleConfirm} disabled={!selectedPayment || submitting}
-            style={{ flex: 2, padding: '13px', borderRadius: 8, background: (selectedPayment && !submitting) ? `linear-gradient(135deg, ${C.primary}, ${C.accent})` : '#BDC3C7', color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: (selectedPayment && !submitting) ? 'pointer' : 'not-allowed', transition: 'all 0.2s', opacity: submitting ? 0.7 : 1 }}>
+          <button onClick={handleConfirm} disabled={submitting}
+            style={{ flex: 2, padding: '13px', borderRadius: 8, background: !submitting ? `linear-gradient(135deg, ${C.primary}, ${C.accent})` : '#BDC3C7', color: C.white, border: 'none', fontSize: 15, fontWeight: 700, cursor: !submitting ? 'pointer' : 'not-allowed', transition: 'all 0.2s', opacity: submitting ? 0.7 : 1 }}>
             {submitting ? '...' : t('modal.confirm')}
           </button>
         </div>
@@ -3046,8 +2901,8 @@ function ContactPage({ t }: { t: TFunc }) {
       <section style={{ ...container, padding: '64px 24px' }}>
         {/* Contact Info */}
         <div style={{ maxWidth: 600, margin: '0 auto 32px', display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
-          <a href="mailto:info@metalprime.pt" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
-            <span style={{ fontSize: 20 }}>&#x2709;</span> info@metalprime.pt
+          <a href="mailto:info@primegift.pt" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
+            <span style={{ fontSize: 20 }}>&#x2709;</span> info@primegift.pt
           </a>
           <a href="tel:+351916799188" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 24px', background: C.white, borderRadius: 10, border: `1px solid ${C.border}`, boxShadow: C.cardShadow, textDecoration: 'none', color: C.text, fontSize: 15, fontWeight: 600, flex: '1 1 220px', justifyContent: 'center' }}>
             <span style={{ fontSize: 20 }}>&#x260E;</span> +351 916 799 188
@@ -3118,18 +2973,18 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
         { heading: 'Finalidade do Tratamento', text: 'Os dados pessoais são tratados com a finalidade de responder a pedidos de contacto, processar encomendas, enviar orçamentos e prestar apoio ao cliente.' },
         { heading: 'Base Legal', text: 'O tratamento dos dados baseia-se no consentimento do titular (ao submeter o formulário) e na execução de contrato ou diligências pré-contratuais.' },
         { heading: 'Conservação dos Dados', text: 'Os dados pessoais são conservados pelo período necessário ao cumprimento das finalidades para que foram recolhidos, ou pelo período exigido por lei.' },
-        { heading: 'Direitos do Titular', text: 'Nos termos do RGPD, tem direito de acesso, retificação, apagamento, limitação do tratamento, portabilidade e oposição ao tratamento dos seus dados. Para exercer estes direitos, contacte-nos através de info@metalprime.pt.' },
+        { heading: 'Direitos do Titular', text: 'Nos termos do RGPD, tem direito de acesso, retificação, apagamento, limitação do tratamento, portabilidade e oposição ao tratamento dos seus dados. Para exercer estes direitos, contacte-nos através de info@primegift.pt.' },
         { heading: 'Segurança', text: 'Implementamos medidas técnicas e organizativas adequadas para proteger os dados pessoais contra perda, uso indevido, acesso não autorizado ou divulgação.' },
       ]
     },
     terms: {
       title: t('legal.terms.title'),
       sections: [
-        { heading: 'Identificação', text: 'O presente website é propriedade e operado pela PrimeGift (MetalPrime), com sede em Portugal. Email: info@metalprime.pt.' },
+        { heading: 'Identificação', text: 'O presente website é propriedade e operado pela PrimeGift, com sede em Portugal. Email: info@primegift.pt.' },
         { heading: 'Produtos e Serviços', text: 'A PrimeGift comercializa copos de plástico reutilizáveis personalizados com tampografia e serigrafia. Os produtos apresentados no website são meramente ilustrativos, podendo existir ligeiras variações de cor ou dimensão.' },
         { heading: 'Encomendas', text: 'A encomenda mínima é de 100 unidades. Todas as encomendas estão sujeitas a aprovação de maquete digital antes da produção. O prazo de produção é de 5 dias úteis após aprovação da maquete, acrescido do prazo de entrega.' },
         { heading: 'Preços', text: 'Os preços indicados no website não incluem IVA (23%). Os preços incluem impressão a 1 cor. O transporte é calculado com base no peso e destino da encomenda.' },
-        { heading: 'Pagamento', text: 'Aceitamos pagamento por PayPal, Transferência Bancária, MB WAY e Apple Pay. O pagamento é exigido na totalidade antes do início da produção.' },
+        { heading: 'Pagamento', text: 'O pagamento é exigido na totalidade antes do início da produção. As instruções de pagamento serão comunicadas após a confirmação da encomenda.' },
         { heading: 'Propriedade Intelectual', text: 'O cliente garante que detém os direitos sobre os logótipos e designs enviados para personalização. A PrimeGift não se responsabiliza por violações de direitos de propriedade intelectual de terceiros.' },
         { heading: 'Limitação de Responsabilidade', text: 'A PrimeGift não se responsabiliza por atrasos causados por terceiros (transportadoras, serviços postais) ou por casos de força maior.' },
       ]
@@ -3148,7 +3003,7 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
       title: t('legal.returns.title'),
       sections: [
         { heading: 'Produtos Personalizados', text: 'Por se tratar de produtos personalizados feitos por encomenda, os copos com impressão personalizada não são elegíveis para devolução ou troca, exceto em caso de defeito de fabrico, conforme previsto no Decreto-Lei n.º 67/2003.' },
-        { heading: 'Defeitos de Fabrico', text: 'Em caso de defeito de fabrico (impressão com defeito, produto danificado, quantidade incorreta), o cliente deve reportar o problema no prazo de 48 horas após a receção da encomenda, enviando fotografias do defeito para info@metalprime.pt.' },
+        { heading: 'Defeitos de Fabrico', text: 'Em caso de defeito de fabrico (impressão com defeito, produto danificado, quantidade incorreta), o cliente deve reportar o problema no prazo de 48 horas após a receção da encomenda, enviando fotografias do defeito para info@primegift.pt.' },
         { heading: 'Processo de Reclamação', text: '1) Contacte-nos por email com fotografias do defeito; 2) Analisaremos a reclamação em 48 horas úteis; 3) Se o defeito for confirmado, procederemos à reposição ou reembolso total do valor.' },
         { heading: 'Aprovação de Maquete', text: 'Após aprovação da maquete digital pelo cliente, quaisquer erros presentes na maquete aprovada são da responsabilidade do cliente. Recomendamos uma revisão cuidadosa de todos os elementos antes da aprovação.' },
         { heading: 'Cancelamento', text: 'Encomendas podem ser canceladas sem custos antes do início da produção. Após o início da produção, não é possível cancelar a encomenda.' },
@@ -3250,18 +3105,6 @@ function Footer({ setPage, t }: { setPage: (p: string) => void; t: TFunc }) {
           ))}
         </div>
 
-        {/* Payment Methods */}
-        <div style={{ flex: '0 0 200px' }}>
-          <h4 style={{ color: C.white, fontSize: 14, fontWeight: 700, margin: '0 0 16px', textTransform: 'uppercase', letterSpacing: 1 }}>{t('footer.payment')}</h4>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {PAYMENT_METHODS.map(pm => (
-              <div key={pm.id} style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <PaymentIcon method={pm.id} />
-                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>{t('payment.' + pm.id)}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: 20, textAlign: 'center' }}>

@@ -103,7 +103,7 @@ async function sendOrderEmails(data: OrderData) {
   const itemCount = data.items.reduce((sum, i) => sum + i.quantity, 0);
   const itemsSummary = data.items.map(i => `${i.product} ${i.capacity} ×${i.quantity}`).join(', ');
 
-  // ==================== EMAIL TO METALPRIME (full details) ====================
+  // ==================== EMAIL TO ADMIN (full details) ====================
   const adminHtml = `
     <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto">
       <div style="background:linear-gradient(135deg,#1B2A4A,#2E86AB);padding:24px 32px;border-radius:12px 12px 0 0">
@@ -159,7 +159,7 @@ async function sendOrderEmails(data: OrderData) {
     <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto">
       <div style="background:linear-gradient(135deg,#1B2A4A,#2E86AB);padding:24px 32px;border-radius:12px 12px 0 0">
         <h1 style="color:white;margin:0;font-size:22px">Confirmação de Encomenda</h1>
-        <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px">PrimeGift — Uma marca do Grupo MetalPrime</p>
+        <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px">PrimeGift</p>
       </div>
       <div style="background:#f8f9fa;padding:24px 32px;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 12px 12px">
         <p style="color:#333;font-size:15px;margin:0 0 20px">Olá <strong>${data.customerName}</strong>, obrigado pela sua encomenda! Aqui está o resumo do seu pedido:</p>
@@ -198,41 +198,12 @@ async function sendOrderEmails(data: OrderData) {
         <p style="color:#555;font-size:13px;margin:0 0 8px">Método de pagamento: <strong>${PAYMENT_LABELS[data.paymentMethod] || data.paymentMethod}</strong></p>
         <p style="color:#555;font-size:13px;margin:0 0 20px">Prazo de entrega: <strong>${SHIPPING_LABELS[data.shippingMethod] || data.shippingMethod}</strong></p>
 
-        ${data.paymentMethod === 'transfer' ? `
-        <div style="background:#F0F7FF;border-radius:8px;padding:16px;border:1px solid #AED6F1;margin-bottom:20px">
-          <p style="margin:0 0 10px;font-size:14px;color:#1B4F72"><strong>Dados para Transferência Bancária:</strong></p>
-          <table style="border-collapse:collapse;width:100%;font-size:13px;color:#2C3E50">
-            <tr><td style="padding:4px 0;font-weight:bold">Titular:</td><td style="padding:4px 0">METALPRIME, LDA</td></tr>
-            <tr><td style="padding:4px 0;font-weight:bold">IBAN:</td><td style="padding:4px 0;font-family:monospace;letter-spacing:1px">PT50 0010 0000 6313 9290 0016 5</td></tr>
-            <tr><td style="padding:4px 0;font-weight:bold">Banco:</td><td style="padding:4px 0">Banco BPI</td></tr>
-            <tr><td style="padding:4px 0;font-weight:bold">BIC/SWIFT:</td><td style="padding:4px 0">BBPIPTPL</td></tr>
-          </table>
-          <p style="margin:10px 0 0;font-size:12px;color:#5D6D7E">Por favor inclua a referência <strong>${data.reference}</strong> na descrição da transferência.</p>
-        </div>
-        ` : ''}
-
-        ${data.paymentMethod === 'paypal' ? `
-        <div style="background:#F0F7FF;border-radius:8px;padding:16px;border:1px solid #AED6F1;margin-bottom:20px">
-          <p style="margin:0 0 8px;font-size:14px;color:#1B4F72"><strong>Pagamento por PayPal:</strong></p>
-          <p style="margin:0;font-size:13px;color:#2C3E50">Envie o pagamento de <strong>${fmtPrice(data.total)}</strong> para: <strong>info@metalprime.pt</strong></p>
-          <p style="margin:8px 0 0;font-size:12px;color:#5D6D7E">Por favor inclua a referência <strong>${data.reference}</strong> na nota do pagamento.</p>
-        </div>
-        ` : ''}
-
-        ${data.paymentMethod === 'mbway' ? `
-        <div style="background:#F0F7FF;border-radius:8px;padding:16px;border:1px solid #AED6F1;margin-bottom:20px">
-          <p style="margin:0 0 8px;font-size:14px;color:#1B4F72"><strong>Pagamento por MB WAY:</strong></p>
-          <p style="margin:0;font-size:13px;color:#2C3E50">Envie o pagamento de <strong>${fmtPrice(data.total)}</strong> para o número: <strong style="font-family:monospace;font-size:15px">916 799 188</strong></p>
-          <p style="margin:8px 0 0;font-size:12px;color:#5D6D7E">Por favor inclua a referência <strong>${data.reference}</strong> na descrição.</p>
-        </div>
-        ` : ''}
-
         <div style="background:#EBF5FB;border-radius:8px;padding:16px;border:1px solid #AED6F1;margin-bottom:20px">
           <p style="margin:0;font-size:14px;color:#1B4F72"><strong>Próximos passos:</strong></p>
           <p style="margin:8px 0 0;font-size:13px;color:#2C3E50">Iremos analisar o seu pedido e enviar a maquete digital para aprovação. Após aprovação, a produção inicia em 5 dias úteis.</p>
         </div>
 
-        <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift — Uma marca do Grupo MetalPrime<br>info@metalprime.pt</p>
+        <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>info@primegift.pt</p>
       </div>
     </div>
   `;
@@ -270,7 +241,7 @@ async function sendOrderEmails(data: OrderData) {
   await Promise.all([
     transporter.sendMail({
       from: `"PrimeGift Encomendas" <${process.env.SMTP_USER}>`,
-      to: 'info@metalprime.pt',
+      to: 'info@primegift.pt',
       subject: `Nova Encomenda ${data.reference} — ${itemsSummary} (${itemCount} un.)`,
       html: adminHtml,
       attachments,
@@ -278,7 +249,7 @@ async function sendOrderEmails(data: OrderData) {
     transporter.sendMail({
       from: `"PrimeGift" <${process.env.SMTP_USER}>`,
       to: data.customerEmail,
-      replyTo: 'info@metalprime.pt',
+      replyTo: 'info@primegift.pt',
       subject: `Confirmação de Encomenda ${data.reference} — PrimeGift`,
       html: customerHtml,
       attachments,
@@ -340,14 +311,14 @@ async function checkStockAndAlert() {
             ${rows}
           </table>
           <p style="color:#555;font-size:13px;margin:20px 0 0">Considere reabastecer o stock em breve.</p>
-          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift — Uma marca do Grupo MetalPrime</p>
+          <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift</p>
         </div>
       </div>
     `;
 
     await transporter.sendMail({
       from: `"PrimeGift Stock" <${process.env.SMTP_USER}>`,
-      to: 'info@metalprime.pt',
+      to: 'info@primegift.pt',
       subject: `Alerta Stock Baixo — ${lowStock.map(s => s.capacity).join(', ')} — PrimeGift`,
       html,
     });
