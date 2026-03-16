@@ -1143,6 +1143,7 @@ type Product = {
   capacity: string;
   description: string;
   weight: number;
+  unitsPerBox: number;
   cupHeight: number;
   cupTopW: number;
   cupBotW: number;
@@ -1161,16 +1162,16 @@ type CartItem = {
 };
 
 const PRODUCTS: Product[] = [
-  { id: 'pg200', name: 'Copo de 200ml', capacity: '200ml', description: 'Café e degustação', weight: 12, cupHeight: 65, cupTopW: 50, cupBotW: 36,
+  { id: 'pg200', name: 'Copo de 200ml', capacity: '200ml', description: 'Café e degustação', weight: 12, unitsPerBox: 1000, cupHeight: 65, cupTopW: 50, cupBotW: 36,
     prices: { 100: 0.30, 250: 0.25, 500: 0.20, 1000: 0.16, 2000: 0.14, 5000: 0.12 },
     serigrafiasPrices: { 100: 0.45, 250: 0.38, 500: 0.30, 1000: 0.24, 2000: 0.21, 5000: 0.18 } },
-  { id: 'pg250', name: 'Copo de 250ml', capacity: '250ml', description: 'Sumos e refrigerantes', weight: 14, cupHeight: 75, cupTopW: 52, cupBotW: 37,
+  { id: 'pg250', name: 'Copo de 250ml', capacity: '250ml', description: 'Sumos e refrigerantes', weight: 14, unitsPerBox: 768, cupHeight: 75, cupTopW: 52, cupBotW: 37,
     prices: { 100: 0.33, 250: 0.28, 500: 0.23, 1000: 0.18, 2000: 0.16, 5000: 0.14 },
     serigrafiasPrices: { 100: 0.50, 250: 0.42, 500: 0.35, 1000: 0.27, 2000: 0.24, 5000: 0.21 } },
-  { id: 'pg330', name: 'Copo de 330ml', capacity: '330ml', description: 'Cerveja e cocktails', weight: 18, cupHeight: 88, cupTopW: 56, cupBotW: 39,
+  { id: 'pg330', name: 'Copo de 330ml', capacity: '330ml', description: 'Cerveja e cocktails', weight: 18, unitsPerBox: 440, cupHeight: 88, cupTopW: 56, cupBotW: 39,
     prices: { 100: 0.35, 250: 0.30, 500: 0.25, 1000: 0.20, 2000: 0.17, 5000: 0.15 },
     serigrafiasPrices: { 100: 0.53, 250: 0.45, 500: 0.38, 1000: 0.30, 2000: 0.26, 5000: 0.23 } },
-  { id: 'pg500', name: 'Copo de 500ml', capacity: '500ml', description: 'Festivais e eventos', weight: 28, cupHeight: 105, cupTopW: 62, cupBotW: 42,
+  { id: 'pg500', name: 'Copo de 500ml', capacity: '500ml', description: 'Festivais e eventos', weight: 28, unitsPerBox: 510, cupHeight: 105, cupTopW: 62, cupBotW: 42,
     prices: { 100: 0.42, 250: 0.36, 500: 0.30, 1000: 0.24, 2000: 0.21, 5000: 0.18 },
     serigrafiasPrices: { 100: 0.63, 250: 0.54, 500: 0.45, 1000: 0.36, 2000: 0.32, 5000: 0.27 } },
 ];
@@ -1239,9 +1240,12 @@ function getColorSurcharge(printColor: string): number {
   return PRINT_COLORS.find(c => c.value === printColor)?.surcharge ?? 0;
 }
 
+const BOX_WEIGHT_G = 400; // peso estimado da caixa de cartão (gramas)
+
 function calculateWeightKg(product: Product, quantity: number): number {
   const cupWeight = product.weight * quantity;
-  const packaging = 200 + Math.ceil(quantity / 100) * 50;
+  const numBoxes = Math.ceil(quantity / product.unitsPerBox);
+  const packaging = numBoxes * BOX_WEIGHT_G;
   return (cupWeight + packaging) / 1000;
 }
 
