@@ -2651,7 +2651,8 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shipp
           fileName: item.uploadedFileName,
         };
       });
-      await fetch('/api/order', {
+      // Step 1: Create order in DB
+      const orderRes = await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2661,6 +2662,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shipp
           shippingCost,
           vat,
           total,
+          paymentMethod: 'stripe',
           shippingMethod,
           shippingRegion,
           customerName: customer.name,
@@ -2677,10 +2679,30 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shipp
           invoiceCity: invoice.city,
         }),
       });
-      setConfirmed(true);
+      const orderData = await orderRes.json();
+      if (!orderData.success || !orderData.orderId) {
+        throw new Error('Erro ao criar encomenda');
+      }
+
+      // Step 2: Create Stripe Checkout session
+      const stripeRes = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId: orderData.orderId,
+          reference: orderRef,
+          total,
+          customerEmail: customer.email,
+        }),
+      });
+      const stripeData = await stripeRes.json();
+      if (!stripeData.url) {
+        throw new Error('Erro ao criar sessão de pagamento');
+      }
+
+      // Step 3: Redirect to Stripe Checkout
+      window.location.href = stripeData.url;
     } catch {
-      setConfirmed(true);
-    } finally {
       setSubmitting(false);
     }
   };

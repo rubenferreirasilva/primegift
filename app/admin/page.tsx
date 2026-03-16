@@ -73,6 +73,7 @@ interface Order {
 }
 
 const PAYMENT_LABELS: Record<string, string> = {
+  stripe: 'Cartão (Stripe)',
   transfer: 'Transferência Bancária',
   paypal: 'PayPal',
   mbway: 'MB WAY',

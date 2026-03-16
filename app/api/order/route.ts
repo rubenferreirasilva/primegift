@@ -42,6 +42,7 @@ interface OrderData {
 }
 
 const PAYMENT_LABELS: Record<string, string> = {
+  stripe: 'Cartão (Stripe)',
   transfer: 'Transferência Bancária',
   paypal: 'PayPal',
   mbway: 'MB WAY',
@@ -334,15 +335,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Dados obrigatórios em falta' }, { status: 400 });
     }
 
-    // Save to database, send emails, and check stock in background
+    // Save to database synchronously (need orderId for Stripe)
+    const sb = getSupabase();
+    let orderId: number | null = null;
+    if (sb) {
+      const { data: row, error } = await sb
+        .from('orders')
+        .insert({ reference: data.reference, status: 'pending', order_data: data })
+        .select('id')
+        .single();
+      if (error) {
+        console.error('DB save error:', error);
+        return NextResponse.json({ error: 'Erro ao guardar encomenda' }, { status: 500 });
+      }
+      orderId = row.id;
+    }
+
+    // Send emails and check stock in background
     waitUntil(
-      Promise.all([
-        (async () => { const sb = getSupabase(); if (sb) { const { error } = await sb.from('orders').insert({ reference: data.reference, status: 'pending', order_data: data }); if (error) console.error('DB save error:', error); } })(),
-        sendOrderEmails(data),
-      ]).then(() => checkStockAndAlert())
+      sendOrderEmails(data).then(() => checkStockAndAlert())
     );
 
-    return NextResponse.json({ success: true, reference: data.reference });
+    return NextResponse.json({ success: true, reference: data.reference, orderId, total: data.total });
   } catch (error) {
     console.error('Erro ao processar encomenda:', error);
     return NextResponse.json({ error: 'Erro ao processar encomenda' }, { status: 500 });
