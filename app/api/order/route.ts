@@ -200,7 +200,7 @@ async function sendOrderEmails(data: OrderData) {
 
         <div style="background:#EBF5FB;border-radius:8px;padding:16px;border:1px solid #AED6F1;margin-bottom:20px">
           <p style="margin:0;font-size:14px;color:#1B4F72"><strong>Próximos passos:</strong></p>
-          <p style="margin:8px 0 0;font-size:13px;color:#2C3E50">Iremos analisar o seu pedido e enviar a maquete digital para aprovação. Após aprovação, a produção inicia em 5 dias úteis.</p>
+          <p style="margin:8px 0 0;font-size:13px;color:#2C3E50">Iremos analisar o seu pedido. Após confirmação, a produção inicia em 5 dias úteis.</p>
         </div>
 
         <p style="color:#999;font-size:12px;margin:20px 0 0;text-align:center">PrimeGift<br>info@primegift.pt</p>
@@ -252,7 +252,6 @@ async function sendOrderEmails(data: OrderData) {
       replyTo: 'info@primegift.pt',
       subject: `Confirmação de Encomenda ${data.reference} — PrimeGift`,
       html: customerHtml,
-      attachments,
     }),
   ]);
 }
