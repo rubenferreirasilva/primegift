@@ -174,7 +174,6 @@ export default function AdminPage() {
   const [actionLoading, setActionLoading] = useState<number | null>(null);
   const [capacityFilter, setCapacityFilter] = useState<string>('all');
   const [activeTab, setActiveTab] = useState<'orders' | 'stock'>('orders');
-  const [setupDone, setSetupDone] = useState(false);
   const [error, setError] = useState('');
   const [showComplaintSearch, setShowComplaintSearch] = useState(false);
   const [complaintSearchRef, setComplaintSearchRef] = useState('');
@@ -271,27 +270,6 @@ export default function AdminPage() {
     }
   };
 
-  const handleSetup = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch('/api/admin/setup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
-      if (res.ok) {
-        setSetupDone(true);
-        setError('');
-      } else {
-        const data = await res.json();
-        setError(data.error || 'Erro ao criar tabela');
-      }
-    } catch {
-      setError('Erro de conexão');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const updateStatus = async (orderId: number, newStatus: string) => {
     setActionLoading(orderId);
@@ -462,12 +440,7 @@ export default function AdminPage() {
             {newOrderAlert && <style>{`@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.3); } }`}</style>}
           </div>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
-            {!setupDone && (
-              <button onClick={handleSetup} style={{ padding: '8px 14px', borderRadius: 6, background: 'rgba(255,255,255,0.2)', color: C.white, border: '1px solid rgba(255,255,255,0.3)', fontSize: 12, cursor: 'pointer', fontWeight: 600 }}>
-                Criar Tabela DB
-              </button>
-            )}
-            <button onClick={() => setActiveTab('orders')}
+<button onClick={() => setActiveTab('orders')}
               style={{ padding: '8px 14px', borderRadius: 6, background: activeTab === 'orders' ? C.white : 'rgba(255,255,255,0.1)', color: activeTab === 'orders' ? C.primary : C.white, border: activeTab === 'orders' ? 'none' : '1px solid rgba(255,255,255,0.3)', fontSize: 12, cursor: 'pointer', fontWeight: 700 }}>
               Encomendas
             </button>
@@ -492,11 +465,7 @@ export default function AdminPage() {
           </div>
         )}
 
-        {setupDone && (
-          <div style={{ background: '#D5F5E3', border: '1px solid #A9DFBF', borderRadius: 8, padding: '12px 16px', marginBottom: 16 }}>
-            <p style={{ margin: 0, color: '#1E8449', fontSize: 13 }}>Tabela criada com sucesso! As encomendas vão ser guardadas automaticamente.</p>
-          </div>
-        )}
+
 
         {/* ==================== STOCK TAB ==================== */}
         {activeTab === 'stock' && (
