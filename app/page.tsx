@@ -139,7 +139,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step4.fileUploaded': 'Ficheiro carregado com sucesso',
     'products.step4.clickToRemove': 'Clique para remover',
     'products.step4.dragOrClick': 'Arraste o ficheiro ou clique para enviar',
-    'products.step4.formats': 'PDF, AI, EPS, PNG ou SVG (máx. 10MB)',
+    'products.step4.formats': 'AI, PNG ou SVG (máx. 10MB)',
     'products.step4.bestResult': 'Para melhor resultado, envie PNG com fundo transparente ou SVG',
     'products.step4.autoRemoveBg': 'Remover fundo automaticamente',
     'products.step4.bgRemoved': 'Fundo removido',
@@ -225,14 +225,14 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step1.title': 'Escolha o Seu Copo',
     'hiwPage.step1.desc': 'Navegue pelo nosso catálogo e selecione o tamanho de copo mais adequado à sua necessidade. Temos opções desde os 200ml para cafés e degustações, até aos 500ml para festivais e grandes eventos. Cada copo é produzido em plástico reutilizável de alta qualidade.',
     'hiwPage.step2.title': 'Envie o Seu Design',
-    'hiwPage.step2.desc': 'Carregue o logótipo ou design da sua marca nos formatos PDF, AI, EPS, PNG ou SVG. A nossa equipa de designers irá adaptar o seu ficheiro ao formato ideal para impressão por tampografia ou serigrafia, garantindo a melhor qualidade de reprodução.',
+    'hiwPage.step2.desc': 'Carregue o logótipo ou design da sua marca nos formatos AI, PNG ou SVG. A nossa equipa de designers irá adaptar o seu ficheiro ao formato ideal para impressão por tampografia ou serigrafia, garantindo a melhor qualidade de reprodução.',
     'hiwPage.step3.title': 'Aprove a Maquete',
     'hiwPage.step3.desc': 'Receba gratuitamente uma maquete digital com a simulação do copo personalizado. Poderá solicitar ajustes até estar completamente satisfeito com o resultado. Só avançamos para produção após a sua aprovação final.',
     'hiwPage.step4.title': 'Receba a Sua Encomenda',
     'hiwPage.step4.desc': 'A sua encomenda é produzida nas nossas instalações em 5 dias, seguida de 1 a 3 dias úteis para entrega — aproximadamente uma semana até chegar às suas mãos. Enviamos para Portugal Continental, Ilhas, Espanha e toda a Europa através da DPD.',
     'hiwPage.fileReq': 'Requisitos do Ficheiro',
     'hiwPage.formats': 'Formatos aceites',
-    'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vetorial preferido), PNG (mín. 300dpi)',
+    'hiwPage.formatsVal': 'AI, SVG (vetorial preferido), PNG (mín. 300dpi)',
     'hiwPage.resolution': 'Resolução mínima',
     'hiwPage.resolutionVal': '300 dpi para ficheiros raster (PNG, JPG)',
     'hiwPage.colorMode': 'Modo de cor',
@@ -269,7 +269,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.tagline': 'A SUA MARCA EM CADA DETALHE',
     'footer.nav': 'Navegação',
     'footer.copyright': '© 2026 PrimeGift. Todos os direitos reservados.',
-    'products.step4.vectorNotice': 'Ficheiros PDF, AI e EPS não podem ser pré-visualizados no mockup. O seu ficheiro será usado na maquete final enviada para aprovação.',
+    'products.step4.vectorNotice': 'Ficheiros AI não podem ser pré-visualizados no mockup. O seu ficheiro será usado na maquete final enviada para aprovação.',
     'testimonial.3.quote': 'Usámos os copos da PrimeGift no nosso casamento e foi um sucesso. Os convidados ficaram encantados com a personalização e muitos levaram como lembrança.',
     'testimonial.3.role': 'Casamento — Quinta do Lago',
     'testimonial.4.quote': 'Há 3 anos que encomendamos para os nossos festivais de verão. A consistência da qualidade e o cumprimento dos prazos fazem toda a diferença quando organizamos eventos de grande escala.',
@@ -398,7 +398,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step4.fileUploaded': 'Fichero subido con éxito',
     'products.step4.clickToRemove': 'Haz clic para eliminar',
     'products.step4.dragOrClick': 'Arrastra el fichero o haz clic para subir',
-    'products.step4.formats': 'PDF, AI, EPS, PNG o SVG (máx. 10MB)',
+    'products.step4.formats': 'AI, PNG o SVG (máx. 10MB)',
     'products.step4.bestResult': 'Para mejor resultado, envía PNG con fondo transparente o SVG',
     'products.step4.autoRemoveBg': 'Eliminar fondo automáticamente',
     'products.step4.bgRemoved': 'Fondo eliminado',
@@ -477,14 +477,14 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step1.title': 'Elige Tu Vaso',
     'hiwPage.step1.desc': 'Navega por nuestro catálogo y selecciona el tamaño de vaso más adecuado a tu necesidad. Tenemos opciones desde los 200ml para cafés y degustaciones, hasta los 500ml para festivales y grandes eventos. Cada vaso se produce en plástico reutilizable de alta calidad.',
     'hiwPage.step2.title': 'Envía Tu Diseño',
-    'hiwPage.step2.desc': 'Sube el logotipo o diseño de tu marca en formatos PDF, AI, EPS, PNG o SVG. Nuestro equipo de diseñadores adaptará tu fichero al formato ideal para impresión por tampografía o serigrafía, garantizando la mejor calidad de reproducción.',
+    'hiwPage.step2.desc': 'Sube el logotipo o diseño de tu marca en formatos AI, PNG o SVG. Nuestro equipo de diseñadores adaptará tu fichero al formato ideal para impresión por tampografía o serigrafía, garantizando la mejor calidad de reproducción.',
     'hiwPage.step3.title': 'Aprueba la Maqueta',
     'hiwPage.step3.desc': 'Recibe gratuitamente una maqueta digital con la simulación del vaso personalizado. Podrás solicitar ajustes hasta estar completamente satisfecho con el resultado. Solo avanzamos a producción tras tu aprobación final.',
     'hiwPage.step4.title': 'Recibe Tu Pedido',
     'hiwPage.step4.desc': 'Tu pedido se produce en nuestras instalaciones en 5 días, seguido de 1 a 3 días hábiles para entrega — aproximadamente una semana hasta llegar a tus manos. Enviamos a Portugal Continental, Islas, España y toda Europa a través de DPD.',
     'hiwPage.fileReq': 'Requisitos del Fichero',
     'hiwPage.formats': 'Formatos aceptados',
-    'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vectorial preferido), PNG (mín. 300dpi)',
+    'hiwPage.formatsVal': 'AI, SVG (vectorial preferido), PNG (mín. 300dpi)',
     'hiwPage.resolution': 'Resolución mínima',
     'hiwPage.resolutionVal': '300 dpi para ficheros raster (PNG, JPG)',
     'hiwPage.colorMode': 'Modo de color',
@@ -519,7 +519,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.tagline': 'TU MARCA EN CADA DETALLE',
     'footer.nav': 'Navegación',
     'footer.copyright': '© 2026 PrimeGift. Todos los derechos reservados.',
-    'products.step4.vectorNotice': 'Los archivos PDF, AI y EPS no pueden previsualizarse en la maqueta. Tu archivo será utilizado en la maqueta final enviada para aprobación.',
+    'products.step4.vectorNotice': 'Los archivos AI no pueden previsualizarse en la maqueta. Tu archivo será utilizado en la maqueta final enviada para aprobación.',
     'testimonial.3.quote': 'Usamos los vasos de PrimeGift en nuestra boda y fue un éxito. Los invitados quedaron encantados con la personalización y muchos se los llevaron de recuerdo.',
     'testimonial.3.role': 'Boda — Quinta do Lago',
     'testimonial.4.quote': 'Hace 3 años que pedimos para nuestros festivales de verano. La consistencia de la calidad y el cumplimiento de los plazos marcan la diferencia en eventos de gran escala.',
@@ -648,7 +648,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step4.fileUploaded': 'File uploaded successfully',
     'products.step4.clickToRemove': 'Click to remove',
     'products.step4.dragOrClick': 'Drag file or click to upload',
-    'products.step4.formats': 'PDF, AI, EPS, PNG or SVG (max. 10MB)',
+    'products.step4.formats': 'AI, PNG or SVG (max. 10MB)',
     'products.step4.bestResult': 'For best results, send PNG with transparent background or SVG',
     'products.step4.autoRemoveBg': 'Remove background automatically',
     'products.step4.bgRemoved': 'Background removed',
@@ -727,14 +727,14 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step1.title': 'Choose Your Cup',
     'hiwPage.step1.desc': 'Browse our catalogue and select the cup size best suited to your needs. We offer options from 200ml for coffees and tastings, to 500ml for festivals and large events. Each cup is produced in high-quality reusable plastic.',
     'hiwPage.step2.title': 'Send Your Design',
-    'hiwPage.step2.desc': 'Upload your logo or brand design in PDF, AI, EPS, PNG or SVG format. Our design team will adapt your file to the ideal format for pad printing or screen printing, ensuring the best reproduction quality.',
+    'hiwPage.step2.desc': 'Upload your logo or brand design in AI, PNG or SVG format. Our design team will adapt your file to the ideal format for pad printing or screen printing, ensuring the best reproduction quality.',
     'hiwPage.step3.title': 'Approve the Mockup',
     'hiwPage.step3.desc': 'Receive a free digital mockup with the simulation of your customised cup. You can request adjustments until you are completely satisfied with the result. We only proceed to production after your final approval.',
     'hiwPage.step4.title': 'Receive Your Order',
     'hiwPage.step4.desc': 'Your order is produced in our facilities in 5 days, followed by 1-3 business days for delivery — approximately one week until it reaches you. We ship to Mainland Portugal, Islands, Spain and all of Europe via DPD.',
     'hiwPage.fileReq': 'File Requirements',
     'hiwPage.formats': 'Accepted formats',
-    'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vector preferred), PNG (min. 300dpi)',
+    'hiwPage.formatsVal': 'AI, SVG (vector preferred), PNG (min. 300dpi)',
     'hiwPage.resolution': 'Minimum resolution',
     'hiwPage.resolutionVal': '300 dpi for raster files (PNG, JPG)',
     'hiwPage.colorMode': 'Colour mode',
@@ -769,7 +769,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.tagline': 'YOUR BRAND IN EVERY DETAIL',
     'footer.nav': 'Navigation',
     'footer.copyright': '© 2026 PrimeGift. All rights reserved.',
-    'products.step4.vectorNotice': 'PDF, AI and EPS files cannot be previewed on the mockup. Your file will be used in the final mockup sent for approval.',
+    'products.step4.vectorNotice': 'AI files cannot be previewed on the mockup. Your file will be used in the final mockup sent for approval.',
     'testimonial.3.quote': 'We used PrimeGift cups at our wedding and it was a huge success. Guests loved the personalisation and many took them home as souvenirs.',
     'testimonial.3.role': 'Wedding — Quinta do Lago',
     'testimonial.4.quote': 'We\'ve been ordering for our summer festivals for 3 years now. The consistency in quality and meeting deadlines makes all the difference for large-scale events.',
@@ -898,7 +898,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'products.step4.fileUploaded': 'Fichier téléchargé avec succès',
     'products.step4.clickToRemove': 'Cliquez pour supprimer',
     'products.step4.dragOrClick': 'Glissez le fichier ou cliquez pour envoyer',
-    'products.step4.formats': 'PDF, AI, EPS, PNG ou SVG (max. 10 Mo)',
+    'products.step4.formats': 'AI, PNG ou SVG (max. 10 Mo)',
     'products.step4.bestResult': 'Pour un meilleur résultat, envoyez un PNG avec fond transparent ou SVG',
     'products.step4.autoRemoveBg': 'Supprimer le fond automatiquement',
     'products.step4.bgRemoved': 'Fond supprimé',
@@ -977,14 +977,14 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'hiwPage.step1.title': 'Choisissez Votre Gobelet',
     'hiwPage.step1.desc': 'Parcourez notre catalogue et sélectionnez la taille de gobelet la plus adaptée à vos besoins. Nous proposons des options allant de 200ml pour cafés et dégustations jusqu\'à 500ml pour festivals et grands événements. Chaque gobelet est produit en plastique réutilisable de haute qualité.',
     'hiwPage.step2.title': 'Envoyez Votre Design',
-    'hiwPage.step2.desc': 'Téléchargez votre logo ou design de marque aux formats PDF, AI, EPS, PNG ou SVG. Notre équipe de designers adaptera votre fichier au format idéal pour l\'impression par tampographie ou sérigraphie, garantissant la meilleure qualité de reproduction.',
+    'hiwPage.step2.desc': 'Téléchargez votre logo ou design de marque aux formats AI, PNG ou SVG. Notre équipe de designers adaptera votre fichier au format idéal pour l\'impression par tampographie ou sérigraphie, garantissant la meilleure qualité de reproduction.',
     'hiwPage.step3.title': 'Approuvez la Maquette',
     'hiwPage.step3.desc': 'Recevez gratuitement une maquette numérique avec la simulation de votre gobelet personnalisé. Vous pourrez demander des ajustements jusqu\'à être entièrement satisfait du résultat. Nous ne passons en production qu\'après votre approbation finale.',
     'hiwPage.step4.title': 'Recevez Votre Commande',
     'hiwPage.step4.desc': 'Votre commande est produite dans nos installations en 5 jours, suivie de 1 à 3 jours ouvrés de livraison — environ une semaine jusqu\'à réception. Nous expédions vers le Portugal Continental, les Îles, l\'Espagne et toute l\'Europe via DPD.',
     'hiwPage.fileReq': 'Exigences du Fichier',
     'hiwPage.formats': 'Formats acceptés',
-    'hiwPage.formatsVal': 'PDF, AI, EPS, SVG (vectoriel préféré), PNG (min. 300dpi)',
+    'hiwPage.formatsVal': 'AI, SVG (vectoriel préféré), PNG (min. 300dpi)',
     'hiwPage.resolution': 'Résolution minimale',
     'hiwPage.resolutionVal': '300 dpi pour fichiers raster (PNG, JPG)',
     'hiwPage.colorMode': 'Mode couleur',
@@ -1019,7 +1019,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.tagline': 'VOTRE MARQUE DANS CHAQUE DÉTAIL',
     'footer.nav': 'Navigation',
     'footer.copyright': '© 2026 PrimeGift. Tous droits réservés.',
-    'products.step4.vectorNotice': 'Les fichiers PDF, AI et EPS ne peuvent pas être prévisualisés sur la maquette. Votre fichier sera utilisé dans la maquette finale envoyée pour approbation.',
+    'products.step4.vectorNotice': 'Les fichiers AI ne peuvent pas être prévisualisés sur la maquette. Votre fichier sera utilisé dans la maquette finale envoyée pour approbation.',
     'testimonial.3.quote': 'Nous avons utilisé les gobelets PrimeGift pour notre mariage et ce fut un succès. Les invités ont adoré la personnalisation et beaucoup les ont gardés en souvenir.',
     'testimonial.3.role': 'Mariage — Quinta do Lago',
     'testimonial.4.quote': 'Cela fait 3 ans que nous commandons pour nos festivals d\'été. La constance de la qualité et le respect des délais font toute la différence pour les événements de grande envergure.',
@@ -1890,7 +1890,7 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
   const [logoScale, setLogoScale] = useState(100);
   const [addedToCartMsg, setAddedToCartMsg] = useState(false);
 
-  const ALLOWED_EXTS = ['pdf', 'ai', 'eps', 'png', 'svg', 'jpg', 'jpeg'];
+  const ALLOWED_EXTS = ['ai', 'png', 'svg'];
   const validateFile = (file: File): boolean => {
     const ext = file.name.split('.').pop()?.toLowerCase() || '';
     if (!ALLOWED_EXTS.includes(ext)) {
@@ -1925,8 +1925,8 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
       return;
     }
     const ext = uploadedFile.name.split('.').pop()?.toLowerCase() || '';
-    const isImage = uploadedFile.type.startsWith('image/') || ['png', 'jpg', 'jpeg', 'svg'].includes(ext);
-    const isVector = ['pdf', 'ai', 'eps'].includes(ext);
+    const isImage = uploadedFile.type.startsWith('image/') || ['png', 'svg'].includes(ext);
+    const isVector = ['ai'].includes(ext);
     if (!isImage && !isVector) {
       setLogoPreviewUrl(null);
       return;
@@ -2098,7 +2098,7 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
               <input
                 ref={fileInputRef}
                 type="file"
-                accept=".pdf,.ai,.eps,.png,.svg,.jpg,.jpeg,application/pdf,application/postscript,image/png,image/svg+xml,image/jpeg"
+                accept=".ai,.png,.svg,image/png,image/svg+xml,application/postscript"
                 style={{ display: 'none' }}
                 onChange={e => {
                   const file = e.target.files?.[0];
