@@ -177,7 +177,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Envio de grande volume (acima de 30kg).',
     'shipping.overweightLink': 'Contacte-nos',
     'shipping.overweightSuffix': 'para melhor preço.',
-    'shipping.freeShipping': 'Transporte OFERTA! Encomendas acima de 250€.',
     'shipping.estimatedWeight': 'Peso estimado:',
     'shipping.deadline': 'Prazo:',
     // Mockup
@@ -195,7 +194,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.title': 'Resumo do Orçamento',
     'order.subtotal': 'Subtotal',
     'order.shipping': 'Envio',
-    'order.shippingFree': 'OFERTA',
     'order.vat': 'IVA (23%)',
     'order.total': 'Total',
     'order.freeMockup': 'Maquete digital gratuita incluída',
@@ -217,7 +215,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.product': 'Produto',
     'priceTable.printColors': 'Impressão: Preto, Branco ou Cinzento',
     'priceTable.vatNote': 'IVA não incluído (23%)',
-    'priceTable.freeShipping': 'Portes grátis para encomendas acima de 250€',
     // Modal
     'modal.title': 'Confirmar Encomenda',
     'modal.paymentMethod': 'Método de Pagamento',
@@ -457,7 +454,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Envío de gran volumen (más de 30kg).',
     'shipping.overweightLink': 'Contáctenos',
     'shipping.overweightSuffix': 'para mejor precio.',
-    'shipping.freeShipping': '¡Transporte GRATIS! Pedidos superiores a 250€.',
     'shipping.estimatedWeight': 'Peso estimado:',
     'shipping.deadline': 'Plazo:',
     'mockup.preview': 'Previsualización',
@@ -473,7 +469,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.title': 'Resumen del Presupuesto',
     'order.subtotal': 'Subtotal',
     'order.shipping': 'Envío',
-    'order.shippingFree': 'GRATIS',
     'order.vat': 'IVA (23%)',
     'order.total': 'Total',
     'order.freeMockup': 'Maqueta digital gratuita incluida',
@@ -494,7 +489,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.product': 'Producto',
     'priceTable.printColors': 'Impresión: Negro, Blanco o Gris',
     'priceTable.vatNote': 'IVA no incluido (23%)',
-    'priceTable.freeShipping': 'Portes gratis para pedidos superiores a 250€',
     'modal.title': 'Confirmar Pedido',
     'modal.paymentMethod': 'Método de Pago',
     'modal.invoice': 'Datos de Facturación',
@@ -730,7 +724,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Large volume shipment (over 30kg).',
     'shipping.overweightLink': 'Contact us',
     'shipping.overweightSuffix': 'for a better price.',
-    'shipping.freeShipping': 'FREE shipping! Orders over 250€.',
     'shipping.estimatedWeight': 'Estimated weight:',
     'shipping.deadline': 'Delivery time:',
     'mockup.preview': 'Preview',
@@ -746,7 +739,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.title': 'Quote Summary',
     'order.subtotal': 'Subtotal',
     'order.shipping': 'Shipping',
-    'order.shippingFree': 'FREE',
     'order.vat': 'VAT (23%)',
     'order.total': 'Total',
     'order.freeMockup': 'Free digital mockup included',
@@ -767,7 +759,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.product': 'Product',
     'priceTable.printColors': 'Print: Black, White or Grey',
     'priceTable.vatNote': 'VAT not included (23%)',
-    'priceTable.freeShipping': 'Free shipping for orders over 250€',
     'modal.title': 'Confirm Order',
     'modal.paymentMethod': 'Payment Method',
     'modal.invoice': 'Billing Details',
@@ -1003,7 +994,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.overweight': 'Envoi volumineux (plus de 30kg).',
     'shipping.overweightLink': 'Contactez-nous',
     'shipping.overweightSuffix': 'pour un meilleur prix.',
-    'shipping.freeShipping': 'Livraison OFFERTE ! Commandes supérieures à 250€.',
     'shipping.estimatedWeight': 'Poids estimé :',
     'shipping.deadline': 'Délai :',
     'mockup.preview': 'Aperçu',
@@ -1019,7 +1009,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'order.title': 'Résumé du Devis',
     'order.subtotal': 'Sous-total',
     'order.shipping': 'Expédition',
-    'order.shippingFree': 'OFFERT',
     'order.vat': 'TVA (23%)',
     'order.total': 'Total',
     'order.freeMockup': 'Maquette numérique gratuite incluse',
@@ -1040,7 +1029,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'priceTable.product': 'Produit',
     'priceTable.printColors': 'Impression : Noir, Blanc ou Gris',
     'priceTable.vatNote': 'TVA non incluse (23%)',
-    'priceTable.freeShipping': 'Livraison gratuite pour commandes supérieures à 250€',
     'modal.title': 'Confirmer la Commande',
     'modal.paymentMethod': 'Mode de Paiement',
     'modal.invoice': 'Données de Facturation',
@@ -2088,8 +2076,7 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
   const cartWeightKg = getCartWeight(cart);
   const overweight = cartWeightKg > 30;
   const isInternational = shippingRegion === 'international';
-  const freeShipping = cartSubtotal > 250;
-  const shippingCost = (!isInternational && !overweight && cart.length > 0) ? (freeShipping ? 0 : (getShippingCost(cartWeightKg, shippingRegion, shippingMethod) ?? 0)) : 0;
+  const shippingCost = (!isInternational && !overweight && cart.length > 0) ? (getShippingCost(cartWeightKg, shippingRegion, shippingMethod) ?? 0) : 0;
   const totalBeforeVAT = cartSubtotal + shippingCost;
   const vat = totalBeforeVAT * 0.23;
   const total = totalBeforeVAT + vat;
@@ -2331,13 +2318,8 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                 <div style={{ marginTop: 12, padding: 12, background: C.lightBg, borderRadius: 8, fontSize: 13, color: C.textSec }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span>{t('region.' + shippingRegion)} — {t('shipping.deadline')} {t(`method.${shippingMethod}.days`)}</span>
-                    <span style={{ fontWeight: 600, color: freeShipping ? C.success : C.text }}>{freeShipping ? t('order.shippingFree') : fmt(shippingCost)}</span>
+                    <span style={{ fontWeight: 600, color: C.text }}>{fmt(shippingCost)}</span>
                   </div>
-                </div>
-              )}
-              {freeShipping && (
-                <div style={{ marginTop: 8, padding: 10, background: '#EAFAF1', borderRadius: 8, border: '1px solid #82E0AA' }}>
-                  <p style={{ margin: 0, fontSize: 13, color: '#1E8449', fontWeight: 600 }}>{t('shipping.freeShipping')}</p>
                 </div>
               )}
               {isInternational && delivery.country === 'OTHER' && (
@@ -2473,8 +2455,7 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                     {(() => {
                       const estimateWeight = cart.length > 0 ? cartWeightKg : calculateWeightKg(product, quantity);
                       const estimateSubtotal = cart.length > 0 ? cartSubtotal : stagingSubtotal;
-                      const estimateFree = estimateSubtotal > 250;
-                      const estimateCost = estimateFree ? 0 : (getShippingCost(estimateWeight, shippingRegion, shippingMethod) ?? 0);
+                      const estimateCost = getShippingCost(estimateWeight, shippingRegion, shippingMethod) ?? 0;
                       const estimateOverweight = estimateWeight > 30;
                       return (
                         <div style={{ marginBottom: 16, padding: '12px', background: C.lightBg, borderRadius: 8, border: `1px solid ${C.border}` }}>
@@ -2488,8 +2469,8 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                             </div>
                             <div style={{ textAlign: 'right' }}>
                               {!isInternational && !estimateOverweight ? (
-                                <div style={{ fontWeight: 700, fontSize: 15, color: estimateFree ? C.success : C.primary }}>
-                                  {estimateFree ? t('order.shippingFree') : fmt(estimateCost)}
+                                <div style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>
+                                  {fmt(estimateCost)}
                                 </div>
                               ) : estimateOverweight ? (
                                 <div style={{ fontSize: 11, color: '#922B21', fontWeight: 600 }}>Contacte-nos</div>
@@ -2498,12 +2479,6 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                               )}
                             </div>
                           </div>
-                          {estimateFree && (
-                            <div style={{ fontSize: 11, color: C.success, marginTop: 6, fontWeight: 600 }}>{t('shipping.freeShipping')}</div>
-                          )}
-                          {!estimateFree && !isInternational && !estimateOverweight && (
-                            <div style={{ fontSize: 11, color: C.textMuted, marginTop: 6 }}>{t('shipping.freeShipping')}</div>
-                          )}
                         </div>
                       );
                     })()}
@@ -2591,16 +2566,8 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                                     DPD {shippingRegion === 'es-peninsular' ? '(SEUR)' : 'Business'} · {t('region.' + shippingRegion)} · {t('shipping.estimatedWeight')} {cartWeightKg.toFixed(1)}kg
                                   </div>
                                 </div>
-                                <span style={{ fontWeight: 700, fontSize: 14, color: freeShipping ? C.success : C.primary }}>{freeShipping ? t('order.shippingFree') : fmt(shippingCost)}</span>
+                                <span style={{ fontWeight: 700, fontSize: 14, color: C.primary }}>{fmt(shippingCost)}</span>
                               </div>
-                              {freeShipping && (
-                                <div style={{ fontSize: 11, color: C.success, marginTop: 4, fontWeight: 600 }}>{t('shipping.freeShipping')}</div>
-                              )}
-                              {!freeShipping && cartSubtotal > 0 && (
-                                <div style={{ fontSize: 11, color: C.textMuted, marginTop: 4 }}>
-                                  {t('shipping.freeShipping')} ({t('order.subtotal')} &gt; 250€)
-                                </div>
-                              )}
                             </div>
                           )}
                           {isInternational && cart.length > 0 && (
@@ -2716,14 +2683,13 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
           <div style={{ marginTop: 16, display: 'flex', gap: 24, flexWrap: 'wrap', fontSize: 13, color: C.textMuted }}>
             <span>{t('priceTable.printColors')}</span>
             <span>{t('priceTable.vatNote')}</span>
-            <span style={{ color: C.success, fontWeight: 600 }}>{t('priceTable.freeShipping')}</span>
           </div>
         </div>
       </section>
 
       {/* Confirmation Modal */}
       {showModal && cart.length > 0 && (
-        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} freeShipping={freeShipping} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} itemRefs={itemRefs} customer={customer} />
+        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} itemRefs={itemRefs} customer={customer} />
       )}
     </div>
   );
@@ -2797,8 +2763,8 @@ function CartDrawer({ cart, setCart, onClose, t }: { cart: CartItem[]; setCart: 
 
 // ==================== CONFIRMATION MODAL ====================
 
-function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, delivery, setDelivery, orderRef, itemRefs, customer }: {
-  cart: CartItem[]; cartSubtotal: number; shippingCost: number; freeShipping: boolean; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; itemRefs: string[]; customer: { name: string; email: string; phone: string };
+function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, delivery, setDelivery, orderRef, itemRefs, customer }: {
+  cart: CartItem[]; cartSubtotal: number; shippingCost: number; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; itemRefs: string[]; customer: { name: string; email: string; phone: string };
 }) {
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
@@ -2922,7 +2888,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, freeShipping, vat
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 14 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.subtotal')}</span><span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span></div>
             {!isInternational && !overweight && (
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.shipping')} ({t(`method.${shippingMethod}`)})</span><span style={{ fontWeight: 700, color: freeShipping ? C.success : undefined }}>{freeShipping ? t('order.shippingFree') : fmt(shippingCost)}</span></div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.shipping')} ({t(`method.${shippingMethod}`)})</span><span style={{ fontWeight: 700 }}>{fmt(shippingCost)}</span></div>
             )}
             <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.vat')}</span><span style={{ fontWeight: 600 }}>{fmt(vat)}</span></div>
             <div style={{ height: 1, background: C.border, margin: '4px 0' }} />
