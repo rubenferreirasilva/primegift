@@ -172,11 +172,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.destination': 'Destino',
     'shipping.method': 'Método de envio',
     'shipping.international': 'Para envios internacionais fora da UE,',
-    'shipping.internationalLink': 'contacte-nos',
-    'shipping.internationalSuffix': 'para orçamento de envio personalizado.',
-    'shipping.overweight': 'Envio de grande volume (acima de 30kg).',
-    'shipping.overweightLink': 'Contacte-nos',
-    'shipping.overweightSuffix': 'para melhor preço.',
     'shipping.estimatedWeight': 'Peso estimado:',
     'shipping.deadline': 'Prazo:',
     // Mockup
@@ -449,11 +444,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.destination': 'Destino',
     'shipping.method': 'Método de envío',
     'shipping.international': 'Para envíos internacionales fuera de la UE,',
-    'shipping.internationalLink': 'contáctenos',
-    'shipping.internationalSuffix': 'para presupuesto de envío personalizado.',
-    'shipping.overweight': 'Envío de gran volumen (más de 30kg).',
-    'shipping.overweightLink': 'Contáctenos',
-    'shipping.overweightSuffix': 'para mejor precio.',
     'shipping.estimatedWeight': 'Peso estimado:',
     'shipping.deadline': 'Plazo:',
     'mockup.preview': 'Previsualización',
@@ -719,11 +709,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.destination': 'Destination',
     'shipping.method': 'Shipping method',
     'shipping.international': 'For international shipments outside the EU,',
-    'shipping.internationalLink': 'contact us',
-    'shipping.internationalSuffix': 'for a custom shipping quote.',
-    'shipping.overweight': 'Large volume shipment (over 30kg).',
-    'shipping.overweightLink': 'Contact us',
-    'shipping.overweightSuffix': 'for a better price.',
     'shipping.estimatedWeight': 'Estimated weight:',
     'shipping.deadline': 'Delivery time:',
     'mockup.preview': 'Preview',
@@ -989,11 +974,6 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'shipping.destination': 'Destination',
     'shipping.method': 'Mode d\'expédition',
     'shipping.international': 'Pour les envois internationaux hors UE,',
-    'shipping.internationalLink': 'contactez-nous',
-    'shipping.internationalSuffix': 'pour un devis d\'expédition personnalisé.',
-    'shipping.overweight': 'Envoi volumineux (plus de 30kg).',
-    'shipping.overweightLink': 'Contactez-nous',
-    'shipping.overweightSuffix': 'pour un meilleur prix.',
     'shipping.estimatedWeight': 'Poids estimé :',
     'shipping.deadline': 'Délai :',
     'mockup.preview': 'Aperçu',
@@ -1238,13 +1218,19 @@ function calculateWeightKg(product: Product, quantity: number): number {
 }
 
 function getShippingCost(weightKg: number, region: string, method: string): number | null {
-  const rates = SHIPPING_RATES[region]?.[method];
+  // Fallback para international: usar eu-zone3 como base
+  const effectiveRegion = SHIPPING_RATES[region]?.[method] ? region : 'eu-zone3';
+  const rates = SHIPPING_RATES[effectiveRegion]?.[method];
   if (!rates) return null;
   const brackets = Object.keys(rates).map(Number).sort((a, b) => a - b);
   for (const bracket of brackets) {
     if (weightKg <= bracket) return rates[bracket];
   }
-  return null;
+  // Acima do último bracket: escalar proporcionalmente
+  const maxBracket = brackets[brackets.length - 1];
+  const maxRate = rates[maxBracket];
+  const ratePerKg = maxRate / maxBracket;
+  return Math.ceil(weightKg * ratePerKg * 100) / 100;
 }
 
 function getAvailableMethods(region: string): string[] {
@@ -2074,9 +2060,7 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
   // Cart calculations
   const cartSubtotal = getCartSubtotal(cart);
   const cartWeightKg = getCartWeight(cart);
-  const overweight = cartWeightKg > 30;
-  const isInternational = shippingRegion === 'international';
-  const shippingCost = (!isInternational && !overweight && cart.length > 0) ? (getShippingCost(cartWeightKg, shippingRegion, shippingMethod) ?? 0) : 0;
+  const shippingCost = cart.length > 0 ? (getShippingCost(cartWeightKg, shippingRegion, shippingMethod) ?? 0) : 0;
   const totalBeforeVAT = cartSubtotal + shippingCost;
   const vat = totalBeforeVAT * 0.23;
   const total = totalBeforeVAT + vat;
@@ -2314,22 +2298,12 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                 </select>
               </div>
               {/* Auto-detected shipping info */}
-              {delivery.postalCode && !isInternational && !overweight && cart.length > 0 && (
+              {delivery.postalCode && cart.length > 0 && (
                 <div style={{ marginTop: 12, padding: 12, background: C.lightBg, borderRadius: 8, fontSize: 13, color: C.textSec }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span>{t('region.' + shippingRegion)} — {t('shipping.deadline')} {t(`method.${shippingMethod}.days`)}</span>
                     <span style={{ fontWeight: 600, color: C.text }}>{fmt(shippingCost)}</span>
                   </div>
-                </div>
-              )}
-              {isInternational && delivery.country === 'OTHER' && (
-                <div style={{ marginTop: 8, padding: 12, background: '#FEF9E7', borderRadius: 8, border: '1px solid #F9E79F' }}>
-                  <p style={{ margin: 0, fontSize: 13, color: '#7D6608' }}>{t('shipping.international')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.internationalLink')}</a> {t('shipping.internationalSuffix')}</p>
-                </div>
-              )}
-              {overweight && !isInternational && (
-                <div style={{ marginTop: 8, padding: 12, background: '#FDEDEC', borderRadius: 8, border: '1px solid #F5B7B1' }}>
-                  <p style={{ margin: 0, fontSize: 13, color: '#922B21' }}>{t('shipping.overweight')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.overweightLink')}</a> {t('shipping.overweightSuffix')}</p>
                 </div>
               )}
             </div>
@@ -2456,7 +2430,6 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                       const estimateWeight = cart.length > 0 ? cartWeightKg : calculateWeightKg(product, quantity);
                       const estimateSubtotal = cart.length > 0 ? cartSubtotal : stagingSubtotal;
                       const estimateCost = getShippingCost(estimateWeight, shippingRegion, shippingMethod) ?? 0;
-                      const estimateOverweight = estimateWeight > 30;
                       return (
                         <div style={{ marginBottom: 16, padding: '12px', background: C.lightBg, borderRadius: 8, border: `1px solid ${C.border}` }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -2468,15 +2441,9 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                               <div style={{ fontSize: 11, color: C.textMuted }}>{t('shipping.estimatedWeight')} {estimateWeight.toFixed(1)}kg · {t('method.standard.days')}</div>
                             </div>
                             <div style={{ textAlign: 'right' }}>
-                              {!isInternational && !estimateOverweight ? (
-                                <div style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>
-                                  {fmt(estimateCost)}
-                                </div>
-                              ) : estimateOverweight ? (
-                                <div style={{ fontSize: 11, color: '#922B21', fontWeight: 600 }}>Contacte-nos</div>
-                              ) : (
-                                <div style={{ fontSize: 11, color: '#7D6608', fontWeight: 600 }}>Sob consulta</div>
-                              )}
+                              <div style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>
+                                {fmt(estimateCost)}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -2557,7 +2524,7 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                             <span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span>
                           </div>
                           {/* Transport section */}
-                          {!isInternational && !overweight && cart.length > 0 && (
+                          {cart.length > 0 && (
                             <div style={{ background: C.lightBg, borderRadius: 8, padding: '10px 12px', margin: '4px 0' }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div>
@@ -2568,16 +2535,6 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                                 </div>
                                 <span style={{ fontWeight: 700, fontSize: 14, color: C.primary }}>{fmt(shippingCost)}</span>
                               </div>
-                            </div>
-                          )}
-                          {isInternational && cart.length > 0 && (
-                            <div style={{ background: '#FEF9E7', borderRadius: 8, padding: '10px 12px', margin: '4px 0' }}>
-                              <div style={{ fontSize: 12, color: '#7D6608' }}>{t('shipping.international')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.internationalLink')}</a></div>
-                            </div>
-                          )}
-                          {overweight && !isInternational && cart.length > 0 && (
-                            <div style={{ background: '#FDEDEC', borderRadius: 8, padding: '10px 12px', margin: '4px 0' }}>
-                              <div style={{ fontSize: 12, color: '#922B21' }}>{t('shipping.estimatedWeight')} {cartWeightKg.toFixed(1)}kg — {t('shipping.overweight')} <a onClick={() => goToContact()} style={{ color: C.accent, cursor: 'pointer', textDecoration: 'underline' }}>{t('shipping.overweightLink')}</a></div>
                             </div>
                           )}
                           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -2689,7 +2646,7 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
 
       {/* Confirmation Modal */}
       {showModal && cart.length > 0 && (
-        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} isInternational={isInternational} overweight={overweight} onClose={() => setShowModal(false)} t={t} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} itemRefs={itemRefs} customer={customer} />
+        <ConfirmationModal cart={cart} cartSubtotal={cartSubtotal} shippingCost={shippingCost} vat={vat} total={total} shippingRegion={shippingRegion} shippingMethod={shippingMethod} onClose={() => setShowModal(false)} t={t} delivery={delivery} setDelivery={setDelivery} orderRef={orderRef} itemRefs={itemRefs} customer={customer} />
       )}
     </div>
   );
@@ -2763,8 +2720,8 @@ function CartDrawer({ cart, setCart, onClose, t }: { cart: CartItem[]; setCart: 
 
 // ==================== CONFIRMATION MODAL ====================
 
-function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shippingRegion, shippingMethod, isInternational, overweight, onClose, t, delivery, setDelivery, orderRef, itemRefs, customer }: {
-  cart: CartItem[]; cartSubtotal: number; shippingCost: number; vat: number; total: number; shippingRegion: string; shippingMethod: string; isInternational: boolean; overweight: boolean; onClose: () => void; t: TFunc; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; itemRefs: string[]; customer: { name: string; email: string; phone: string };
+function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shippingRegion, shippingMethod, onClose, t, delivery, setDelivery, orderRef, itemRefs, customer }: {
+  cart: CartItem[]; cartSubtotal: number; shippingCost: number; vat: number; total: number; shippingRegion: string; shippingMethod: string; onClose: () => void; t: TFunc; delivery: { name: string; address: string; postalCode: string; city: string; country: string }; setDelivery: React.Dispatch<React.SetStateAction<{ name: string; address: string; postalCode: string; city: string; country: string }>>; orderRef: string; itemRefs: string[]; customer: { name: string; email: string; phone: string };
 }) {
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [invoice, setInvoice] = useState({ name: '', nif: '', address: '', postalCode: '', city: '' });
@@ -2887,9 +2844,7 @@ function ConfirmationModal({ cart, cartSubtotal, shippingCost, vat, total, shipp
           <div style={{ height: 1, background: C.border, margin: '12px 0' }} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 14 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.subtotal')}</span><span style={{ fontWeight: 600 }}>{fmt(cartSubtotal)}</span></div>
-            {!isInternational && !overweight && (
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.shipping')} ({t(`method.${shippingMethod}`)})</span><span style={{ fontWeight: 700 }}>{fmt(shippingCost)}</span></div>
-            )}
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.shipping')} ({t(`method.${shippingMethod}`)})</span><span style={{ fontWeight: 700 }}>{fmt(shippingCost)}</span></div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{t('order.vat')}</span><span style={{ fontWeight: 600 }}>{fmt(vat)}</span></div>
             <div style={{ height: 1, background: C.border, margin: '4px 0' }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 20 }}>
@@ -3173,7 +3128,7 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
         { heading: 'Identificação', text: 'O presente website é propriedade e operado pela PrimeGift (MetalPrime), com sede em Portugal. Email: info@metalprime.pt.' },
         { heading: 'Produtos e Serviços', text: 'A PrimeGift comercializa copos de plástico reutilizáveis personalizados com tampografia e serigrafia. Os produtos apresentados no website são meramente ilustrativos, podendo existir ligeiras variações de cor ou dimensão.' },
         { heading: 'Encomendas', text: 'A encomenda mínima é de 100 unidades. Todas as encomendas estão sujeitas a aprovação de maquete digital antes da produção. O prazo de produção é de 5 dias úteis após aprovação da maquete, acrescido do prazo de entrega.' },
-        { heading: 'Preços', text: 'Os preços indicados no website não incluem IVA (23%). Os preços incluem impressão a 1 cor. O transporte é calculado com base no peso e destino da encomenda. Portes grátis para encomendas acima de 250€ (antes de IVA).' },
+        { heading: 'Preços', text: 'Os preços indicados no website não incluem IVA (23%). Os preços incluem impressão a 1 cor. O transporte é calculado com base no peso e destino da encomenda.' },
         { heading: 'Pagamento', text: 'Aceitamos pagamento por PayPal, Transferência Bancária, MB WAY e Apple Pay. O pagamento é exigido na totalidade antes do início da produção.' },
         { heading: 'Propriedade Intelectual', text: 'O cliente garante que detém os direitos sobre os logótipos e designs enviados para personalização. A PrimeGift não se responsabiliza por violações de direitos de propriedade intelectual de terceiros.' },
         { heading: 'Limitação de Responsabilidade', text: 'A PrimeGift não se responsabiliza por atrasos causados por terceiros (transportadoras, serviços postais) ou por casos de força maior.' },
@@ -3203,8 +3158,8 @@ function LegalPage({ type, t }: { type: string; t: TFunc }) {
       title: t('legal.shipping.title'),
       sections: [
         { heading: 'Prazos de Entrega', text: 'Produção: 5 dias úteis após aprovação da maquete. Entrega DPD: 1-3 dias úteis adicionais (Portugal Continental e Espanha). Total estimado: 6 a 8 dias úteis.' },
-        { heading: 'Zonas de Entrega', text: 'Portugal Continental, Ilhas (Açores e Madeira), Espanha Peninsular, Europa (Zona 2 e 3). Para envios internacionais fora da UE, contacte-nos para orçamento personalizado.' },
-        { heading: 'Custos de Envio', text: 'Os custos de envio são calculados com base no peso total da encomenda e na zona de destino. Portes grátis para encomendas com subtotal superior a 250€ (antes de IVA). Para encomendas acima de 30kg, contacte-nos para o melhor preço.' },
+        { heading: 'Zonas de Entrega', text: 'Portugal Continental, Ilhas (Açores e Madeira), Espanha Peninsular, Europa (Zona 2 e 3).' },
+        { heading: 'Custos de Envio', text: 'Os custos de envio são calculados com base no peso total da encomenda e na zona de destino.' },
         { heading: 'Transportadora', text: 'Os envios são realizados através da DPD Portugal para Portugal Continental, Ilhas e Espanha (via SEUR), e através da rede DPD internacional para a restante Europa.' },
         { heading: 'Rastreamento', text: 'Após o envio, receberá um email com o número de rastreamento para acompanhar a sua encomenda em tempo real.' },
         { heading: 'Receção da Encomenda', text: 'Na receção, verifique o estado da embalagem e dos produtos. Em caso de danos visíveis, recuse a entrega ou assinale os danos no comprovativo de entrega e contacte-nos imediatamente.' },
