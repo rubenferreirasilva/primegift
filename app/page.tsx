@@ -172,6 +172,9 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'mockup.finalApproval': 'A maquete final será enviada para aprovação.',
     'mockup.logoSize': 'Tamanho do logo',
     'mockup.download': 'Descarregar Mockup',
+    'mockup.dimensions': 'Dimensões',
+    'mockup.height': 'Altura',
+    'mockup.diameter': 'Diâmetro',
     // Order summary
     'order.title': 'Resumo do Orçamento',
     'order.subtotal': 'Subtotal',
@@ -428,6 +431,9 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'mockup.finalApproval': 'La maqueta final será enviada para aprobación.',
     'mockup.logoSize': 'Tamaño del logo',
     'mockup.download': 'Descargar Maqueta',
+    'mockup.dimensions': 'Dimensiones',
+    'mockup.height': 'Altura',
+    'mockup.diameter': 'Diámetro',
     'order.title': 'Resumen del Presupuesto',
     'order.subtotal': 'Subtotal',
     'order.shipping': 'Envío',
@@ -678,6 +684,9 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'mockup.finalApproval': 'The final mockup will be sent for approval.',
     'mockup.logoSize': 'Logo size',
     'mockup.download': 'Download Mockup',
+    'mockup.dimensions': 'Dimensions',
+    'mockup.height': 'Height',
+    'mockup.diameter': 'Diameter',
     'order.title': 'Quote Summary',
     'order.subtotal': 'Subtotal',
     'order.shipping': 'Shipping',
@@ -928,6 +937,9 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'mockup.finalApproval': 'La maquette finale sera envoyée pour approbation.',
     'mockup.logoSize': 'Taille du logo',
     'mockup.download': 'Télécharger la Maquette',
+    'mockup.dimensions': 'Dimensions',
+    'mockup.height': 'Hauteur',
+    'mockup.diameter': 'Diamètre',
     'order.title': 'Résumé du Devis',
     'order.subtotal': 'Sous-total',
     'order.shipping': 'Expédition',
@@ -2261,6 +2273,17 @@ function ProductsPage({ goToContact, initialProduct, t, cart, setCart }: { goToC
                     capacity={product.capacity}
                     rotating={printTechnique === 'serigrafia'}
                   />
+                </div>
+                {/* Cup dimensions display */}
+                <div style={{ padding: '8px 24px', background: '#F8F9FA', borderTop: '1px solid #E9ECEF', display: 'flex', justifyContent: 'center', gap: 24 }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <span style={{ fontSize: 11, color: '#6B7280', display: 'block' }}>{t('mockup.height')}</span>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: '#1E3A5F' }}>{product.cupHeight}mm</span>
+                  </div>
+                  <div style={{ textAlign: 'center' }}>
+                    <span style={{ fontSize: 11, color: '#6B7280', display: 'block' }}>{t('mockup.diameter')}</span>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: '#1E3A5F' }}>{product.cupTopW}mm</span>
+                  </div>
                 </div>
                 {removingBg && (
                   <div style={{ padding: '8px 24px 16px', textAlign: 'center' }}>
